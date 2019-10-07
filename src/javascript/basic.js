@@ -35,6 +35,8 @@ function addNumber() {
 	if (!isNaN(Number(textInput))) {
 		sum = Number(textInput) + 1;
 		result = checkSize(textInput);
+		document.getElementById("resultText1").innerHTML = textInput + " + 1 = " + sum;
+		document.getElementById("resultText2").innerHTML = "The result is " + result;
 		console.log(textInput + " + 1 = " + sum);
 		console.log("The result is " + result);	
 	} else {
