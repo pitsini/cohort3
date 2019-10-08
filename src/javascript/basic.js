@@ -14,13 +14,10 @@ function size(textValue) {
 
 function changeTitle(indexTitle) {
 	if (indexTitle === 0) {
-		indexTitle = 1;
 		return [1, "Hello Thailand"];
 	} else if (indexTitle === 1) {
-		indexTitle = 2;
 		return [2, "Hello Canada"];
 	} else {
-		indexTitle = 0;
 		return [0, "Hello World from inline JavaScript"];
 	};
 }
