@@ -1,51 +1,38 @@
-let whichHello = 0;
-
-function checkSize(num) {	
-	let sizeResult;
-	if (num < 10) {
-		sizeResult = "small";
-	} else if (num >= 10 && num <= 19) {
-	 	sizeResult = "med";
-	} else if (num > 19) {
-		sizeResult = "large";
-    } else {
-		sizeResult = "N/A - Are you sure you keyed the number?"
+function size(textValue) {
+	if (textValue.length === 0) {
+		return "You haven't key anything";
+	} else if (Number(textValue) < 10) {
+		return "small";
+	} else if (Number(textValue) >= 10 && textValue <= 19) {
+		return "med";
+	} else if (Number(textValue) >= 20) {
+		return "large";
+	} else if (isNaN(Number(textValue))) {
+		return textValue + " is not a number.";
 	}
-	return sizeResult;
 }
 
-function changeTitle() {
-	if (whichHello === 0) {
-		document.getElementById("helloTitle").textContent = "Hello Thailand";
-		whichHello = 1;
-	} else if (whichHello === 1) {
-		document.getElementById("helloTitle").textContent = "Hello Canada";
-		whichHello = 2;
+function changeTitle(indexTitle) {
+	if (indexTitle === 0) {
+		indexTitle = 1;
+		return [1, "Hello Thailand"];
+	} else if (indexTitle === 1) {
+		indexTitle = 2;
+		return [2, "Hello Canada"];
 	} else {
-		document.getElementById("helloTitle").textContent = "Hello World from inline JavaScript";
-		whichHello = 0;
+		indexTitle = 0;
+		return [0, "Hello World from inline JavaScript"];
 	};
 }
 
-function addNumber() {
-	let textInput = document.getElementById("textbox").value;
-	let sum;
-	let result;
-	//console.log(!isNaN(Number(textInput)));
-	if (!isNaN(Number(textInput))) {
-		sum = Number(textInput) + 1;
-		result = checkSize(textInput);
-		document.getElementById("resultText1").innerHTML = textInput + " + 1 = " + sum;
-		document.getElementById("resultText2").innerHTML = "The result is " + result;
-		console.log(textInput + " + 1 = " + sum);
-		console.log("The result is " + result);	
-	} else {
-		console.log("Sorry, " + textInput + " is not a number.");
-	}	
-}
+let indexTitle = 0;
 
-console.log("Hello World from basic.js");
-document.getElementById("button").addEventListener("click", addNumber);
-document.getElementById("helloTitle").addEventListener("mouseover", changeTitle);
+idButton.addEventListener("click", (() => {
+	resultText1.textContent = size(idTextbox.value);
+}));
 
-// when you press enter after you key in textbox
+helloTitle.addEventListener("mouseover", (() => {
+	const result = changeTitle(indexTitle);
+	indexTitle = result[0];
+	helloTitle.textContent = result[1];
+}));
