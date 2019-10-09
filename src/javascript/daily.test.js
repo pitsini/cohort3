@@ -9,4 +9,3 @@ test('Compare parameter', () => {
     expect(functions.assertEquals("10", 10)).toBe(false);
     expect(functions.assertEquals("John", "john")).toBe(false);
 });
-
