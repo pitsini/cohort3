@@ -10,10 +10,52 @@ idNumber.addEventListener('change', (() => {
     idNumberSize.textContent = functions.size(idNumber.value);
 }));
 
-// =======Calculator Code=======
+// ======= Exercise - Calculator: Summary button =======
 let num1;
 let num2;
+let result;
+sumBtn.addEventListener('click', (() => {
+    if (num1 === "blank") {
+        showResult.textContent = "You need a first value";
+    } else if (num2 === "blank") {
+        showResult.textContent = "You need a second value";
+    } else if (isNaN(num1) || isNaN(num2)) {
+        showResult.textContent = "The input should be a number";
+    } else if (showOperators.textContent === "") {
+        showResult.textContent = "Please choose an operator";
+    } else {
+        num1 = Number(num1);
+        num2 = Number(num2);
 
+        switch (showOperators.textContent) {
+            case "+":
+                result = functions.add(num1, num2);
+                showResult.textContent = `${num1} + ${num2} = ${result}`;
+                break;
+            case "-":
+                result = functions.subtract(num1, num2)
+                showResult.textContent = `${num1} - ${num2} = ${result}`;
+                break;
+            case "x":
+                result = functions.multiply(num1, num2);
+                showResult.textContent = `${num1} x ${num2} = ${result}`;
+                break;
+            case "÷":
+                result = functions.divide(num1, num2)
+                showResult.textContent = `${num1} ÷ ${num2} = ${result}`;
+                if (num2 === 0) {
+                    showResult.textContent = "You cannot have second value \= 0";
+                }
+                break;
+
+            default:
+                break;
+        }
+        clear();
+    }
+}));
+
+// ======= Exercise - Calculator: fancy stuff (Not necessary) =======
 const clear = (str) => {
     value1.focus();
     showValue1.textContent = "";
@@ -133,41 +175,4 @@ divideBtn.addEventListener('focusin', (() => {
 
 sumBtn.addEventListener('focusin', (() => {
     sumBtn.style.border = "2px dashed gray";
-}));
-
-sumBtn.addEventListener('click', (() => {
-    if (num1 === "blank") {
-        showResult.textContent = "You need a first value";
-    } else if (num2 === "blank") {
-        showResult.textContent = "You need a second value";
-    } else if (isNaN(num1) || isNaN(num2) ) {
-        showResult.textContent = "The input should be a number";
-    } else if (showOperators.textContent === "") {
-        showResult.textContent = "Please choose an operator";
-    } else {
-        num1 = Number(num1);
-        num2 = Number(num2);
-        
-        switch (showOperators.textContent) {
-            case "+":
-                showResult.textContent = `${num1} + ${num2} = ${functions.add(num1, num2)}`;    
-                break;
-            case "-":
-                showResult.textContent = `${num1} - ${num2} = ${functions.subtract(num1, num2)}`;
-                break;
-            case "x":
-                showResult.textContent = `${num1} x ${num2} = ${functions.multiply(num1, num2)}`;
-                break;
-            case "÷":
-                showResult.textContent = `${num1} ÷ ${num2} = ${functions.divide(num1, num2)}`;
-                if (num2 === 0) {
-                    showResult.textContent = "You can't have second value \= 0";
-                }
-                break;
-        
-            default:
-                break;
-        }
-        clear();
-    }    
 }));
