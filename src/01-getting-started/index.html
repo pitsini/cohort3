@@ -95,6 +95,44 @@
         <input id="idNumber" type="number"> is a <span id="idNumberSize">unknown</span> number?
         <p id="idNumberSizexx"></p>
     </div>
+<!-- ---------- Third Parallax Image with Size------------------ -->
+
+<!-- ========== Calulator ================== -->
+<div class="bgimg-3 w3-display-container w3-opacity-min">
+    <div class="w3-display-middle">
+        <span class="w3-xxlarge w3-text-white w3-wide">Calculator</span>
+    </div>
+</div>
+
+<div class="w3-content w3-container w3-padding-64 w3-center" id="idSize">
+    <div id="calculator-container">
+        <div class="value-containers" id="valueContainer1">
+            <span>First Value: </span>
+            <span><input type="text" class="text-box" id="value1"></span>
+            <span class="show-values" id="showValue1"></span>
+        </div>
+        <div class="operationsContainter" id="operationsContainter">
+            <div id="operations-btns">
+                <div id="add-btn"><button type="button" class="operators-btn" id="addBtn">+</button></div>
+                <div id="subtract-btn"><button type="button" class="operators-btn" id="subtractBtn">-</button></div>
+                <div id="multiply-btn"><button type="button" class="operators-btn" id="multiplyBtn">x</button></div>
+                <div id="divide-btn"><button type="button" class="operators-btn" id="divideBtn">&divide</button></div>
+            </div>
+            <span class="show-values" id="showOperators"></span>
+        </div>
+        <div class="value-containers" id="valueContainer2">
+            <span>Second Value: </span>
+            <span><input type="text" class="text-box" id="value2"></span>
+            <span class="show-values" id="showValue2"></span>
+        </div>
+        <div class="operationsContainter">
+            <button type="button" id="sumBtn">=</button>
+            <span class="show-values"></span>
+        </div>
+    </div>
+    <div id="showResult"></div>
+</div>
+
 
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">

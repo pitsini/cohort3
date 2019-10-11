@@ -14,3 +14,18 @@ test('Does that add function work?', () => {
     expect(functions.add(1,2)).toBe(3);
     expect(functions.add(101,202)).toBe(303);
 });
+
+test('Does that subtract function work?', () => {
+    expect(functions.subtract(5, 1)).toBe(4);
+    expect(functions.subtract(100, 30)).toBe(70);
+});
+
+test('Does that multiply function work?', () => {
+    expect(functions.multiply(50, 5)).toBe(250);
+    expect(functions.multiply(100, 30)).toBe(3000);
+});
+
+test('Does that divide function work?', () => {
+    expect(functions.divide(50, 5)).toBe(10);
+    expect(functions.divide(100, 10)).toBe(10);
+});
