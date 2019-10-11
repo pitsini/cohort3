@@ -14,12 +14,20 @@
 
 // Write the function after this comment ---
 const functions = {
-    // --- Daily Exercises - makeEmailArr - October 9, 2019 ---
+    // --- Daily Exercises - makeEmailObj - October 11, 2019
+    makeEmailObj: (obj1) => {
+        let lowerCaseFname = obj1.fname.toLowerCase();
+        let lowerCaseLname = obj1.lname.toLowerCase();
+        let email = `${lowerCaseFname}.${lowerCaseLname}@evolveu.ca`;        
+        return email;
+    },
+
+    // --- Daily Exercises - makeEmailArr - October 9, 2019
     makeEmailArr: (array1) => {
         return `${array1[0].toLowerCase()}.${array1[1].toLowerCase()}@evolveu.ca`;
     },
 
-    // --- Daily Exercises - AssertEquals - October 7, 2019 ---
+    // --- Daily Exercises - AssertEquals - October 7, 2019
     assertEquals: (var1, var2) => {
         if (Object.is(var1,var2)) {
             return true;
@@ -30,7 +38,6 @@ const functions = {
             return false;
         }
     }
-
 };
 
 export default functions;
