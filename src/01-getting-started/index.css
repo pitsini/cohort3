@@ -66,13 +66,20 @@ html {
 }
 
 
-/* calulator image) */
+/* calulator exercise */
 
 .bgimg-3 {
     background-image: url("https://cdn.pixabay.com/photo/2014/01/29/20/32/tablet-254581_960_720.jpg");
     min-height: 400px;
     opacity: 0.5;
     background-size: 100%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .operators-btn {
@@ -110,14 +117,8 @@ html {
     justify-content: flex-end;
     padding: 15px;
     text-align: left;
-    width: 250px;
-}
-
-#calculator-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    width: 225px;
+    /* border: 1px dashed black; */
 }
 
 #operations-btns {
@@ -141,6 +142,27 @@ html {
     width: 100px;
     height: 40px;
 }
+
+
+/* tax exercise */
+
+.bgimg-4 {
+    background-image: url("https://www.pwlcapital.com/wp-content/uploads/2019/04/Tax-Season-Female-Calculating-Expenses-Table-Calculator.jpg");
+    min-height: 400px;
+    opacity: 0.5;
+    background-size: 100%;
+}
+
+.alignCenter {    
+    display: flex;
+    align-items: center;
+}
+
+.justifyCenter {    
+    display: flex;
+    justify-content: center;
+}
+
 
 
 

@@ -14,6 +14,7 @@ idNumber.addEventListener('change', (() => {
 let num1;
 let num2;
 let result;
+
 sumBtn.addEventListener('click', (() => {
     if (num1 === "blank") {
         showResult.textContent = "You need a first value";
@@ -175,4 +176,12 @@ divideBtn.addEventListener('focusin', (() => {
 
 sumBtn.addEventListener('focusin', (() => {
     sumBtn.style.border = "2px dashed gray";
+}));
+
+// ======= Exercise - Calculator: Summary button =======
+taxBtn.addEventListener('click', (() => {
+    let tax1;
+    tax1 = income.value;
+    tax1 = tax1.replace(/[,$]/g, '')
+    showTax.value = functions.tax(tax1);
 }));

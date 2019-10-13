@@ -97,7 +97,7 @@
     </div>
 <!-- ---------- Third Parallax Image with Size------------------ -->
 
-<!-- ========== Calulator ================== -->
+<!-- ========== Calulator ========== -->
 <div class="bgimg-3 w3-display-container w3-opacity-min">
     <div class="w3-display-middle">
         <span class="w3-xxlarge w3-text-white w3-wide">Calculator</span>
@@ -105,7 +105,7 @@
 </div>
 
 <div class="w3-content w3-container w3-padding-64 w3-center" id="idSize">
-    <div id="calculator-container">
+    <div class="container">
         <div class="value-containers" id="valueContainer1">
             <span>First Value: </span>
             <span><input type="text" class="text-box" id="value1"></span>
@@ -132,6 +132,28 @@
     </div>
     <div id="showResult"></div>
 </div>
+
+<!-- ========== Tax ========== -->
+<div class="bgimg-4 w3-display-container w3-opacity-min">
+    <div class="w3-display-middle">
+        <span class="w3-xxlarge w3-wide">Tax</span>
+    </div>
+</div>
+
+<div class="container">
+    <div class="value-containers justifyCenter" id="taxIncome">
+        <span>Income: </span>
+        <span><input type="text" class="text-box" id="income"></span>
+    </div>
+    <div class="value-containers justifyCenter alignCenter">
+        <button type="button" id="taxBtn">Calculate</button>
+    </div>
+    <div class="value-containers justifyCenter">
+        <span>Tax: </span>
+        <span><input type="text" class="text-box" id="showTax" disabled></span>
+    </div>
+</div>
+
 
 
     <!-- Footer -->
