@@ -185,3 +185,36 @@ taxBtn.addEventListener('click', (() => {
     tax1 = tax1.replace(/[,$]/g, '')
     showTax.value = functions.tax(tax1);
 }));
+
+// ======= Exercise - Working with Arrays =======
+let array1 = [];
+let addInput, message;
+aBtn.addEventListener('click', (() => {
+    addInput = arrayTextbox.value;    
+    if (functions.isNumber(addInput)) {
+        array1 = functions.addArray(Number(addInput), array1);
+        message = `${addInput} has been added to the array.`;
+    } else {
+        message = `'${addInput}' is not a number.`;
+    }
+    messageArea.textContent = message;
+}));
+
+sBtn.addEventListener('click', (() => {
+    if (array1.length !== 0) {
+        messageArea.textContent = array1;
+    } else {
+        messageArea.textContent = `There is no number in the array.`;
+    }
+}));
+
+tBtn.addEventListener('click', (() => {
+    const total = array1.reduce((acc, eachNum) => acc+eachNum, 0);
+    messageArea.textContent = `Total of array [${array1}] is ${total}`;
+}));
+
+cBtn.addEventListener('click', (() => {
+    array1 = [];
+    messageArea.textContent = `The array has been cleared`;
+    arrayTextbox.value = "";
+}));

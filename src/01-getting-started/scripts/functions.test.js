@@ -32,10 +32,22 @@ test('Does that divide function work?', () => {
 
 // ========== Tax ========== 
 test('Does that tax function work?', () => {
-    // expect(functions.tax(1)).toBe("0.15");
-    // expect(functions.tax(2)).toBe("0.30");
-    // expect(functions.tax(50000)).toBe("7630.35");
-    // expect(functions.tax(100000)).toBe("18141.10");
-    // expect(functions.tax(150000)).toBe("31211.10");
+    expect(functions.tax(1)).toBe("0.15");
+    expect(functions.tax(2)).toBe("0.30");
+    expect(functions.tax(50000)).toBe("7630.35");
+    expect(functions.tax(100000)).toBe("18141.10");
+    expect(functions.tax(150000)).toBe("31211.10");
     expect(functions.tax(250000)).toBe("61796.25");
+});
+
+// ========== Arrays ========== 
+test('Does that isNumber function work?', () => {
+    expect(functions.isNumber(1)).toBe(true);
+    expect(functions.isNumber("1")).toBe(true);
+    expect(functions.isNumber("text")).toBe(false);
+});
+
+test('Does that addArray function work?', () => {
+    const arr = [1,2];
+    expect(functions.addArray(8, arr)).toEqual([1, 2, 8]);
 });

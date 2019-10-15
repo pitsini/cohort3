@@ -53,6 +53,21 @@ const functions = {
         
         taxTotal = ((income-line2)*(line4/100))+line6;
         return taxTotal.toFixed(2);    
+    },
+
+
+    // ========== arrays ========== 
+    isNumber: (text) => {
+        if (isNaN(Number(text)) === true) {
+            return false;
+        } else {
+            return true;
+        }
+    },
+
+    addArray: (number, arr) => {
+        arr.push(number);
+        return arr;
     }
 };
 
