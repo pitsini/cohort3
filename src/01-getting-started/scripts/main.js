@@ -1,4 +1,5 @@
 import functions from './functions.js';
+import taxFunctions from './taxFunctions.js';
 
 // **********
 //
@@ -183,7 +184,7 @@ taxBtn.addEventListener('click', (() => {
     let tax1;
     tax1 = income.value;
     tax1 = tax1.replace(/[,$]/g, '')
-    showTax.value = functions.tax(tax1);
+    showTax.value = taxFunctions.tax(tax1);
 }));
 
 // ======= Exercise - Working with Arrays =======
@@ -218,3 +219,24 @@ cBtn.addEventListener('click', (() => {
     messageArea.textContent = `The array has been cleared`;
     arrayTextbox.value = "";
 }));
+
+// ======= Exercise - Working with Dictionaries =======
+const canadianProv = {
+    ab: "Alberta",
+    bc: "British Columbia",
+    mb: "Manitoba",
+    nb: "New Brunswick",
+    nl: "Newfoundland and Labrador",
+    ns: "Nova Scotia",
+    on: "Ontario",
+    pe: "Prince Edward Island",
+    qc: "Quebec",
+    sk: "Saskatchewan"
+};
+
+lookupBtn.addEventListener('click', (() => {
+    let input = dictTextbox.value; 
+    dictArea.textContent = functions.searchProv(input, canadianProv);
+}));
+
+

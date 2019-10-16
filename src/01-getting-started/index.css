@@ -172,14 +172,14 @@ html {
     background-size: 100%;
 }
 
-#arrayContainer {    
+.arrayContainer {    
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     margin: 20px;
 }
 
-#arrayInner {
+.arrayInner {
     border: 2px solid black;
     margin: 10px;
     width: 500px;
@@ -187,7 +187,15 @@ html {
 
 .margin {
     margin: 20px;
-    /* border: 1px dashed black; */
+}
+
+/* Dictionaries */
+
+.bgimg-6 {
+    background-image: url("https://cdn.pixabay.com/photo/2017/08/17/18/28/books-2652413_960_720.jpg");
+    min-height: 400px;
+    opacity: 0.5;
+    background-size: 100%;
 }
 
 

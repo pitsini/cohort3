@@ -1,4 +1,5 @@
 import functions from './functions'
+import taxFunctions from './taxFunctions'
 
 test('Check the sizes', () => {
     expect(functions.size(-1)).toBe("Negative"); // Consider the edge cases
@@ -32,12 +33,12 @@ test('Does that divide function work?', () => {
 
 // ========== Tax ========== 
 test('Does that tax function work?', () => {
-    expect(functions.tax(1)).toBe("0.15");
-    expect(functions.tax(2)).toBe("0.30");
-    expect(functions.tax(50000)).toBe("7630.35");
-    expect(functions.tax(100000)).toBe("18141.10");
-    expect(functions.tax(150000)).toBe("31211.10");
-    expect(functions.tax(250000)).toBe("61796.25");
+    expect(taxFunctions.tax(1)).toBe("0.15");
+    expect(taxFunctions.tax(2)).toBe("0.30");
+    expect(taxFunctions.tax(50000)).toBe("7630.35");
+    expect(taxFunctions.tax(100000)).toBe("18141.10");
+    expect(taxFunctions.tax(150000)).toBe("31211.10");
+    expect(taxFunctions.tax(250000)).toBe("61796.25");
 });
 
 // ========== Arrays ========== 
@@ -50,4 +51,24 @@ test('Does that isNumber function work?', () => {
 test('Does that addArray function work?', () => {
     const arr = [1,2];
     expect(functions.addArray(8, arr)).toEqual([1, 2, 8]);
+});
+
+// ========== Dictionaries ==========
+
+test('Does that searchProv function work?', () => {
+    const canadianProv = {
+        ab: "Alberta",
+        bc: "British Columbia",
+        mb: "Manitoba",
+        nb: "New Brunswick",
+        nl: "Newfoundland and Labrador",
+        ns: "Nova Scotia",
+        on: "Ontario",
+        pe: "Prince Edward Island",
+        qc: "Quebec",
+        sk: "Saskatchewan"
+    };
+
+    expect(functions.searchProv('ab', canadianProv)).toBe('Alberta');
+    expect(functions.searchProv('sk', canadianProv)).toBe('Saskatchewan');  
 });
