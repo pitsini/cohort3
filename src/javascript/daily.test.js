@@ -1,7 +1,22 @@
 import functions from './daily.js'
 /*	
+    Daily Exercises - More Array Work - October (16-17), 2019
+	Write the function to create examples of slice | splice | forEach | map | reduce | filter | sort
+*/
+test('More Array Work', () => {
+    const arr = ["red", "green", "blue", "white", "black"];
+    expect(functions.slice(3, arr)).toEqual(["white", "black"]);
+    expect(functions.splice(2, 3, "rainbow", arr)).toEqual(["red", "green", "rainbow"]); //At position 2, remove 3 items and add the new item(s)
+    expect(functions.forEach(arr)).toEqual(["red!", "green!", "rainbow!"]);
+    expect(functions.map(arr)).toEqual(["red", "green", "rainbow"]);
+    expect(functions.howManyCharUsingReduce(arr)).toEqual(15);
+    expect(functions.arrayStartWithR("r", arr)).toEqual(["red", "rainbow"]);
+    expect(functions.sort(arr)).toEqual(["green", "rainbow", "red"]);
+});
+
+/*	
     Daily Exercises - Prepare for Array Work - October 15, 2019
-	Write the function to create examples of for, while, do while, for in, for of
+	Write the function to create examples of for | while | do while | for in | for of
 */
 test('prepare for Array work', () => {
     const arr = [1,2,3,4,5];

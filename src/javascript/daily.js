@@ -1,6 +1,46 @@
 // Write the function after this comment ---
 const functions = {
     // --- Daily Exercises - Prepare for Array Work - October 15, 2019
+    
+    slice: (index, arr) => {
+        let result;
+        result = arr.slice(index);
+        return result;
+    },
+    splice: (index, replace, content, arr) => {
+        arr.splice(index, replace, content);
+        return arr;
+    },
+    forEach: (arr) => {
+        let newArr = [];
+        arr.forEach((item) => {
+            newArr.push(item + "!");
+        });
+        return newArr;
+    },
+    map: (arr) => {
+        const newArr = arr.map((item) => {
+            return item.replace("!", "?");
+        });
+        return newArr;
+    },
+    howManyCharUsingReduce: (arr) => {
+        const charTotal = arr.reduce((acc, item) => {
+            return acc + item.length;
+        },0);
+        return charTotal;
+    },
+    arrayStartWithR: (start, arr) => {
+        let newArr = [];
+        newArr = arr.filter(item => item[0] === start);
+        return newArr;
+    },
+    sort: (arr) => {
+        return arr.sort();
+    },
+
+
+    // --- Daily Exercises - Prepare for Array Work - October 15, 2019
     sumFromArray: (arr1) => {
         let summary = 0;
         for (let i = 1; i <= arr1.length; i++) {
