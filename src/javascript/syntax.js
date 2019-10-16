@@ -81,10 +81,11 @@ const functions = {
     addOddNumber: (num) => {
         let result = 0;
         let i = 1;
-        while (i <= num) {
+        do {
             result = result + ((i*2)-1);
             i++;
         }
+        while (i <= num);
         return result;
     },
 
