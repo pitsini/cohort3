@@ -1,19 +1,53 @@
-/*
-	Write the function that will create this output:
-
-*** the two values are not the same:
-    p1--> a
-    p2--> b
-*** the two values are not the same:
-    p1--> 1
-    p2--> 2
-*** the two values are not the same:
-    p1--> 2
-    p2--> 2
-*/
-
 // Write the function after this comment ---
 const functions = {
+    // --- Daily Exercises - Prepare for Array Work - October 15, 2019
+    sumFromArray: (arr1) => {
+        let summary = 0;
+        for (let i = 1; i <= arr1.length; i++) {
+            summary = summary + i;
+        }
+        return summary;
+    },
+
+    doubleArray: (arr2) => {
+        let result = [];
+        let i = 0;
+        while (i < arr2.length) {
+            result.push(arr2[i]*2);
+            i++;
+        }
+        return result;
+    },
+
+    subtractBy1: (arr3) => {
+        let result = [];
+        let i = 0;
+        do {
+            result.push(arr3[i]-1);
+            i++;
+        }
+        while (i < arr3.length);
+        return result;
+    },
+
+    //Warning from MDN => for...in should not be used to iterate over an Array where the index order is important.
+    totalPrice: (arr4) => {
+        let sum = 0;
+        for (const index in arr4) {
+            sum = sum + arr4[index];
+        }
+        return sum;
+    },
+
+    //
+    addExclamationMark: (arr5) => {
+        let result = [];
+        for (const element of arr5) {
+            result.push("$" + element);
+        }
+        return result;
+    },
+
     // --- Daily Exercises - makeEmailObj - October 11, 2019
     makeEmailObj: (obj1) => {
         let lowerCaseFname = obj1.fname.toLowerCase();
@@ -43,9 +77,9 @@ const functions = {
 export default functions;
 
 // and before this comment ---
-functions.assertEquals("a", "b");
-functions.assertEquals("a", "a");
-functions.assertEquals(1, 2);
-functions.assertEquals(2, 2);
-functions.assertEquals("2", 2);
-functions.assertEquals("This value", "This value");
+// functions.assertEquals("a", "b");
+// functions.assertEquals("a", "a");
+// functions.assertEquals(1, 2);
+// functions.assertEquals(2, 2);
+// functions.assertEquals("2", 2);
+// functions.assertEquals("This value", "This value");
