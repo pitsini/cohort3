@@ -179,7 +179,7 @@ sumBtn.addEventListener('focusin', (() => {
     sumBtn.style.border = "2px dashed gray";
 }));
 
-// ======= Exercise - Calculator: Summary button =======
+// ======= Exercise - Tax =======
 taxBtn.addEventListener('click', (() => {
     let tax1;
     tax1 = income.value;

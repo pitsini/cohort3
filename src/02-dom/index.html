@@ -4,14 +4,13 @@
 <head>
     <link rel="stylesheet" type="text/css" href="./index.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    
-    <title>The Basic DOM</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">    
+    <title>Comp 110 - JavaScript Events and DOM</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="innerContainer alignCenter" id="basicDiv">
+    <div class="container justifyCenter">
+        <div class="innerContainer alignCenter " id="basicDiv">
                 <h1>Basic DOM</h1>
                 <h4>This is a list of stuff</h4>
                 <ol id="olList">                    
@@ -19,19 +18,81 @@
                     <li>Item 2</li>
                     <li>Item 3</li>
                 </ol>
-            <div>
-                <button type="button" class="margin20px" id="showBtn">Show</button>
-                <button type="button" class="margin20px" id="addBottomBtn">Add from bottom</button>
-                <button type="button" class="margin20px" id="addTopBtn">Add from Start</button>
-                <button type="button" class="margin20px" id="deleteBottomBtn">Delete from bottom</button>
-                <button type="button" class="margin20px" id="deleteTopBtn">Delete from Start</button>
-                
+            <div class="margin15px">
+                <div class="justifyCenter"><button type="button" id="showBtn">Show</button></div>
+                <div class="justifyCenter">
+                    <button type="button" id="addBottomBtn">Add from bottom</button>
+                    <button type="button" id="addTopBtn">Add from Start</button>
+                </div>
+                <div>
+                    <button type="button" id="deleteBottomBtn">Delete from bottom</button>
+                    <button type="button" id="deleteTopBtn">Delete from Start</button>
+                </div>
             </div>
         </div>
     </div>
+
+    
+    <!-- ========== Working with Cards ========== -->
+    <div class="bgimg-2 w3-display-container">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge  w3-wide">Working with Cards</span>
+        </div>
+    </div>
+    <div class="container">
+        <div id="cardContainer">
+            <div class="addCard">
+                <button type="button" id="addCard">Add Card</button>
+            </div>
+            <div class="card">
+                <h5>Card 1</h5>
+                <div class="margin5px">
+                    <button type="button" class="addBeforeBtn">Add Before</button>
+                    <button type="button" class="addAfterBtn">Add After</button>
+                </div>
+                <div class="margin5px">
+                    <button type="button" class="deleteCardBtn">Delete</button>
+                </div>
+            </div>
+            <div class="card">
+                <h5>Card 2</h5>
+                <div class="margin5px">
+                    <button type="button" class="addBeforeBtn">Add Before</button>
+                    <button type="button" class="addAfterBtn">Add After</button>
+                </div>
+                <div class="margin5px">
+                    <button type="button" class="deleteCardBtn">Delete</button>
+                </div>
+            </div>
+            <!-- <div class="card">
+                <h5>Card 3</h5>
+                <div class="margin5px">
+                    <button type="button" id="addBefore">Add Before</button>
+                    <button type="button" id="addAfter">Add After</button>
+                </div>
+                <div class="margin5px">
+                    <button type="button" id="deleteCard">Delete</button>
+                </div>
+            </div>
+            <div class="card">
+                <h5>Card 4</h5>
+                <div class="margin5px">
+                    <button type="button" id="addBefore">Add Before</button>
+                    <button type="button" id="addAfter">Add After</button>
+                </div>
+                <div class="margin5px">
+                    <button type="button" id="deleteCard">Delete</button>
+                </div>
+            </div> -->
+        </div>
+        <div id="innerRight">
+            <div class="margin15px rightSide"><h1>Right Side</h1></div>
+            <div class="margin15px rightSide"><h1>Right Side</h1></div>
+        </div>
+    </div>
+    
+
     <script type="module" src="./scripts/main.js"></script>
-
-
 </body>
 
 </html>

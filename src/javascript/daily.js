@@ -3,38 +3,35 @@ const functions = {
     // --- Daily Exercises - Prepare for Array Work - October 15, 2019
     
     slice: (index, arr) => {
-        let result;
-        result = arr.slice(index);
-        return result;
+        return arr.slice(index);
     },
+
     splice: (index, replace, content, arr) => {
         arr.splice(index, replace, content);
         return arr;
     },
+
     forEach: (arr) => {
         let newArr = [];
-        arr.forEach((item) => {
-            newArr.push(item + "!");
-        });
+        arr.forEach((item) => newArr.push(item + "!"));
         return newArr;
     },
+
     map: (arr) => {
-        const newArr = arr.map((item) => {
-            return item.replace("!", "?");
-        });
+        const newArr = arr.map((item) => item.replace("!", "?"));
         return newArr;
     },
+
     howManyCharUsingReduce: (arr) => {
-        const charTotal = arr.reduce((acc, item) => {
-            return acc + item.length;
-        },0);
+        const charTotal = arr.reduce((acc, item) => acc + item.length, 0);
         return charTotal;
     },
+
     arrayStartWithR: (start, arr) => {
-        let newArr = [];
-        newArr = arr.filter(item => item[0] === start);
+        let newArr = arr.filter(item => item[0] === start);
         return newArr;
     },
+    
     sort: (arr) => {
         return arr.sort();
     },
@@ -103,23 +100,14 @@ const functions = {
 
     // --- Daily Exercises - AssertEquals - October 7, 2019
     assertEquals: (var1, var2) => {
-        if (Object.is(var1,var2)) {
-            return true;
-        } else {
+        
+        if (!Object.is(var1, var2)) {
             console.log("*** the two values are not the same:");
             console.log(`p1--> ${var1}`);
             console.log(`p2--> ${var2}`);
             return false;
-        }
+        } else true;
     }
 };
 
 export default functions;
-
-// and before this comment ---
-// functions.assertEquals("a", "b");
-// functions.assertEquals("a", "a");
-// functions.assertEquals(1, 2);
-// functions.assertEquals(2, 2);
-// functions.assertEquals("2", 2);
-// functions.assertEquals("This value", "This value");

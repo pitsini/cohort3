@@ -1,6 +1,6 @@
 import functions from './functions.js';
 
-
+// ========== The Basic DOM Exercise ==========
 document.getElementById("basicDiv").addEventListener ('click', ((event) => {
     console.log(event);
 }));
@@ -23,4 +23,9 @@ deleteBottomBtn.addEventListener('click', (() => {
 
 deleteTopBtn.addEventListener('click', (() => {
     functions.deleteLiFromTop(olList);
+}));
+
+// ========== Working with Cards ==========
+addCard.addEventListener('click', (() => {
+    functions.addCard(cardContainer);
 }));
