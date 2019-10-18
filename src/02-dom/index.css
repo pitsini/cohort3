@@ -111,15 +111,6 @@ html {
     /* overflow: auto; */
 }
 
-/* .overflow {
-    overflow: auto;
-} */
-
-/* .justifyLeft {    
-    display: flex;
-    justify-content: flex-start;
-} */
-
 .rightSide {
     background-color: white;
     height: 500px;
@@ -128,10 +119,6 @@ html {
 #innerRight {    
     width: 630px;
     height: 100%;
-}
-
-div {
-    /* border: 1px solid black; */
 }
 
 .card {

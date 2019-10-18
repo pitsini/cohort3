@@ -26,4 +26,5 @@ import functions from './functions'
 
     test('Working with Cards', () => {
         expect(functions.addCard(mycardContainer).childElementCount).toEqual(3);
+        expect(functions.addCard(mycardContainer).childElementCount).toEqual(4);
     });
