@@ -30,6 +30,13 @@ import functions from './functions'
         //check how many child that cardContainer has after running function
         expect(functions.addCard(mycardContainer, childCount)[0].childElementCount).toEqual(3); 
         expect(functions.addCard(mycardContainer, childCount)[0].childElementCount).toEqual(4);
+
         expect(functions.deleteCard(mycardContainer.children[0]).childElementCount).toEqual(3);
         expect(functions.deleteCard(mycardContainer.children[1]).childElementCount).toEqual(2);
+
+        expect(functions.addBefore(mycardContainer.children[1], childCount)[0].childElementCount).toEqual(3);
+        expect(functions.addBefore(mycardContainer.children[2], childCount)[0].childElementCount).toEqual(4);
+
+        expect(functions.addAfter(mycardContainer.children[1], childCount)[0].childElementCount).toEqual(5);
+        expect(functions.addAfter(mycardContainer.children[3], childCount)[0].childElementCount).toEqual(6);
     });

@@ -33,13 +33,6 @@ const functions = {
     },
 
     // ========== Working with Cards ==========
-    addCard: (cardContainer, cardCount) => {
-        let returnValue = functions.createNewCard(cardCount);
-        let newDiv = returnValue[0]
-        let newCardCount = returnValue[1]
-        cardContainer.appendChild(newDiv);
-        return [cardContainer, newCardCount];
-    },
 
     createNewCard: (cardCount) => {
         cardCount++;
@@ -92,12 +85,44 @@ const functions = {
         return [newParentDiv, cardCount];
     },
 
+    addCard: (cardContainer, cardCount) => {
+        let returnValue = functions.createNewCard(cardCount);
+        let newDiv = returnValue[0];
+        let newCardCount = returnValue[1];
+        cardContainer.appendChild(newDiv);
+        return [cardContainer, newCardCount];
+    },
+
     deleteCard: (element) => {
         let parent = element.parentElement; 
         element.remove();
         return parent;
-    }
-};
+    },
 
+    addBefore: (element, cardCount) => {
+        let parent = element.parentElement;
+
+        let returnValue = functions.createNewCard(cardCount);
+        let newDiv = returnValue[0];
+        let newCardCount = returnValue[1];
+
+        parent.insertBefore(newDiv, element);
+        return [parent, newCardCount];
+    },
+
+    addAfter: (element, cardCount) => {
+        // get parent element
+        let parent = element.parentElement;
+
+        // create new 'card' and increase 'card count'
+        let returnValue = functions.createNewCard(cardCount);
+        let newDiv = returnValue[0];
+        let newCardCount = returnValue[1];
+
+        //insert new card before the next silbling....COOL!!!!
+        parent.insertBefore(newDiv, element.nextSibling);
+        return [parent, newCardCount];
+    } 
+};
 export default functions;
 

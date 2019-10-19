@@ -100,7 +100,13 @@ button {
 .bgimg-2 {
     background-image: url('https://thumbs.dreamstime.com/z/playing-cards-background-7891691.jpg');
     min-height: 400px;
-    opacity: 0.4;
+    opacity: 0.7;
+}
+
+.Heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .addCard {

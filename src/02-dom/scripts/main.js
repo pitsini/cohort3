@@ -36,14 +36,17 @@ addCard.addEventListener('click', (() => {
 }));
 
 cardContainer.addEventListener('click', ((event) => {
+    console.log(event)
     switch (event.target.className) {
         case "addBefore":
-            console.log("addBefore");
-            console.log(event.target.parentElement.parentElement.className);
+            cardElement = event.target.parentElement.parentElement;
+            result = functions.addBefore(cardElement, cardCount);
+            cardCount = result[1];
             break;
         case "addAfter":
-            console.log("addAfter");
-            console.log(event.target.parentElement.parentElement.className);
+            cardElement = event.target.parentElement.parentElement;
+            result = functions.addAfter(cardElement, cardCount);
+            cardCount = result[1];
             break;
         case "delete":
             cardElement = event.target.parentElement.parentElement;
