@@ -33,51 +33,69 @@ const functions = {
     },
 
     // ========== Working with Cards ==========
-    addCard: (cardContainer) => {
-        // add first div <div class="card">
-        let cardInStack = cardContainer.getElementsByClassName("card").length;
-        let newCardDiv = document.createElement("div");
-        newCardDiv.setAttribute("Class", "card");
+    addCard: (cardContainer, cardCount) => {
+        let returnValue = functions.createNewCard(cardCount);
+        let newDiv = returnValue[0]
+        let newCardCount = returnValue[1]
+        cardContainer.appendChild(newDiv);
+        return [cardContainer, newCardCount];
+    },
 
-            let h5 = document.createElement("h5");
-            let h5Content = document.createTextNode("Card " + (cardInStack + 1));
+    createNewCard: (cardCount) => {
+        cardCount++;
+        // create parent div
+        let newParentDiv = document.createElement("div");
+        newParentDiv.className = "card";
 
-            h5.appendChild(h5Content);
-            newCardDiv.appendChild(h5);
+        // create h3 tag and append to parent div
+        let h3 = document.createElement("h3");
+        let h3Content = document.createTextNode("Card " + (cardCount));
+        h3.appendChild(h3Content);
+        newParentDiv.appendChild(h3);
 
-        // add second div <div class="margin5px">
-        let newMargin5pxDiv1 = document.createElement("div");
-        newMargin5pxDiv1.setAttribute("Class", "margin5px");
+        // create 1st child div
+        let childDiv1 = document.createElement("div");
 
-            let newAddBeforeBtn = document.createElement("button");
-            newAddBeforeBtn.setAttribute("Class", "addBeforeBtn");
-            let addBeforeBtnContent = document.createTextNode("Add Before");
+        // create "add before" button
+        let newAddBeforeBtn = document.createElement("button");
+        newAddBeforeBtn.className = "addBefore";
+        let addBeforeBtnContent = document.createTextNode("Add Before");
 
-            newAddBeforeBtn.appendChild(addBeforeBtnContent);
-            newMargin5pxDiv1.appendChild(newAddBeforeBtn);
+        // append button to 1st child div
+        newAddBeforeBtn.appendChild(addBeforeBtnContent);
+        childDiv1.appendChild(newAddBeforeBtn);
 
-            let newAddAfterBtn = document.createElement("button");
-            newAddAfterBtn.setAttribute("Class", "addAfterBtn");
-            let addAfterBtnContent = document.createTextNode("Add After");
+        // create "add after" button
+        let newAddAfterBtn = document.createElement("button");
+        newAddAfterBtn.className = "addAfter";
+        let addAfterBtnContent = document.createTextNode("Add After");
 
-            newAddAfterBtn.appendChild(addAfterBtnContent);
-            newMargin5pxDiv1.appendChild(newAddAfterBtn);
-            newCardDiv.appendChild(newMargin5pxDiv1);
+        // append button to 1st child div
+        newAddAfterBtn.appendChild(addAfterBtnContent);
+        childDiv1.appendChild(newAddAfterBtn);
+        newParentDiv.appendChild(childDiv1);
 
-        // add second div <div class="margin5px">
-        let newMargin5pxDiv2 = document.createElement("div");
-        newMargin5pxDiv2.setAttribute("Class", "margin5px");
+        // create 2nd child div
+        let childDiv2 = document.createElement("div");
 
-            let newDeleteCardBtn = document.createElement("button");
-            newDeleteCardBtn.setAttribute("Class", "deleteCardBtn");
-            let deleteCardBtnContent = document.createTextNode("Delete");
+        // create "delete" button
+        let newDeleteCardBtn = document.createElement("button");
+        newDeleteCardBtn.className = "delete";
+        let deleteCardBtnContent = document.createTextNode("Delete");
 
-            newDeleteCardBtn.appendChild(deleteCardBtnContent);
-            newMargin5pxDiv2.appendChild(newDeleteCardBtn);
-            newCardDiv.appendChild(newMargin5pxDiv2);
+        // append button to 2nd child div
+        newDeleteCardBtn.appendChild(deleteCardBtnContent);
+        childDiv2.appendChild(newDeleteCardBtn);
+        newParentDiv.appendChild(childDiv2);
 
-        cardContainer.appendChild(newCardDiv);
-        return cardContainer;
+        // return 2 parameters back using array
+        return [newParentDiv, cardCount];
+    },
+
+    deleteCard: (element) => {
+        let parent = element.parentElement; 
+        element.remove();
+        return parent;
     }
 };
 

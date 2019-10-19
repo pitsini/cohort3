@@ -26,6 +26,29 @@ deleteTopBtn.addEventListener('click', (() => {
 }));
 
 // ========== Working with Cards ==========
+let cardCount = cardContainer.getElementsByClassName("card").length;
+let cardElement;
+let result = [];
+
 addCard.addEventListener('click', (() => {
-    functions.addCard(cardContainer);
+    result = functions.addCard(cardContainer, cardCount);
+    cardCount = result[1];
 }));
+
+cardContainer.addEventListener('click', ((event) => {
+    switch (event.target.className) {
+        case "addBefore":
+            console.log("addBefore");
+            console.log(event.target.parentElement.parentElement.className);
+            break;
+        case "addAfter":
+            console.log("addAfter");
+            console.log(event.target.parentElement.parentElement.className);
+            break;
+        case "delete":
+            cardElement = event.target.parentElement.parentElement;
+            functions.deleteCard(cardElement);
+            break;
+    }
+}));
+
