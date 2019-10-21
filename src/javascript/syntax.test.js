@@ -8,7 +8,9 @@ test('defineVariables function', () => {
     expect(functions.defineVariables(1 === 1)).toBe("boolean");
     expect(functions.defineVariables([1,3,5])).toBe("array");    
     expect(functions.defineVariables({a:1})).toBe("object"); 
-    expect(functions.defineVariables(var1)).toBe("undefined");
+    expect(functions.defineVariables(var1)).toBe("undefined");   
+    expect(functions.defineVariables(function myFunc() { })).toBe("There is none of above.");
+    // There is none of above.
  });
 
 test('ifElse function', () => {
@@ -65,4 +67,5 @@ test('phoneNumberSearch function', () => {
         phone: "(403)111-5555"
     };
     expect(functions.phoneNumberSearch(phoneBook, "Sarah")).toBe("(403)111-5555");
+    expect(functions.phoneNumberSearch(phoneBook, "John")).toBe("John can't be found.");
 });

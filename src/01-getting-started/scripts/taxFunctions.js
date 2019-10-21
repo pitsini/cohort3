@@ -18,7 +18,7 @@ const taxFunctions = {
             line2 = 147667;
             line4 = 29;
             line6 = 30534.525;
-        } else if (income > 210371) {
+        } else {
             line2 = 210371;
             line4 = 33;
             line6 = 48718.685;

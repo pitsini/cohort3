@@ -1,7 +1,16 @@
 // Write the function after this comment ---
 const functions = {
-    // --- Daily Exercises - Prepare for Array Work - October 15, 2019
     
+    // --- Daily Exercises - loopStaff - October 21, 2019
+    loopStaff: (arr) => {
+        const mapArray = arr.map((staff) => {
+            const newArray = functions.makeEmailObj(staff);
+            return newArray;
+        });
+        return mapArray;
+    },
+
+    // --- Daily Exercises - Prepare for Array Work - October 15, 2019    
     slice: (index, arr) => {
         return arr.slice(index);
     },
@@ -89,7 +98,7 @@ const functions = {
     makeEmailObj: (obj1) => {
         let lowerCaseFname = obj1.fname.toLowerCase();
         let lowerCaseLname = obj1.lname.toLowerCase();
-        let email = `${lowerCaseFname}.${lowerCaseLname}@evolveu.ca`;        
+        let email = `${lowerCaseFname}.${lowerCaseLname}@evolveu.ca`;
         return email;
     },
 
@@ -106,7 +115,9 @@ const functions = {
             console.log(`p1--> ${var1}`);
             console.log(`p2--> ${var2}`);
             return false;
-        } else true;
+        } else {
+            return true;
+        }
     }
 };
 

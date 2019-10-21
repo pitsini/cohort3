@@ -11,6 +11,8 @@ const functions = {
             return "array"
         } else if (typeof (text) === "number" || text === undefined || typeof(text) === "string" || typeof(text) === "object" || typeof(text) === "boolean") {
             return typeof(text);            
+        } else {
+            return "There is none of above.";
         }
     },
 //------------------------------
@@ -105,6 +107,8 @@ const functions = {
         let phoneFound = "";
         if (obj.name.includes(name)) {
             phoneFound = obj.phone;
+        } else {
+            return `${name} can't be found.`;
         }
         return phoneFound;
     }

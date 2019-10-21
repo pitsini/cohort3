@@ -60,5 +60,6 @@ test('Does that searchProv function work?', () => {
     };
 
     expect(functions.searchProv('ab', canadianProv)).toBe('Alberta');
-    expect(functions.searchProv('sk', canadianProv)).toBe('Saskatchewan');  
+    expect(functions.searchProv('sk', canadianProv)).toBe('Saskatchewan');
+    expect(functions.searchProv('thailand', canadianProv)).toBe("thailand can't be found in dictionary.");  
 });

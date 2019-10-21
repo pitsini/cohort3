@@ -1,4 +1,32 @@
 import functions from './daily.js'
+/*
+    Daily Exercises - loopStaff - October 21, 2019
+*/
+const data = {
+    staff: [
+        { fname: "Jane", lname: "Smith", balance: 10 },
+        { fname: "Liam", lname: "Henry", balance: 1000 },
+        { fname: "Emma", lname: "Jones", balance: 1330 },
+        { fname: "Olivia", lname: "Notly", balance: 310 },
+        { fname: "Noah", lname: "Ho", balance: 503 },
+        { fname: "William", lname: "Lee", balance: 520 },
+        { fname: "Benjamin", lname: "Amis", balance: 150 },
+    ],
+    company: "EvolveU",
+    city: "Calgary",
+    prov: "Alberta"
+};
+
+test('email builder for company', () => {
+    const staffEmail = functions.loopStaff(data.staff);
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
 /*	
     Daily Exercises - More Array Work - October (16-17), 2019
 	Write the function to create examples of slice | splice | forEach | map | reduce | filter | sort
@@ -58,12 +86,12 @@ test('email builder from an array', () => {
 
 // --- Daily Exercises - AssertEquals - October 7, 2019 ---
 test('Compare parameter', () => {
-    // expect(functions.assertEquals(10, 10)).toBe(true);
-    // expect(functions.assertEquals(-1, -1)).toBe(true);   
-    // expect(functions.assertEquals("10", "10")).toBe(true);
-    // expect(functions.assertEquals("John", "John")).toBe(true); 
-    // expect(functions.assertEquals(10, -10)).toBe(false);
-    // expect(functions.assertEquals("10", 10)).toBe(false);
-    // expect(functions.assertEquals("John", "john")).toBe(false);
+    expect(functions.assertEquals(10, 10)).toEqual(true);
+    expect(functions.assertEquals(-1, -1)).toEqual(true);   
+    expect(functions.assertEquals("10", "10")).toEqual(true);
+    expect(functions.assertEquals("John", "John")).toEqual(true); 
+    expect(functions.assertEquals(10, -10)).toEqual(false);
+    expect(functions.assertEquals("10", 10)).toEqual(false);
+    expect(functions.assertEquals("John", "john")).toEqual(false);
 });
 
