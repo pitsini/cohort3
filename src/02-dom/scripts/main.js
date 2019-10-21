@@ -1,7 +1,7 @@
 import functions from './functions.js';
 
 // ========== The Basic DOM Exercise ==========
-document.getElementById("basicDiv").addEventListener ('click', ((event) => {
+basicDiv.addEventListener ('click', ((event) => {
     console.log(event);
 }));
 
