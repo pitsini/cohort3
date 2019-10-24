@@ -1,7 +1,31 @@
 // Write the function after this comment ---
 const functions = {
-    
-    // --- Daily Exercises - loopStaff - October 21, 2019
+      
+    // --- Daily Exercises - loopStaff: in / of - October 24, 2019
+    loopStaffIn: (staff) => {
+        let emailArray = [];
+        let newEmail = "";
+
+        for (const prop in staff) {
+            console.log(staff[prop]);
+            newEmail = functions.makeEmailObj(staff[prop]);
+            emailArray.push(newEmail);
+        }
+        return emailArray;
+    },
+
+    loopStaffOf: (staff) => {
+        let emailArray = [];
+        let newEmail = "";
+
+        for (const eachStaff of staff) {
+            newEmail = functions.makeEmailObj(eachStaff);
+            emailArray.push(newEmail);
+        }
+        return emailArray;
+    }, 
+
+      // --- Daily Exercises - loopStaff - October 21, 2019
     loopStaff: (arr) => {
         const mapArray = arr.map((staff) => {
             const newArray = functions.makeEmailObj(staff);

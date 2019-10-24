@@ -1,7 +1,5 @@
 import functions from './daily.js'
-/*
-    Daily Exercises - loopStaff - October 21, 2019
-*/
+
 const data = {
     staff: [
         { fname: "Jane", lname: "Smith", balance: 10 },
@@ -16,7 +14,32 @@ const data = {
     city: "Calgary",
     prov: "Alberta"
 };
+/*
+    Daily Exercises - loopStaff: in / of - October 24, 2019
+*/
+test('loopStaff: for in', () => {
+    const staffEmail = functions.loopStaffIn(data.staff);
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
 
+test('loopStaff: for of', () => {
+    const staffEmail = functions.loopStaffOf(data.staff);
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
+/*
+    Daily Exercises - loopStaff - October 21, 2019
+*/
 test('email builder for company', () => {
     const staffEmail = functions.loopStaff(data.staff);
     expect(staffEmail[0])
