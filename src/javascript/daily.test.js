@@ -14,9 +14,43 @@ const data = {
     city: "Calgary",
     prov: "Alberta"
 };
-/*
-    Daily Exercises - loopStaff: in / of - October 24, 2019
-*/
+
+// --- loopStaff each / map - October 25, 2019
+test('loopStaff: forEach', () => {
+    const staffEmail = functions.loopStaffForEach(data.staff);
+    
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
+test('loopStaff: map', () => {
+    const staffEmail = functions.loopStaffMap(data.staff);
+
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
+// --- loopStaff: in / of - October 24, 2019
+test('loopStaff: for in', () => {
+    const staffEmail = functions.loopStaffIn(data.staff);
+    expect(staffEmail[0])
+        .toEqual("jane.smith@evolveu.ca");
+    expect(staffEmail[3])
+        .toEqual("olivia.notly@evolveu.ca");
+    expect(staffEmail[6])
+        .toEqual("benjamin.amis@evolveu.ca");
+});
+
+
+// ---  loopStaff: in / of - October 24, 2019
 test('loopStaff: for in', () => {
     const staffEmail = functions.loopStaffIn(data.staff);
     expect(staffEmail[0])
@@ -37,9 +71,7 @@ test('loopStaff: for of', () => {
         .toEqual("benjamin.amis@evolveu.ca");
 });
 
-/*
-    Daily Exercises - loopStaff - October 21, 2019
-*/
+// --- loopStaff - October 21, 2019
 test('email builder for company', () => {
     const staffEmail = functions.loopStaff(data.staff);
     expect(staffEmail[0])
@@ -50,10 +82,7 @@ test('email builder for company', () => {
         .toEqual("benjamin.amis@evolveu.ca");
 });
 
-/*	
-    Daily Exercises - More Array Work - October (16-17), 2019
-	Write the function to create examples of slice | splice | forEach | map | reduce | filter | sort
-*/
+// --- Array slice | splice | forEach | map | reduce | filter | sort - October (16-17), 2019
 test('More Array Work', () => {
     const arr = ["red", "green", "blue", "white", "black"];
     expect(functions.slice(3, arr)).toEqual(["white", "black"]);
@@ -65,10 +94,7 @@ test('More Array Work', () => {
     expect(functions.sort(arr)).toEqual(["green", "rainbow", "red"]);
 });
 
-/*	
-    Daily Exercises - Prepare for Array Work - October 15, 2019
-	Write the function to create examples of for | while | do while | for in | for of
-*/
+// --- for | while | do while | for in | for of - October 15, 2019
 test('prepare for Array work', () => {
     const arr = [1,2,3,4,5];
     expect(functions.sumFromArray(arr)).toEqual(15);
@@ -78,11 +104,7 @@ test('prepare for Array work', () => {
     expect(functions.addExclamationMark(arr)).toEqual(["$1", "$2", "$3", "$4", "$5"]);
 });
 
-/*	
-    Daily Exercises - makeEmailObj - October 11, 2019
-	Write the function to format an email based on an object / map
-*/
-
+// --- makeEmailObj - October 11, 2019
 test('email builder from an object / map', () => {
     const name = { fname: 'first', lname: 'last' };
     expect(functions.makeEmailObj(name))
@@ -93,10 +115,7 @@ test('email builder from an object / map', () => {
         .toEqual("bill.smith@evolveu.ca");
 });
 
-/*
-    Daily Exercises - makeEmailArr - October 9, 2019
-    Write a function to format an email based on an array.
-*/
+// --- Daily Exercises - makeEmailArr - October 9, 2019
 test('email builder from an array', () => {
     const name = ["first", "last"];
     expect(functions.makeEmailArr(name))
@@ -107,7 +126,7 @@ test('email builder from an array', () => {
         .toEqual("bill.smith@evolveu.ca");
 });
 
-// --- Daily Exercises - AssertEquals - October 7, 2019 ---
+// --- AssertEquals - October 7, 2019 ---
 test('Compare parameter', () => {
     expect(functions.assertEquals(10, 10)).toEqual(true);
     expect(functions.assertEquals(-1, -1)).toEqual(true);   

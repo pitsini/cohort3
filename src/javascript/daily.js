@@ -1,13 +1,31 @@
 // Write the function after this comment ---
 const functions = {
-      
-    // --- Daily Exercises - loopStaff: in / of - October 24, 2019
+
+    // --- loopStaff each / map - October 25, 2019
+    loopStaffForEach: (staff) => {
+        let emailArray = [];
+        let newEmail = "";
+
+        staff.forEach(function (eachStaff) {
+            newEmail = functions.makeEmailObj(eachStaff);
+            emailArray.push(newEmail);
+        });
+        return emailArray;
+    },
+
+    loopStaffMap: (staff) => {
+        let emailArray = [];
+        
+        emailArray = staff.map(eachStaff => functions.makeEmailObj(eachStaff));
+        return emailArray;
+    }, 
+
+    // --- loopStaff: in / of - October 24, 2019
     loopStaffIn: (staff) => {
         let emailArray = [];
         let newEmail = "";
 
         for (const prop in staff) {
-            console.log(staff[prop]);
             newEmail = functions.makeEmailObj(staff[prop]);
             emailArray.push(newEmail);
         }
@@ -25,7 +43,7 @@ const functions = {
         return emailArray;
     }, 
 
-      // --- Daily Exercises - loopStaff - October 21, 2019
+      // --- loopStaff - October 21, 2019
     loopStaff: (arr) => {
         const mapArray = arr.map((staff) => {
             const newArray = functions.makeEmailObj(staff);
@@ -34,7 +52,7 @@ const functions = {
         return mapArray;
     },
 
-    // --- Daily Exercises - Prepare for Array Work - October 15, 2019    
+    // --- Prepare for Array Work - October 15, 2019    
     slice: (index, arr) => {
         return arr.slice(index);
     },
@@ -69,8 +87,7 @@ const functions = {
         return arr.sort();
     },
 
-
-    // --- Daily Exercises - Prepare for Array Work - October 15, 2019
+    // --- Prepare for Array Work - October 15, 2019
     sumFromArray: (arr1) => {
         let summary = 0;
         for (let i = 1; i <= arr1.length; i++) {
@@ -100,7 +117,7 @@ const functions = {
         return result;
     },
 
-    //Warning from MDN => for...in should not be used to iterate over an Array where the index order is important.
+    // for...in should not be used to iterate over an Array where the index order is important.
     totalPrice: (arr4) => {
         let sum = 0;
         for (const index in arr4) {
@@ -109,7 +126,7 @@ const functions = {
         return sum;
     },
 
-    //
+    
     addExclamationMark: (arr5) => {
         let result = [];
         for (const element of arr5) {
@@ -118,7 +135,7 @@ const functions = {
         return result;
     },
 
-    // --- Daily Exercises - makeEmailObj - October 11, 2019
+    // --- makeEmailObj - October 11, 2019
     makeEmailObj: (obj1) => {
         let lowerCaseFname = obj1.fname.toLowerCase();
         let lowerCaseLname = obj1.lname.toLowerCase();
@@ -126,12 +143,12 @@ const functions = {
         return email;
     },
 
-    // --- Daily Exercises - makeEmailArr - October 9, 2019
+    // --- makeEmailArr - October 9, 2019
     makeEmailArr: (array1) => {
         return `${array1[0].toLowerCase()}.${array1[1].toLowerCase()}@evolveu.ca`;
     },
 
-    // --- Daily Exercises - AssertEquals - October 7, 2019
+    // --- AssertEquals - October 7, 2019
     assertEquals: (var1, var2) => {
         
         if (!Object.is(var1, var2)) {
