@@ -36,7 +36,6 @@ addCard.addEventListener('click', (() => {
 }));
 
 cardContainer.addEventListener('click', ((event) => {
-    console.log(event)
     switch (event.target.className) {
         case "addBefore":
             cardElement = event.target.parentElement.parentElement;

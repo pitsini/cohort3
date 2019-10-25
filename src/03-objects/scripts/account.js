@@ -1,19 +1,19 @@
     class Account {
         constructor(accountName, startingBalance) {
             this.accountName = accountName;
-            this.startingBalance = startingBalance;
+            this.balance = startingBalance;
         }
 
         deposit(amount) {
-            this.startingBalance += amount;
+            this.balance += amount;
         }
 
         withdraw(amount) {
-            this.startingBalance -= amount;
+            this.balance -= amount;
         }
 
-        balance() {            
-            return this.startingBalance;
+        checkBalance() {            
+            return this.balance;
         }
     }
 
