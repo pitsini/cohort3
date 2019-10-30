@@ -2,25 +2,29 @@ body {
     font-family: 'Bree Serif', serif;
 }
 
-input[type=number], select {
-  width: 250px;
-  padding: 12px 20px;
+input[type=number], input[type=text], select {
+  width: 200px;
+  /* padding: 12px 20px; */
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  margin: 5px;
 }
 
 input[type=submit] {
+/* button { */
   width: 150px;
   background-color: #4CAF50;
   color: white;
-  padding: 14px 20px;
+  padding: 7px 5px;
   /* margin: 8px 0; */
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 5px;
+  
 }
 
 select {
@@ -46,19 +50,46 @@ input[type=submit]:hover {
     width: 80%;
 }
 
-.activities {
+.activity {
     display: flex;
     justify-content: center;
     padding: 10px;
+    /* visibility: hidden; */
     /* border: 1px solid black; */
 }
 
-.margin10px {
-    margin: 10px;
+#lowHigh {
+    visibility: hidden;
+    border: hidden;
+    box-shadow: none;
+}
+#bigActivity {
+    visibility: hidden;
+}
+
+
+/* .margin5px {
+    margin: 5px;
+} */
+
+.showArea:hover {
+    
+  background-color: rgb(230, 230, 230);
+}
+
+#accountDetail {
+    /* margin: auto;
+    width: 90%;
+     */
+
+    /* border: 3px solid green; */
+    display: flex;
+    justify-content: space-around;
+    visibility: hidden;
 }
 
 #accSummary {
-    width: 350px;
+    width: 700px;
     /* margin: auto; */
     min-height: 150px;
     /* align-items: center; */
@@ -80,11 +111,35 @@ input[type=submit]:hover {
     /* justify-content: center; */
 }
 
-#showCustName, #showBalance {
-    margin: 20px;
+.showBalance, .showAccName {
+    margin: 5px;
+    width: 200px;
+    /* border: 1px solid green; */
 }
 
-#showArea {
-    margin: auto;
+.showArea {
+    /* margin: auto; */
+    border-bottom: 1px solid rgb(214, 214, 214);
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 100%;
+    
 }
 
+button {
+    width: 150px;
+    height: 30px;
+    margin: 5px;
+}
+
+#bigShowArea {
+    /* margin: auto; */
+    /* border: 1px solid black; */
+    /* display: flex;
+    justify-content: center; */
+    height: 200px;
+    overflow: auto;
+
+    /* width: 450px; */
+}

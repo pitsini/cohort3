@@ -1,5 +1,12 @@
 import { Account, AccountController } from './account'
 
+function createAccounts(controller) {
+    controller.addAccount('checking', 50);
+    controller.addAccount('saving', 500);
+    controller.addAccount('house saving', 100);
+    controller.addAccount('education saving', 300);
+}
+
 // ========== 130A - Account ==========
 test('Account - deposit, withdraw, balance', () => {
     const newAccount = new Account('checkingAccount', 25);
@@ -14,51 +21,49 @@ test('Account - deposit, withdraw, balance', () => {
 
 // ========== 130C - Multiple Account ==========
 test('Add Account', () => {
-    let accountArray = [];
-    const newAccontController = new AccountController();
+    const controller = new AccountController();
 
-    expect(accountArray.length).toEqual(0);
-    accountArray = newAccontController.addAccount(accountArray, 'checking', 50);
-    expect(accountArray.length).toEqual(1);
-    accountArray = newAccontController.addAccount(accountArray, 'saving', 100);
-    expect(accountArray.length).toEqual(2);
+    // we should have no account
+    expect(controller.allAccounts.length).toEqual(0);    
+    controller.addAccount('checking', 50);
+
+    // we should have 1 account
+    expect(controller.allAccounts.length).toEqual(1);
+    controller.addAccount('saving', 100);
+
+    // we should have 2 accounts
+    expect(controller.allAccounts.length).toEqual(2);
 });
 
 test('Remove Account', () => {
-    let pointer = 2; 
-    const newAccontController = new AccountController();
-    let accountArray = [{ accountName: 'checking', balance: 50 },
-                        { accountName: 'saving', balance: 100 },
-                        { accountName: 'house saving', balance: 200 },
-                        { accountName: 'education saving', balance: 300 }];
-      
-    accountArray = newAccontController.removeAccount(accountArray, pointer)
-    expect(accountArray[2].accountName).not.toEqual('house saving');
+    const controller = new AccountController();
+    createAccounts(controller);     // creating 4 accounts to use
+
+    // the 3rd account(index = 2) should be 'house saving' account
+    expect(controller.allAccounts[2].accountName).toEqual('house saving');
+    controller.removeAccount(2);
+
+    // the 3rd account should not be 'house saving' account
+    expect(controller.allAccounts[2].accountName).not.toEqual('house saving');
 });
 
 test('Total Balance', () => {
-    const newAccontController = new AccountController();
-    let accountArray = [{ accountName: 'checking', balance: 50 }, { accountName: 'house saving', balance: 100 }];
+    const controller = new AccountController();
+    createAccounts(controller);     // creating 4 accounts to use
 
-    expect(newAccontController.totalBalance(accountArray)).toEqual(150);
+    expect(controller.totalBalance()).toEqual(950);
 });
 
 test('Check Highest Value', () => {
-    const newAccontController = new AccountController();
-    let accountArray = [    { accountName: 'checking', balance: 50 }, 
-                            { accountName: 'saving', balance: 500 },
-                            { accountName: 'house saving', balance: 100 },
-                            { accountName: 'education saving', balance: 300 } ];
+    const controller = new AccountController();
+    createAccounts(controller);     // creating 4 accounts to use
 
-    expect(newAccontController.checkHighest(accountArray)).toEqual(500);
+    expect(controller.checkHighest()).toEqual(500);
 });
 
-test('Check Lowest Value', () => {
-    const newAccontController = new AccountController();
-    let accountArray = [{ accountName: 'checking', balance: 50 },
-    { accountName: 'saving', balance: 500 },
-    { accountName: 'house saving', balance: 100 },
-    { accountName: 'education saving', balance: 300 }];
+test('Check Lowest Value', () => {    
+    const controller = new AccountController();
+    createAccounts(controller);     // creating 4 accounts to use
 
-    expect(newAccontController.checkLowest(accountArray)).toEqual(50);
+    expect(controller.checkLowest()).toEqual(50);
 });

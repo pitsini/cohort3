@@ -18,35 +18,68 @@ class Account {
 }
 
 class AccountController {
-    addAccount(arr, accName, amount) {
+    constructor () {
+        this.allAccounts = [];
+    }
+
+    addAccount(accName, amount) {
         const newAccount = new Account(accName, amount);
-        arr.push(newAccount);
-        return arr;
+        this.allAccounts.push(newAccount);
     }
 
-    removeAccount(arr, pointer) {
-        arr.splice(pointer, 1);
-        return arr;
+    removeAccount(pointer) {
+        this.allAccounts.splice(pointer, 1);
     }
 
-    totalBalance (arr) {
+    totalBalance () {
         let summary = 0;
-        for (const eachAccount of arr) {
+        for (const eachAccount of this.allAccounts) {
             summary += eachAccount.balance;
         }
         return summary;
     }
 
-    checkHighest(arr) {
-        const balanceArr = arr.map(each => each.balance);
+    checkHighest() {        
+        const balanceArr = this.allAccounts.map(each => each.balance);
         const highestValue = Math.max(...balanceArr);
         return highestValue;
     }
 
-    checkLowest(arr) {
-        const balanceArr = arr.map(each => each.balance);
+    checkLowest() {
+        const balanceArr = this.allAccounts.map(each => each.balance);
         const lowestValue = Math.min(...balanceArr);
         return lowestValue;
     }
 }
-export { Account, AccountController };
+
+const functions = {
+    createShowArea: () => {
+        let parentDiv = document.createElement("div");
+        parentDiv.className = "showArea";
+
+        // create showAccName div
+        let childDiv1 = document.createElement("div");
+        childDiv1.className = "showAccName";
+        parentDiv.appendChild(childDiv1);
+
+        // create showBalance div
+        let childDiv2 = document.createElement("div");
+        childDiv2.className = "showBalance";
+        parentDiv.appendChild(childDiv2);
+
+        // create "Remove" button
+        let newRemoveBtn = document.createElement("button");
+        newRemoveBtn.className = "removeAccount";
+        let removeBtnContent = document.createTextNode("Remove");
+
+        newRemoveBtn.appendChild(removeBtnContent);
+        parentDiv.appendChild(newRemoveBtn);
+
+
+        // let br = document.createElement("br");
+        // parentDiv.appendChild(br);
+
+        return parentDiv
+    }
+};
+export { functions, Account, AccountController };
