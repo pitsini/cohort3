@@ -15,6 +15,17 @@ const data = {
     prov: "Alberta"
 };
 
+// --- More Array Exercises - October 29, 2019
+test('loopStaff: totalBalance', () => {
+    expect(functions.loopStaffTotalBalance(data.staff))
+        .toEqual(3823);
+});
+
+test('loopStaff: averageBalance', () => {
+    expect(functions.loopStaffAverage(data.staff))
+        .toEqual(546.14);
+});
+
 // --- loopStaff each / map - October 25, 2019
 test('loopStaff: forEach', () => {
     const staffEmail = functions.loopStaffForEach(data.staff);

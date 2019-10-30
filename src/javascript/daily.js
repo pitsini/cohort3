@@ -1,5 +1,24 @@
 // Write the function after this comment ---
 const functions = {
+    // --- More Array Exercises - October 29, 2019
+    loopStaffTotalBalance: (staff) => {
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        let balanceArr = [];
+
+        balanceArr = staff.map(eachStaff => eachStaff.balance);
+        return balanceArr.reduce(reducer);
+    },
+
+    loopStaffAverage: (staff) => {
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        let balanceArr = [];
+
+        balanceArr = staff.map(eachStaff => eachStaff.balance);
+        const total = balanceArr.reduce(reducer);
+        const average = total / balanceArr.length;
+        return Number(Number.parseFloat(average).toFixed(2));
+        
+    },
 
     // --- loopStaff each / map - October 25, 2019
     loopStaffForEach: (staff) => {
