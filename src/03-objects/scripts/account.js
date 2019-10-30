@@ -75,11 +75,11 @@ const functions = {
         newRemoveBtn.appendChild(removeBtnContent);
         parentDiv.appendChild(newRemoveBtn);
 
-
-        // let br = document.createElement("br");
-        // parentDiv.appendChild(br);
-
         return parentDiv
-    }
+    },
+
+    round2Digit: (amount) => {
+        return Math.round(Number(amount) * 100) / 100;
+    } 
 };
 export { functions, Account, AccountController };

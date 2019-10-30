@@ -1,4 +1,4 @@
-import { Account, AccountController } from './account'
+import { functions, Account, AccountController } from './account'
 
 function createAccounts(controller) {
     controller.addAccount('checking', 50);
@@ -66,4 +66,15 @@ test('Check Lowest Value', () => {
     createAccounts(controller);     // creating 4 accounts to use
 
     expect(controller.checkLowest()).toEqual(50);
+});
+
+// ========== 130C - extra functions ==========
+
+test('Create new div', () => {
+    const newDiv = functions.createShowArea();
+    expect(newDiv.childElementCount).toEqual(3);
+});
+
+test('round 2 digits', () => {
+    expect(functions.round2Digit(5.8958)).toBeCloseTo(5.90);
 });

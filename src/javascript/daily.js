@@ -16,8 +16,7 @@ const functions = {
         balanceArr = staff.map(eachStaff => eachStaff.balance);
         const total = balanceArr.reduce(reducer);
         const average = total / balanceArr.length;
-        return Number(Number.parseFloat(average).toFixed(2));
-        
+        return Number(Number.parseFloat(average).toFixed(2));        
     },
 
     // --- loopStaff each / map - October 25, 2019

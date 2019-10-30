@@ -3,19 +3,20 @@ let pointer = 0;
 let currentName;
 let currentBalance;
 let amt;
-// let currentElement;
-// let length;
 const controller = new AccountController();
 
+total.addEventListener('click', ((event) => {
+    showResult.textContent = 'The total balance is $' + controller.totalBalance().toFixed(2);
+}));
+
 highest.addEventListener('click', ((event) => {
-    alert('The hightest value is $' + controller.checkHighest());
+    showResult.textContent = 'The hightest value is $' + controller.checkHighest().toFixed(2);
 }));
 
 lowest.addEventListener('click', ((event) => {
-    alert('The lowest value is $' + controller.checkLowest());
+    showResult.textContent = 'The lowest value is $' + controller.checkLowest().toFixed(2);
 }));
 
-// const bigContainer = document.getElementsByClassName("bigContainer");
 activityBtn.addEventListener('click', ((event) => {
     amt = activityAmount.value;
     if (amt === "") {
@@ -23,40 +24,42 @@ activityBtn.addEventListener('click', ((event) => {
     } else if (isNaN(amt)) {
         alert(`Sorry, ${amt} is not a number`);
     } else {
-        amt = Number(amt);
+        amt = functions.round2Digit(Number(amt));
         console.log(amt);
-        // deposit
+        
         switch (choice.selectedIndex) {
-            case 0:
+
+            case 0:     // deposit
                 if (amt > 0) {
+                    console.log("pointer: " + pointer);
                     controller.allAccounts[pointer].deposit(amt);
-                    alert(`Successful! Your current balance is $${controller.allAccounts[pointer].balance}.`);
-                    accountB.textContent = "Balance: $" + controller.allAccounts[pointer].balance;
+                    // alert(`Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`);
+                    showResult.textContent = `Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`;
+                    accountB.textContent = "Balance: $" + controller.allAccounts[pointer].balance.toFixed(2);
                     activityAmount.value = "";
                     currentName.textContent = controller.allAccounts[pointer].accountName;
-                    currentBalance.textContent = controller.allAccounts[pointer].balance
+                    currentBalance.textContent = controller.allAccounts[pointer].balance.toFixed(2);
                 } else {
                     alert("Sorry, You cannot deposit less than $0")
                 }
                 break;
         
-            case 1:
+            case 1:     // withdraw
                 if (controller.allAccounts[pointer].balance < amt) {
                     alert("Sorry, You cannot withdraw less your balance")
                 } else if (amt <= 0) {
                     alert("Sorry, You cannot withdraw less than $0")
                 } else {
+                    console.log("pointer: " + pointer);
                     controller.allAccounts[pointer].withdraw(amt);
-                    alert(`Successful! Your current balance is $${controller.allAccounts[pointer].balance}.`);
-                    accountB.textContent = "Balance: $" + controller.allAccounts[pointer].balance;
+                    // alert(`Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`);
+                    showResult.textContent = `Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`;
+                    accountB.textContent = "Balance: $" + controller.allAccounts[pointer].balance.toFixed(2);
                     activityAmount.value = "";
                     currentName.textContent = controller.allAccounts[pointer].accountName;
-                    currentBalance.textContent = controller.allAccounts[pointer].balance
+                    currentBalance.textContent = controller.allAccounts[pointer].balance.toFixed(2);
                 }
                 break;
-        }
-        if (choice.selectedIndex === 0) {
-            
         }
     }
 }));
@@ -76,12 +79,13 @@ bigShowArea.addEventListener('click', ((event) => {
             bigActivity.style.visibility = "visible";
             lowHigh.style.visibility = "visible";
             currentName = event.target.parentElement.getElementsByClassName("showAccName")[0];
-            // currentName = event.target.parentElement.getElementsByClassName("showAccName")[0].textContent;
             accountN.textContent = "Account name: " + currentName.textContent;
             
-            // currentBalance = event.target.parentElement.getElementsByClassName("showBalance")[0].textContent;
             currentBalance = event.target.parentElement.getElementsByClassName("showBalance")[0];
             accountB.textContent = "Balance: $" + currentBalance.textContent;
+
+            pointer = Array.prototype.slice.call(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
+            showResult.textContent = "";
             break;
         case "showArea":
             // unhighlight in show area
@@ -89,33 +93,28 @@ bigShowArea.addEventListener('click', ((event) => {
                 bigShowArea.children[i].style.backgroundColor = "";
             }
 
-            // event.target.children.style.backgroundColor = "red";
             event.target.style.backgroundColor = "rgb(230, 230, 230)";
-
-            // pointer = Array.prototype.slice.call(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
-            // event.target.parentElement.children[pointer].style.backgroundColor = "red";
 
             bigActivity.style.visibility = "visible";
             lowHigh.style.visibility = "visible";
             
-            // currentName = event.target.getElementsByClassName("showAccName")[0].textContent;
             currentName = event.target.getElementsByClassName("showAccName")[0];
             accountN.textContent = "Account name: " + currentName.textContent;
 
-            // currentBalance = event.target.getElementsByClassName("showBalance")[0].textContent;
             currentBalance = event.target.getElementsByClassName("showBalance")[0];
             accountB.textContent = "Balance: $" + currentBalance.textContent;
+
+            // reset pointer
+            pointer = Array.prototype.slice.call(event.target.parentElement.children).indexOf(event.target);
+            showResult.textContent = "";
             break;
         case "removeAccount":
-            console.log(event.target.parentElement.parentElement);
 
             // get index of current account
             pointer = Array.prototype.slice.call(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
             
             event.target.parentElement.remove();
-            console.log(controller.allAccounts);
             controller.removeAccount(pointer);
-            console.log(controller.allAccounts);
 
             // unhighlight in show area
             for (let i = 0; i < bigShowArea.children.length; i++) {
@@ -124,17 +123,14 @@ bigShowArea.addEventListener('click', ((event) => {
             bigActivity.style.visibility = "hidden";
 
             lowHigh.style.visibility = "hidden";
+            showResult.textContent = "";
             break;
     };
 }));
 bigContainer.addEventListener('click', ((event) => {
-    // console.log(event.target.className);
-    // console.log(document.querySelectorAll(".removeAccount").length);
     switch (event.target.className) {
-        // case ""
         case "account":
-            // console.log(event.target.value);
-            // console.log("hi");
+            showResult.textContent = "";
             switch (event.target.getAttribute("value")) {
                 case "Create Account":
                     accountDetail.style.visibility = "visible";
@@ -149,47 +145,34 @@ bigContainer.addEventListener('click', ((event) => {
 
         case "addAccount":
             if (accountName.value !== "" && startingBalance.value !== "") {
-                controller.addAccount(accountName.value, Number(startingBalance.value));
-                // console.log(controller.allAccounts);
-                // document.getElementsByClassName("showAccName")[0].textContent = controller.allAccounts[controller.allAccounts.length - 1].accountName;
-                // document.getElementsByClassName("showBalance")[0].textContent = controller.allAccounts[controller.allAccounts.length - 1].balance;
+                const roundAmount = functions.round2Digit(Number(startingBalance.value));
+                
+                controller.addAccount(accountName.value, roundAmount);
                 accountDetail.style.visibility = "hidden";
                 document.getElementsByClassName("account")[0].setAttribute("value", "Create Account");
 
                 let newDiv = functions.createShowArea();
                 bigShowArea.appendChild(newDiv);
 
-            // showCustName.appendChild(document.createElement('br'));
-
-
                 const lastIndex = controller.allAccounts.length - 1;
                 document.getElementsByClassName("showAccName")[lastIndex].textContent = controller.allAccounts[lastIndex].accountName;
-                document.getElementsByClassName("showBalance")[lastIndex].textContent = controller.allAccounts[lastIndex].balance;
+                document.getElementsByClassName("showBalance")[lastIndex].textContent = controller.allAccounts[lastIndex].balance.toFixed(2);
 
                 // clear value
                 accountName.value = "";
                 startingBalance.value = "";
+                showResult.textContent = "";
                 
                 // unhighlight in show area
                 for (let i = 0; i < bigShowArea.children.length; i++) {
                     bigShowArea.children[i].style.backgroundColor = "";
                 }
+                
                 bigActivity.style.visibility = "hidden";
-                lowHigh.style.visibility = "hidden";
+                lowHigh.style.visibility = "visible";
             } else {
                 alert("Please fill in account name and starting balance.");
             };
-
-            // console.log(accountName.value);
-            // console.log(startingBalance.value);
-
-
-
             break;
     }
-            // const checkingAccount = new Account('John Doe', 25);
-            // showCustName.textContent = `${checkingAccount.accountName}`;
-            // showBalance.textContent = `Your balance is $${checkingAccount.balance}`;
-            // showCustName.appendChild(document.createElement('br'));
-            // showCustName.appendChild(document.createTextNode(`${checkingAccount.customerName}`));
 }));
