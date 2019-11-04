@@ -105,7 +105,7 @@ class Community {
     }
 
     async deleteCity(obj) {
-        const newCityArr = this.allCity.filter(eachCity => eachCity.name != selectedCity);
+        // const newCityArr = this.allCity.filter(eachCity => eachCity.name != selectedCity);
         // this.allCity = newCityArr.slice();
 
         this.data = await postData(this.url + 'delete', obj);
