@@ -11,8 +11,8 @@ class City {
         this.population = population;
     }
 
-    show() {  
-        return `City: ${this.name} | Latitude: ${this.latitude} | Longtitude: ${this.longitude} | Population: ${this.population}`;
+    show() {
+        return `Key: ${this.key} | City: ${this.name} | Latitude: ${this.latitude} | Longtitude: ${this.longitude} | Population: ${this.population}`;
     }
 
     movedIn(number) {
@@ -25,18 +25,24 @@ class City {
 
     howBig() {
         let result;
-        if (this.population > 100000) {
-            result = "City";
-        } else if (this.population > 20000) {
-            result = "Large town";
-        } else if (this.population > 1000) {
-            result = "Town";
-        } else if (this.population > 100) {
-            result = "Village";
-        } else if (this.population >= 1) {
-            result = "Hamlet";
-        } else {
-            result = "No one live here!"
+        switch (true) {
+            case (this.population > 100000):
+                result = "City";
+                break;
+            case (this.population > 20000):
+                result = "Large town";
+                break;
+            case (this.population > 1000):
+                result = "Town";
+                break;
+            case (this.population > 100):
+                result = "Village";
+                break;
+            case (this.population >= 1):
+                result = "Hamlet";
+                break;
+            default:
+                result = "No one live here!";
         }
         return result;
     }
@@ -50,8 +56,7 @@ class City {
     }
 }
 
-class Controller {
-
+class Community {
     
     constructor() {
         this.allCity = [];
@@ -59,7 +64,10 @@ class Controller {
         this.data;
     }
 
-    getMostNorthern() {
+    async getMostNorthern() {
+        this.allCity = await this.getAllCities();
+        // console.log(this.allCity);
+
         const allLatitude = this.allCity.map(each => each.latitude);
         const mostNorthernLatitude = Math.max(...allLatitude);
         const mostNorthernCities = this.allCity.filter(each => each.latitude === mostNorthernLatitude);
@@ -69,13 +77,18 @@ class Controller {
         // console.log(maxObj);
     }
 
-    getMostSouthern() {
+    async getMostSouthern() {
+        this.allCity = await this.getAllCities();
+
         const allLatitude = this.allCity.map(each => each.latitude);
         const mostSouthernLatitude = Math.min(...allLatitude);
         const mostSouthernCities = this.allCity.filter(each => each.latitude === mostSouthernLatitude);
         return mostSouthernCities;
     }
-    getPopulation() {
+
+    async getPopulation() {
+        this.allCity = await this.getAllCities();
+
         let total = 0;
         for (const eachCity of this.allCity) {
             total += eachCity.population;
@@ -99,27 +112,27 @@ class Controller {
         return this.data;
     }
 
-    async clearCity() {
+    async clearCommunity() {
         this.data = await postData(this.url + 'clear');
         return this.data;
     }
 
-    async checkCity() {
+    async getAllCities() {
         this.data = await postData(this.url + 'all');
         return this.data;
     }
 
-    async getCity(keyObj) {
+    async get_aCity(keyObj) {
         this.data = await postData(this.url + 'read', keyObj);        
         return this.data;
     }
 
-    async updateCity(keyObj) {
-        this.data = await postData(this.url + 'update', keyObj);
+    async update_aCity(obj) {
+        this.data = await postData(this.url + 'update', obj);
         return this.data;
-    }
-    
+    }    
 }
+
 async function postData(url = '', data = {}) {
     // Default options are marked with *
     const response = await fetch(url, {
@@ -142,4 +155,4 @@ async function postData(url = '', data = {}) {
     // console.log(json, typeof(json));
     return json;
 }
-export { City, Controller }
+export { City, Community }

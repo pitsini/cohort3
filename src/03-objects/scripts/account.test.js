@@ -23,15 +23,12 @@ test('Account - deposit, withdraw, balance', () => {
 test('Add Account', () => {
     const controller = new AccountController();
 
-    // we should have no account
-    expect(controller.allAccounts.length).toEqual(0);    
+    expect(controller.allAccounts.length).toEqual(0);
+
     controller.addAccount('checking', 50);
-
-    // we should have 1 account
     expect(controller.allAccounts.length).toEqual(1);
-    controller.addAccount('saving', 100);
 
-    // we should have 2 accounts
+    controller.addAccount('saving', 100);
     expect(controller.allAccounts.length).toEqual(2);
 });
 
@@ -39,11 +36,9 @@ test('Remove Account', () => {
     const controller = new AccountController();
     createAccounts(controller);     // creating 4 accounts to use
 
-    // the 3rd account(index = 2) should be 'house saving' account
     expect(controller.allAccounts[2].accountName).toEqual('house saving');
-    controller.removeAccount(2);
 
-    // the 3rd account should not be 'house saving' account
+    controller.removeAccount(2);
     expect(controller.allAccounts[2].accountName).not.toEqual('house saving');
 });
 
