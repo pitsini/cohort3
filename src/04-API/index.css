@@ -1,0 +1,120 @@
+body {
+    font-family: 'Bree Serif', serif;
+}
+
+input[type=number], input[type=text], select {
+  width: 150px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+input[type=submit] {
+/* button { */
+  width: 150px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 7px 5px;
+  /* margin: 8px 0; */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+select {
+    width: 200px;
+}
+
+input[type=submit]:hover {
+  background-color: #f4511e;
+}
+
+#bigContainer {   
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container {
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 5px 5px rgb(145, 144, 144);
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+}
+
+.activity {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+#lowHigh {
+    visibility: hidden;
+    border: hidden;
+    box-shadow: none;
+}
+
+#bigActivity {
+    visibility: hidden;
+}
+
+.showArea:hover {
+    
+  background-color: rgb(230, 230, 230);
+}
+
+#communityDetail {
+    display: flex;
+    justify-content: space-around;
+    visibility: hidden;
+}
+
+#accSummary {
+    width: 700px;
+    min-height: 150px;
+}
+
+#history {    
+    min-height: 150px;
+}
+
+#createAccount {
+    width: 115px;
+    padding: 10px;
+}
+
+#heading {    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.showBalance, .showAccName {
+    margin: 5px;
+    width: 200px;
+}
+
+.showArea {
+    border-bottom: 1px solid rgb(214, 214, 214);
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 100%;
+}
+
+button {
+    width: 150px;
+    height: 30px;
+    margin: 5px;
+}
+
+#bigShowArea {
+    height: 200px;
+    overflow: auto;
+}

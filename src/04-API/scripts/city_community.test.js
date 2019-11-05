@@ -1,5 +1,5 @@
 global.fetch = require('node-fetch');
-import { City, Community } from './city'
+import { City, Community } from './city_community'
 
 
 test('test that the City class works?', () => {    

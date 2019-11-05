@@ -1,7 +1,3 @@
-global.fetch = require('node-fetch');
-
-
-
 class City {
     constructor(key, name, latitude, longitude, population) {
         this.key = key;
@@ -130,7 +126,29 @@ class Community {
     async update_aCity(obj) {
         this.data = await postData(this.url + 'update', obj);
         return this.data;
-    }    
+    }
+
+    async getHightestKey() {
+        this.allCity = await this.getAllCities();
+        // console.log(this.allCity);
+
+        const allKey = this.allCity.map(each => each.key);
+        
+        let mostHighestKey;
+        switch (true) {
+            case (allKey.length !== 0):
+                mostHighestKey = Math.max(...allKey);
+                break;
+            default:
+                mostHighestKey = 0;
+                break;
+        }
+        // console.log(mostHighestKey);
+        return mostHighestKey;
+
+        // const maxObj = this.allCity.reduce((prev, current) => (prev.latitude > current.latitude) ? prev : current);
+        // console.log(maxObj);
+    }
 }
 
 async function postData(url = '', data = {}) {
