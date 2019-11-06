@@ -15,6 +15,12 @@ const data = {
     prov: "Alberta"
 };
 
+// --- More Array Exercises (Really) - November 6, 2019
+test('Test if filterBalance function working?', () => {
+    const staffArray = functions.filterBalance(data.staff);
+    expect(staffArray[1].balance).toEqual(1330);
+});
+
 // --- More Array Exercises - October 29, 2019
 test('loopStaff: totalBalance', () => {
     expect(functions.loopStaffTotalBalance(data.staff))

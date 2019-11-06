@@ -1,6 +1,11 @@
 // Write the function after this comment ---
 const functions = {
     // --- More Array Exercises - October 29, 2019
+    filterBalance: (staff) => {
+        return staff.filter(eachStaff => eachStaff.balance >= 1000);
+    },
+
+    // --- More Array Exercises - October 29, 2019
     loopStaffTotalBalance: (staff) => {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
         let balanceArr = [];
