@@ -1,22 +1,45 @@
+const url = 'http://localhost:5000/';
+let data;
 class City {
+    // static url = 'http://localhost:5000/';
+    // static data;
+    
     constructor(key, name, latitude, longitude, population) {
         this.key = key;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.population = population;
+        
     }
 
     show() {
-        return `Key: ${this.key} | City: ${this.name} | Latitude: ${this.latitude} | Longtitude: ${this.longitude} | Population: ${this.population}`;
+        return `City: ${this.name} | Latitude: ${this.latitude} | Longtitude: ${this.longitude} | Population: ${this.population}`;
+        // const obj = { key: this.key, name: this.name, latitude: this.latitude, longitude: this.longitude, population: this.population };
+        // return obj;
     }
 
-    movedIn(number) {
+    async movedIn(number) {
         this.population += number;
+        data = await this.update_City(this);
+        return data;
     }
 
-    movedOut(number) {
+    async movedOut(number) {
         this.population -= number;
+        data = await this.update_City(this);
+        return data;
+    } 
+
+    async get_City() {
+        data = await postData(url + 'read', this.key);
+        return data;
+    }
+
+    async update_City(obj) {
+        data = await postData(url + 'update', obj);
+        return data;
+
     }
 
     howBig() {
@@ -92,13 +115,22 @@ class Community {
         return total;
     }
 
-    async createCity(obj) {
-        const newCity = new City(obj.key, obj.name, obj.latitude, obj.longitude, obj.population);
+    async createCity(key, name, latitude, longitude, population) {
+        const newCity = new City(key, name, latitude, longitude, population);
         // this.allCity.push(newCity);
-
+        console.log(newCity);
+        // console.log(newCity.show());
         this.data = await postData(this.url + 'add', newCity);
         return this.data;
     }
+
+    // async createCity(obj) {
+    //     const newCity = new City(obj.key, obj.name, obj.latitude, obj.longitude, obj.population);
+    //     // this.allCity.push(newCity);
+
+    //     this.data = await postData(this.url + 'add', newCity);
+    //     return this.data;
+    // }
 
     async deleteCity(obj) {
         // const newCityArr = this.allCity.filter(eachCity => eachCity.name != selectedCity);
@@ -118,15 +150,16 @@ class Community {
         return this.data;
     }
 
-    async get_aCity(keyObj) {
-        this.data = await postData(this.url + 'read', keyObj);        
-        return this.data;
-    }
+    // async get_City(keyObj) {
+    //     this.data = await postData(this.url + 'read', keyObj);        
+    //     return this.data;
+    // }
 
-    async update_aCity(obj) {
-        this.data = await postData(this.url + 'update', obj);
-        return this.data;
-    }
+    // async update_City(obj) {
+    //     this.data = await postData(this.url + 'update', obj);
+    //     return this.data;
+        
+    // }
 
     async getHightestKey() {
         this.allCity = await this.getAllCities();

@@ -67,9 +67,11 @@ bigContainer.addEventListener('click', (async (event) => {
                 // bigActivity.style.visibility = "hidden";
                 // lowHigh.style.visibility = "visible";
             } else {
-                alert("Please fill in account name and starting balance.");
+                information.textContent = "Please fill up all information.";
             };
             break;
     }
 }));
+
+
 

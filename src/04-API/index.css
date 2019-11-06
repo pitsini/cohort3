@@ -48,6 +48,20 @@ input[type=submit]:hover {
     width: 80%;
 }
 
+h3, h4 {
+    /* border: 1px solid gray; */
+    width: 350px;
+    text-align: center;
+}
+
+#information {
+    /* border: 1px solid gray; */
+    width: 200px;
+    color: red;
+    font-size: 0.9em;
+    text-align: center;
+}
+
 .activity {
     display: flex;
     justify-content: center;
@@ -61,7 +75,7 @@ input[type=submit]:hover {
 }
 
 #bigActivity {
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .showArea:hover {
@@ -76,7 +90,7 @@ input[type=submit]:hover {
 }
 
 #accSummary {
-    width: 700px;
+    width: 900px;
     min-height: 150px;
 }
 
@@ -118,3 +132,8 @@ button {
     height: 200px;
     overflow: auto;
 }
+
+#map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 50%;  /* The width is the width of the web page */
+       }
