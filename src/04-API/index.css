@@ -48,12 +48,6 @@ input[type=submit]:hover {
     width: 80%;
 }
 
-#resultArea2 {
-    /* border: 1px solid gray; */
-    width: 80%;
-    text-align: center;
-}
-
 h3, h4 {
     /* border: 1px solid gray; */
     width: 350px;
@@ -62,6 +56,11 @@ h3, h4 {
 
 #resultArea3 {
     color: red;
+    height: 20px;
+}
+
+#resultArea3Title {
+    
     height: 20px;
 }
 
@@ -76,6 +75,9 @@ h3, h4 {
 #resultArea2 {
     color: red;
     height: 20px;
+    /* border: 1px solid gray; */
+    width: 80%;
+    text-align: center;
 }
 
 .grey_text {

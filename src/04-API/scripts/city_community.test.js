@@ -126,11 +126,11 @@ test('test that the fetch works?', async () => {
 
     data[0].name = "Bangkok";
 
-    data = await community.update_aCity(data[0]);
+    data = await community.update_City(data[0]);
     expect(data.status).toEqual(200);
 
 
-    data = await community.get_aCity({ key: 2 });
+    data = await community.get_City({ key: 2 });
     expect(data.status).toEqual(200);
     expect(data.length).toBe(1);
     expect(data[0].name).toBe("Bangkok");

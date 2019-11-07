@@ -1,5 +1,5 @@
 import { City, Community, functions } from './city_community.js'
-let data, dataCommunity, currentKey;
+let amt,data, dataCommunity, currentKey;
 const community = new Community();
 let currentCityName, currentLatitude, currentLongitude, currentPopulation;
 
@@ -98,7 +98,9 @@ bigContainer.addEventListener('click', (async (event) => {
                 latitude.value = "";
                 longitude.value = "";
                 population.value = "";
-                // resultArea2.textContent = "";
+                resultArea2.textContent = "";
+                resultArea3Title.textContent = "";
+                resultArea3.textContent = "";
 
                 // // unhighlight in show area
                 // for (let i = 0; i < bigShowArea.children.length; i++) {
@@ -227,34 +229,45 @@ bigShowArea.addEventListener('click', ((event) => {
 
 
 mostNorthern.addEventListener('click', (async (event) => {
-
+    resultArea2.textContent = "Hello";
     // data = await community.updateCountKey(newCountKey);  
     data = await community.getMostNorthern();
-    // console.log(data);
+    resultArea2.textContent = "North";
+    console.log(data);
     console.log(data.length);
     switch (true) {
-        case (data.length === 1):
-            resultArea2.textContent = 'The northernmost city is ' + data[0].name + ' (Latitude = ' + data[0].latitude + ")";
+        case (data.length == 1):
+            console.log("Hey1");
+
+            resultArea2.textContent = 'The northernmost city is ' + data[0].name + ' (Latitude = ' + data[0].latitude + ')';
+            
             break;    
         case (data.length > 1):
+            console.log("Hey2");
             const city = data.map(each => each.name);
             console.log(city);
-            resultArea2.textContent = 'The northernmost cities are ' + city + ' (Latitude = ' + data[0].latitude + ")";
+            resultArea2.textContent = 'The northernmost cities are ' + city + ' (Latitude = ' + data[0].latitude + ')';
             break;    
         default:
+
+            console.log("Hey3");
             resultArea2.textContent = "There is no northernmost city in our database."
             break;
     }    
 }));
 
-mostSouthern.addEventListener('click', ( async (event) => {
+mostSouthernBtn.addEventListener('click', (async (event) => {
+
+    console.log(community.allCity);
     // showResult.textContent = 'The hightest value is $' + controller.checkHighest().toFixed(2);
     data = await community.getMostSouthern();
-    // console.log(data);
+
+    // resultArea2.textContent = "hell";
+    console.log(data);
     console.log(data.length);
     switch (true) {
         case (data.length === 1):
-            resultArea2.textContent = 'The southernmost city is ' + data[0].name + " (Latitude = " + data[0].latitude + ")";
+            resultArea2.textContent = `The southernmost city is ${data[0].name} (Latitude = ${data[0].latitude})`;
             break;
         case (data.length > 1):
             const city = data.map(each => each.name);
@@ -264,8 +277,18 @@ mostSouthern.addEventListener('click', ( async (event) => {
         default:
             resultArea2.textContent = "There is no southernmost city in our database."
             break;
-    }    
+    }  
+
+    console.log(community.allCity);
+    // resultArea2.style.visibility = "visible";
+    // resultArea2.textContent = `Our community has a population of`;
 }));
+
+// mostSouthernBtn.addEventListener('click', ((event) => {
+//     // showResult.textContent = 'The lowest value is $' + controller.checkLowest().toFixed(2);
+//     // data = await community.getPopulation();
+//     resultArea2.textContent = 'Hello';
+// }));
 
 totalPopulation.addEventListener('click', (async(event) => {
     // showResult.textContent = 'The lowest value is $' + controller.checkLowest().toFixed(2);
@@ -274,19 +297,121 @@ totalPopulation.addEventListener('click', (async(event) => {
 }));
 
 
-howBig.addEventListener('click', ( (event) => {
+howBig.addEventListener('click', (async (event) => {
     // showResult.textContent = 'The lowest value is $' + controller.checkLowest().toFixed(2);
     // data = new.howBig();
     // console.log(community.allCity);
-    // console.log(currentKey);
-    // console.log(community.allCity);
-    // console.log(community.allCity[currentKey-1]);
+
+
+    console.log(currentKey);
+    console.log(community.allCity);
+    console.log(community.allCity[0]);
+    console.log(community.allCity[1]);
+    console.log(community.allCity[currentKey-1]);
     data = community.allCity[currentKey-1].howBig();
+
+    // dataCommunity = await community.getAllCities();
+
+    // community.allCity = await community.getAllCities();
+    // console.log("run getAllCities");
+    // console.log(currentKey);
+    // console.log(community.allCity[0]);
+    // console.log(community.allCity[1]);
+    // console.log(community.allCity[currentKey]);
+    // data = community.allCity[1].howBig();
 
     // console.log(dataCommunity[currentKey]);
 
+
+    // data = await community.allCity[currentKey - 1].movedIn(amt);
+
     // console.log(dataCommunity[currentKey].howBig());
     // console.log(community.allCity[Number(currentKey)].howBig());
-    resultArea3.textContent = `This is a ${data}`;
+    resultArea3Title.textContent = "This is a";
+    resultArea3.textContent = data;
 }));
 
+whichSphereBtn.addEventListener('click', ((event) => {
+    console.log(currentKey);
+    console.log(community.allCity);
+    data = community.allCity[currentKey - 1].whichSphere();
+
+    resultArea3Title.textContent = "This city is in the";
+    resultArea3.textContent = data;
+}));
+
+moveInOutBtn.addEventListener('click', (async (event) => {
+    resultArea3Title.textContent = "";
+    resultArea3.textContent = "";
+
+    amt = Number(moveInOut.value);
+    if (amt !== "") {
+        // amt = functions.round2Digit(Number(amt));
+        console.log(amt);
+        switch (choice.selectedIndex) {
+            case 0:     // moved in
+                if (amt > 0) {
+                    console.log("currentKey: " + currentKey);
+                    console.log(community.allCity[currentKey - 1]);
+                    data = await community.allCity[currentKey - 1].movedIn(amt);
+                    console.log(data.status);
+                    console.log(community.allCity);
+                    if (data.status === 200) {
+                        resultArea3.textContent = "Successful!!!";
+                        populationTxt.textContent = community.allCity[currentKey - 1].population;
+                        console.log(currentKey);
+                        console.log(document.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
+                        // console.log(event.target.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
+                        document.getElementsByClassName("showPopulation")[currentKey - 1].textContent = community.allCity[currentKey - 1].population;
+                    } else {
+                        resultArea3.textContent = "Error!!!";
+                    }
+                    // showResult.textContent = `Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`;
+                    // accountB.textContent = "Balance: $" + controller.allAccounts[pointer].balance.toFixed(2);
+                    // activityAmount.value = "";
+                    // currentName.textContent = controller.allAccounts[pointer].accountName;
+                    // currentBalance.textContent = controller.allAccounts[pointer].balance.toFixed(2);
+                } else if (amt < 0) {
+                        resultArea3.textContent = "Amount can't be lese than 0";
+                    } else {
+                    resultArea3.textContent = "Amount can't be blank.";
+                }
+                break;
+
+            case 1:     // move out
+                if (amt > 0) {
+                    if (community.allCity[currentKey - 1].population < amt) {
+                        resultArea3.textContent = "Moved out people can't be more than population.";
+                    } else {
+                        console.log("currentKey: " + currentKey);
+                        console.log(community.allCity[currentKey - 1]);
+                        data = await community.allCity[currentKey - 1].movedOut(amt);
+                        console.log(data.status);
+                        console.log(community.allCity);
+                        if (data.status === 200) {
+                            resultArea3.textContent = "Successful!!!";
+                            populationTxt.textContent = community.allCity[currentKey - 1].population;
+                            console.log(currentKey);
+                            console.log(document.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
+                            // console.log(event.target.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
+                            document.getElementsByClassName("showPopulation")[currentKey - 1].textContent = community.allCity[currentKey - 1].population;
+                        } else {
+                            resultArea3.textContent = "Error!!!";
+                        }
+                    }
+                    // showResult.textContent = `Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`;
+                    // accountB.textContent = "Balance: $" + controller.allAccounts[pointer].balance.toFixed(2);
+                    // activityAmount.value = "";
+                    // currentName.textContent = controller.allAccounts[pointer].accountName;
+                    // currentBalance.textContent = controller.allAccounts[pointer].balance.toFixed(2);
+                } else if (amt < 0) {
+                    resultArea3.textContent = "Amount can't be lese than 0";
+                } else {
+                    resultArea3.textContent = "Amount can't be blank.";
+                }
+                break;
+        }
+    } else {
+        resultArea3.textContent = "Please fill in amount.";
+    }
+}));

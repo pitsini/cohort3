@@ -41,7 +41,7 @@
     </div>
     <div class="container" id="functionsArea">
         <input type="submit" value="Most Northern" id="mostNorthern">
-        <input type="submit" value="Most Southern" id="mostSouthern">
+        <input type="submit" value="Most Southern" id="mostSouthernBtn">
         <input type="submit" value="Check Population" id="totalPopulation">
         
     </div>
@@ -50,10 +50,10 @@
     
     <div class="container" id="bigActivity">
         <div id="flex">
-            <div>City: <span class="grey_text" id="cityTxt"> Calgary</div>
-            <div>Latitude: <span class="grey_text" id="latitudeTxt">$100</div>
-            <div>Longitude: <span class="grey_text" id="longitudeTxt">checking</div>
-            <div>Population: <span class="grey_text" id="populationTxt">$100</div>
+            <div>City: <span class="grey_text" id="cityTxt"></div>
+            <div>Latitude: <span class="grey_text" id="latitudeTxt"></div>
+            <div>Longitude: <span class="grey_text" id="longitudeTxt"></div>
+            <div>Population: <span class="grey_text" id="populationTxt"></div>
         </div>
         <hr>
         <!-- <div > -->
@@ -62,18 +62,19 @@
             <div id="flex_center">
                     <div id="map"></div> 
                 <div class="activity">
+                    <div class="center" id="resultArea3Title"></div>
                     <div class="center" id="resultArea3"></div>
                     <div class="center">
                         <input type="submit" value="How Big?" id="howBig">
-                        <input type="submit" value="Which Hemisphere?" id="activityBtn">
+                        <input type="submit" value="Which Hemisphere?" id="whichSphereBtn">
                     </div>
                     <div class="border center">
                         <select id="choice">
                             <option value="movedIn">Moved In</option>
                             <option value="movedOut">Moved Out</option>
                         </select>
-                        <input type="number" name="amount" placeholder="amount" id="activityAmount">
-                        <input type="submit" value="Submit" id="activityBtn">
+                        <input type="number" name="moveInOut" placeholder="amount" id="moveInOut">
+                        <input type="submit" value="Submit" id="moveInOutBtn">
                     </div>
                 </div>
             </div>

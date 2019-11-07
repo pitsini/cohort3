@@ -18,25 +18,25 @@ class City {
 
     async movedIn(number) {
         this.population += number;
-        data = await this.update_City(this);
+        data = await this.update_aCity(this);
         return data;
     }
 
     async movedOut(number) {
         this.population -= number;
-        data = await this.update_City(this);
+        data = await this.update_aCity(this);
         return data;
     } 
 
-    // async get_City() {
-    //     data = await postData(url + 'read', this.key);
-    //     return data;
-    // }
+    async get_aCity() {
+        data = await postData(url + 'read', this.key);
+        return data;
+    }
 
-    // async update_City(obj) {
-    //     data = await postData(url + 'update', obj);
-    //     return data;
-    // }
+    async update_aCity(obj) {
+        data = await postData(url + 'update', obj);
+        return data;
+    }
 
     howBig() {
         let result;
@@ -80,24 +80,32 @@ class Community {
     }
 
     async getMostNorthern() {
-        this.allCity = await this.getAllCities();
-        const allLatitude = this.allCity.map(each => each.latitude).filter(each => each !== undefined);
+        // this.allCity = await this.getAllCities();
+        // const allLatitude = this.allCity.map(each => each.latitude).filter(each => each !== undefined);
+        // console.log(allLatitude);
+        // const mostNorthernLatitude = Math.max(...allLatitude);
+        // console.log(mostNorthernLatitude);
+        // console.log(this.allCity);
+        // const mostNorthernCities = this.allCity.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined );
+
+        this.data = await this.getAllCities();
+        const allLatitude = this.data.map(each => each.latitude).filter(each => each !== undefined);
         console.log(allLatitude);
         const mostNorthernLatitude = Math.max(...allLatitude);
         console.log(mostNorthernLatitude);
-        console.log(this.allCity);
-        const mostNorthernCities = this.allCity.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined );
+        console.log(this.data);
+        const mostNorthernCities = this.data.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined);
 
         console.log(mostNorthernCities);
         return mostNorthernCities;
     }
 
     async getMostSouthern() {
-        this.allCity = await this.getAllCities();
-        const allLatitude = this.allCity.map(each => each.latitude).filter(each => each !== undefined);
+        this.data = await this.getAllCities();
+        const allLatitude = this.data.map(each => each.latitude).filter(each => each !== undefined);
         const mostSouthernLatitude = Math.min(...allLatitude);
         console.log(mostSouthernLatitude);
-        const mostSouthernCities = this.allCity.filter(each => (each.latitude === mostSouthernLatitude) ? each : undefined );
+        const mostSouthernCities = this.data.filter(each => (each.latitude === mostSouthernLatitude) ? each : undefined );
 
         console.log(mostSouthernCities);
         return mostSouthernCities;
@@ -110,9 +118,9 @@ class Community {
     }
 
     async getPopulation() {
-        this.allCity = await this.getAllCities();
+        this.data = await this.getAllCities();
 
-        const allPop = this.allCity.map(each => each.population).filter(each => each !== undefined);
+        const allPop = this.data.map(each => each.population).filter(each => each !== undefined);
         console.log(allPop);
         const total = allPop.reduce((acc, population) => acc + population);
         console.log(total);
@@ -173,16 +181,16 @@ class Community {
         return this.data;
     }
 
-    async get_aCity(keyObj) {
-        this.data = await postData(this.url + 'read', keyObj);        
-        return this.data;
-    }
+    // async get_aCity(keyObj) {
+    //     this.data = await postData(this.url + 'read', keyObj);        
+    //     return this.data;
+    // }
 
-    async update_aCity(obj) {
-        this.data = await postData(this.url + 'update', obj);
-        return this.data;
+    // async update_aCity(obj) {
+    //     this.data = await postData(this.url + 'update', obj);
+    //     return this.data;
         
-    }
+    // }
 
     async getHightestKey() {
         this.allCity = await this.getAllCities();
