@@ -4,14 +4,14 @@ const community = new Community();
 let currentCityName, currentLatitude, currentLongitude, currentPopulation;
 
 window.addEventListener('load', async (event) => {
-    // data = await community.clearCommunity();
+    data = await community.clearCommunity();
     dataCommunity = await community.getAllCities();
     if (dataCommunity.length === 0) {
         // setup usedKey in the server   
         // data = await community.createCity(0, undefined, undefined, undefined, 0);
         data = await community.setCountKey();
         
-    } else if (data.length === 1) {
+    } else if (dataCommunity.length === 1) {
         // console.log("1 " + data.length); 
     }
     // console.log(data);
