@@ -81,33 +81,50 @@ class Community {
 
     async getMostNorthern() {
         this.allCity = await this.getAllCities();
-        // console.log(this.allCity);
-
-        const allLatitude = this.allCity.map(each => each.latitude);
+        const allLatitude = this.allCity.map(each => each.latitude).filter(each => each !== undefined);
+        console.log(allLatitude);
         const mostNorthernLatitude = Math.max(...allLatitude);
-        const mostNorthernCities = this.allCity.filter(each => each.latitude === mostNorthernLatitude);
-        return mostNorthernCities;
+        console.log(mostNorthernLatitude);
+        console.log(this.allCity);
+        const mostNorthernCities = this.allCity.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined );
 
-        // const maxObj = this.allCity.reduce((prev, current) => (prev.latitude > current.latitude) ? prev : current);
-        // console.log(maxObj);
+        console.log(mostNorthernCities);
+        return mostNorthernCities;
     }
 
     async getMostSouthern() {
         this.allCity = await this.getAllCities();
-
-        const allLatitude = this.allCity.map(each => each.latitude);
+        const allLatitude = this.allCity.map(each => each.latitude).filter(each => each !== undefined);
         const mostSouthernLatitude = Math.min(...allLatitude);
-        const mostSouthernCities = this.allCity.filter(each => each.latitude === mostSouthernLatitude);
+        console.log(mostSouthernLatitude);
+        const mostSouthernCities = this.allCity.filter(each => (each.latitude === mostSouthernLatitude) ? each : undefined );
+
+        console.log(mostSouthernCities);
         return mostSouthernCities;
+
+        // this.allCity = await this.getAllCities();
+        // const allLatitude = this.allCity.map(each => each.latitude);
+        // const mostSouthernLatitude = Math.min(...allLatitude);
+        // const mostSouthernCities = this.allCity.filter(each => each.latitude === mostSouthernLatitude);
+        // return mostSouthernCities;
     }
 
     async getPopulation() {
         this.allCity = await this.getAllCities();
 
-        let total = 0;
-        for (const eachCity of this.allCity) {
-            total += eachCity.population;
-        }
+        const allPop = this.allCity.map(each => each.population).filter(each => each !== undefined);
+        console.log(allPop);
+        const total = allPop.reduce((acc, population) => acc + population);
+        console.log(total);
+        // let total = 0;
+        // for (const eachCity of this.allCity) {
+        //     console.log(eachCity.population);
+        //     console.log(total);
+        //     total += eachCity.population;
+        // }
+
+
+        console.log(total);
         return total;
     }
 

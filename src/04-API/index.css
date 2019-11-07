@@ -49,7 +49,7 @@ input[type=submit]:hover {
 }
 
 #resultArea2 {
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     width: 80%;
     text-align: center;
 }
@@ -58,6 +58,11 @@ h3, h4 {
     /* border: 1px solid gray; */
     width: 350px;
     text-align: center;
+}
+
+#resultArea3 {
+    color: red;
+    height: 20px;
 }
 
 #resultArea1 {
@@ -124,7 +129,7 @@ h3, h4 {
 #bigActivity {
     /* visibility: hidden; */
     /* display: flex; */
-    
+    margin-top: 20px;
     /* flex */
 }
 
@@ -141,8 +146,9 @@ h3, h4 {
 }
 
 #communityArea {
-    width: 900px;
+    width: 850px;
     min-height: 150px;
+    padding: 20px;
 }
 
 #history {    
@@ -192,8 +198,8 @@ button {
 }
 
 #bigShowArea {
-    height: 200px;
-    overflow: auto;
+    /* height: 200px; */
+    /* overflow: auto; */
 }
 
 #map {
