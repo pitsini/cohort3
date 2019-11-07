@@ -4,10 +4,6 @@ import { City, Community } from './city_community'
 
 test('test that the City class works?', async () => {   
 
-    // const community = new Community();
-    // data = await community.clearCommunity()
-    // expect(data.status).toEqual(200);
-
     // const newCity = new City(1, 'Calgary', 51.05, -114.05, 5000);
     // expect(newCity.show()).toEqual("City: Calgary | Latitude: 51.05 | Longtitude: -114.05 | Population: 5000");
 
@@ -30,20 +26,20 @@ test('test that the City class works?', async () => {
     data = await newCity.movedOut(4000);
     expect(newCity.population).toEqual(1100);
     
-    // expect(newCity.howBig()).toEqual("Town");
-    // const newCity1 = new City(2, 'New York', -51.05, -114.05, 900000);
-    // expect(newCity1.howBig()).toEqual("City");
-    // const newCity2 = new City(3, 'Airdrie', 51.05, -114.05, 25000);
-    // expect(newCity2.howBig()).toEqual("Large town");
-    // const newCity3 = new City(4, 'Old', 51.05, -114.05, 150);
-    // expect(newCity3.howBig()).toEqual("Village");
-    // const newCity4 = new City(5, 'Camrose', 51.05, -114.05, 50);
-    // expect(newCity4.howBig()).toEqual("Hamlet");
-    // const newCity5 = new City(6, 'Somewhere', 51.05, -114.05, 0);
-    // expect(newCity5.howBig()).toEqual("No one live here!");
+    expect(newCity.howBig()).toEqual("Town");
+    const newCity1 = new City(2, 'New York', -51.05, -114.05, 900000);
+    expect(newCity1.howBig()).toEqual("City");
+    const newCity2 = new City(3, 'Airdrie', 51.05, -114.05, 25000);
+    expect(newCity2.howBig()).toEqual("Large town");
+    const newCity3 = new City(4, 'Old', 51.05, -114.05, 150);
+    expect(newCity3.howBig()).toEqual("Village");
+    const newCity4 = new City(5, 'Camrose', 51.05, -114.05, 50);
+    expect(newCity4.howBig()).toEqual("Hamlet");
+    const newCity5 = new City(6, 'Somewhere', 51.05, -114.05, 0);
+    expect(newCity5.howBig()).toEqual("No one live here!");
     
-    // expect(newCity.whichSphere()).toEqual("Northern Hemisphere");
-    // expect(newCity1.whichSphere()).toEqual("Southern Hemisphere");
+    expect(newCity.whichSphere()).toEqual("Northern Hemisphere");
+    expect(newCity1.whichSphere()).toEqual("Southern Hemisphere");
 });
 
 // ---- Community Class ----
@@ -61,7 +57,7 @@ test('test that the Community class works?', async () => {
     expect(data.status).toEqual(200);
     
     console.log(cities[0]);
-    data = await community.createCity(0, "Calgary", 51.05, -114.05, 5000);
+    data = await community.createCity(1, "Calgary", 51.05, -114.05, 5000);
     expect(data.status).toEqual(200);
     // data = await community.createCity(cities[1]);
     // expect(data.status).toEqual(200);
@@ -98,7 +94,7 @@ test('test that the fetch works?', async () => {
 
 
     // --- add data ---
-    data = await community.createCity(cities[0]);
+    data = await community.createCity(1, "Calgary", 51.05, -114.05, 5000);
     expect(data.status).toEqual(200);
 
     data = await community.getAllCities();
@@ -107,11 +103,11 @@ test('test that the fetch works?', async () => {
     expect(data[0].name).toBe("Calgary");
 
     // add a second with the same key which should be an error
-    data = await community.createCity(cities[0]);
+    data = await community.createCity(1, "Calgary", 51.05, -114.05, 5000);
     expect(data.status).toEqual(400);
 
     // add a second which should be ok
-    data = await community.createCity(cities[1]);
+    data = await community.createCity(2, "Edmonton", 53.55, -113.49, 20000);
     expect(data.status).toEqual(200);
 
     // --- check data ---
@@ -119,6 +115,8 @@ test('test that the fetch works?', async () => {
     expect(data.status).toEqual(200);
     expect(data.length).toBe(2);
     expect(data[1].name).toBe("Edmonton");
+
+    console.log(data.findIndex(key => key === 2));
 
     // --- update ----
     data = await community.get_aCity({ key: 2 });
@@ -130,6 +128,7 @@ test('test that the fetch works?', async () => {
 
     data = await community.update_aCity(data[0]);
     expect(data.status).toEqual(200);
+
 
     data = await community.get_aCity({ key: 2 });
     expect(data.status).toEqual(200);

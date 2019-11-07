@@ -8,12 +8,12 @@
 </head>
 
 <body id="bigContainer">
-    <div class="container" id="accSummary">
+    <div class="container" id="communityArea">
         <div id="heading">
             <div>
             <h3>Welcome to our community!</h3></div>
             <!-- <h4>Click the button to create a new city.</h4> -->
-            <div id="information">key in the password</div>
+            <div id="resultArea1"></div>
             <input type="submit" value="Create City" class="createCity">
         </div>
         
@@ -29,29 +29,62 @@
                 <input type="number" name="population" id="population" placeholder="Population">
                 <input type="submit" value="Add" class="addCity">
             </div>
-        <hr>
+            <hr>
+            <div class="titleText">
+                <span class="border titleTxt">City</span>
+                <span class="border titleTxt">Latitude</span>
+                <span class="border titleTxt">Longitude</span>
+                <span class="border titleTxt">Population</span>
+            </div>
         </div>
         <div id="bigShowArea"></div>
     </div>
-    <div class="container" id="lowHigh">
-        <input type="submit" value="Hightest Account" id="highest">
-        <input type="submit" value="Lowest Account" id="lowest">
-        <input type="submit" value="Total Balance" id="total">
-        <div id="showResult"></div>
+    <div class="container" id="functionsArea">
+        <input type="submit" value="Most Northern" id="mostNorthern">
+        <input type="submit" value="Most Southern" id="mostSouthern">
+        <input type="submit" value="Check Population" id="totalPopulation">
+        
     </div>
+    
+    <div id="resultArea2"></div>
+    
     <div class="container" id="bigActivity">
-        <div id="accountN">Account name: checking</div>
-        <div id="accountB">Balance: $100</div>
-        <hr>
-        <div><div id="map"></div></div>
-        <div class="activity">            
-            <select id="choice">
-                <option value="deposit">Deposit</option>
-                <option value="withdraw">Withdraw</option>
-            </select>
-            <input type="number" name="amount" placeholder="amount" id="activityAmount">
-            <input type="submit" value="Submit" id="activityBtn">
+        <div id="flex">
+            <div>City: <span class="grey_text" id="cityTxt"> Calgary</div>
+            <div>Latitude: <span class="grey_text" id="latitudeTxt">$100</div>
+            <div>Longitude: <span class="grey_text" id="longitudeTxt">checking</div>
+            <div>Population: <span class="grey_text" id="populationTxt">$100</div>
         </div>
+        <hr>
+        <!-- <div > -->
+            <!-- <div id="accountB">Balance: $100</div> -->
+            
+            <div id="flex_center">
+                    <div id="map"></div> 
+                <div class="activity">
+                    <div class="center">
+                        <input type="submit" value="How Big?" id="activityBtn">
+                        <input type="submit" value="Which Hemisphere?" id="activityBtn">
+                    </div>
+                    <div class="border center">
+                        <select id="choice">
+                            <option value="movedIn">Moved In</option>
+                            <option value="movedOut">Moved Out</option>
+                        </select>
+                        <input type="number" name="amount" placeholder="amount" id="activityAmount">
+                        <input type="submit" value="Submit" id="activityBtn">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="activity">            
+                <select id="choice">
+                    <option value="deposit">Deposit</option>
+                    <option value="withdraw">Withdraw</option>
+                </select>
+                <input type="number" name="amount" placeholder="amount" id="activityAmount">
+                <input type="submit" value="Submit" id="activityBtn">
+            </div> -->
+        <!-- </div> -->
     </div>
 
     <script type="module" src="./scripts/index.js"></script>

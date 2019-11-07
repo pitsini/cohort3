@@ -3,7 +3,7 @@ body {
 }
 
 input[type=number], input[type=text], select {
-  width: 150px;
+  width: 100px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
@@ -43,9 +43,15 @@ input[type=submit]:hover {
     border: 1px solid gray;
     border-radius: 10px;
     box-shadow: 5px 5px rgb(145, 144, 144);
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 5px;
     width: 80%;
+}
+
+#resultArea2 {
+    border: 1px solid gray;
+    width: 80%;
+    text-align: center;
 }
 
 h3, h4 {
@@ -54,7 +60,7 @@ h3, h4 {
     text-align: center;
 }
 
-#information {
+#resultArea1 {
     /* border: 1px solid gray; */
     width: 200px;
     color: red;
@@ -62,21 +68,66 @@ h3, h4 {
     text-align: center;
 }
 
-.activity {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
+#resultArea2 {
+    color: red;
+    height: 20px;
 }
 
-#lowHigh {
+.grey_text {
+    color: grey;
+}
+
+#flex {
+    display: flex;     
+    justify-content: space-around;
+    /* display: flex;
+    justify-content: center; */
+}
+
+#flex_center {
+    
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    justify-content: center;
+    /* border: 1px dashed red; */
+}
+
+.activity {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    /* border: 1px dashed black; */
+    width: 50%;
+}
+
+/* .border {    
+    border: 1px dashed black;
+} */
+.center {
+
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#functionsArea {
     visibility: hidden;
     border: hidden;
     box-shadow: none;
+    /* padding: 0px; */
+    display: flex;
+    justify-content: center;
 }
 
 #bigActivity {
     /* visibility: hidden; */
+    /* display: flex; */
+    
+    /* flex */
 }
+
 
 .showArea:hover {
     
@@ -89,7 +140,7 @@ h3, h4 {
     visibility: hidden;
 }
 
-#accSummary {
+#communityArea {
     width: 900px;
     min-height: 150px;
 }
@@ -109,11 +160,23 @@ h3, h4 {
     justify-content: space-around;
 }
 
-.showBalance, .showAccName {
+.showCityName, .showLatitude, .showLongitude, .showPopulation {
     margin: 5px;
     width: 200px;
 }
 
+.titleTxt {
+    width: 180px;
+}
+
+.titleText {
+    width: 700px;
+    border-bottom: 1px dashed  rgb(214, 214, 214);
+    /* border: 1px dashed black; */
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
 .showArea {
     border-bottom: 1px solid rgb(214, 214, 214);
     display: flex;
@@ -134,6 +197,8 @@ button {
 }
 
 #map {
+    margin: 10px 30px;
+    /* align-content: center; */
         height: 400px;  /* The height is 400 pixels */
-        width: 50%;  /* The width is the width of the web page */
+        width: 50%;  /*The width is the width of the web page*/
        }

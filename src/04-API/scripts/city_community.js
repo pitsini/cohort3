@@ -1,16 +1,13 @@
 const url = 'http://localhost:5000/';
 let data;
 class City {
-    // static url = 'http://localhost:5000/';
-    // static data;
     
     constructor(key, name, latitude, longitude, population) {
         this.key = key;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.population = population;
-        
+        this.population = population;        
     }
 
     show() {
@@ -31,16 +28,15 @@ class City {
         return data;
     } 
 
-    async get_City() {
-        data = await postData(url + 'read', this.key);
-        return data;
-    }
+    // async get_City() {
+    //     data = await postData(url + 'read', this.key);
+    //     return data;
+    // }
 
-    async update_City(obj) {
-        data = await postData(url + 'update', obj);
-        return data;
-
-    }
+    // async update_City(obj) {
+    //     data = await postData(url + 'update', obj);
+    //     return data;
+    // }
 
     howBig() {
         let result;
@@ -70,7 +66,7 @@ class City {
         if (this.latitude > 0) {
             return "Northern Hemisphere";
         } else {
-            return "Southern Hemisphere"
+            return "Southern Hemisphere";
         }
     }
 }
@@ -117,7 +113,7 @@ class Community {
 
     async createCity(key, name, latitude, longitude, population) {
         const newCity = new City(key, name, latitude, longitude, population);
-        // this.allCity.push(newCity);
+        this.allCity.push(newCity);
         console.log(newCity);
         // console.log(newCity.show());
         this.data = await postData(this.url + 'add', newCity);
@@ -150,16 +146,26 @@ class Community {
         return this.data;
     }
 
-    // async get_City(keyObj) {
-    //     this.data = await postData(this.url + 'read', keyObj);        
-    //     return this.data;
-    // }
+    async setCountKey() {
+        this.data = await postData(this.url + 'add', { key: 0, countKey: 0 });
+        return this.data;
+    }
 
-    // async update_City(obj) {
-    //     this.data = await postData(this.url + 'update', obj);
-    //     return this.data;
+    async updateCountKey(newCountKey) {
+        this.data = await postData(this.url + 'update', { key: 0, countKey: newCountKey });
+        return this.data;
+    }
+
+    async get_aCity(keyObj) {
+        this.data = await postData(this.url + 'read', keyObj);        
+        return this.data;
+    }
+
+    async update_aCity(obj) {
+        this.data = await postData(this.url + 'update', obj);
+        return this.data;
         
-    // }
+    }
 
     async getHightestKey() {
         this.allCity = await this.getAllCities();
@@ -206,4 +212,41 @@ async function postData(url = '', data = {}) {
     // console.log(json, typeof(json));
     return json;
 }
-export { City, Community }
+
+const functions = {
+    createShowArea: () => {
+        let parentDiv = document.createElement("div");
+        parentDiv.className = "showArea";
+
+        // create showAccName div
+        let childDiv1 = document.createElement("div");
+        childDiv1.className = "showCityName";
+        parentDiv.appendChild(childDiv1);
+
+        // create showLatitude div
+        let childDiv2 = document.createElement("div");
+        childDiv2.className = "showLatitude";
+        parentDiv.appendChild(childDiv2);
+
+        // create showLongitude div
+        let childDiv3 = document.createElement("div");
+        childDiv3.className = "showLongitude";
+        parentDiv.appendChild(childDiv3);
+
+        // create showPopulation div
+        let childDiv4 = document.createElement("div");
+        childDiv4.className = "showPopulation";
+        parentDiv.appendChild(childDiv4);
+
+        // create "Remove" button
+        let newRemoveBtn = document.createElement("button");
+        newRemoveBtn.className = "removeCity";
+        let removeBtnContent = document.createTextNode("Remove");
+
+        newRemoveBtn.appendChild(removeBtnContent);
+        parentDiv.appendChild(newRemoveBtn);
+
+        return parentDiv
+    }
+};
+export { City, Community, functions }
