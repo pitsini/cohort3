@@ -1,10 +1,10 @@
 import { City, Community, functions } from './city_community.js'
-let amt,data, dataCommunity, currentKey;
+let amt,data, dataCommunity, currentKey=0, maxIndexList;
 const community = new Community();
 let currentCityName, currentLatitude, currentLongitude, currentPopulation;
 
 window.addEventListener('load', async (event) => {
-    data = await community.clearCommunity();
+    // data = await community.clearCommunity();
     dataCommunity = await community.getAllCities();
     if (dataCommunity.length === 0) {
         // setup usedKey in the server   
@@ -41,11 +41,19 @@ bigContainer.addEventListener('click', (async (event) => {
         // click add account button
         case "addCity":
             let newName, newLat, newLong, newPop; 
-            if (cityName.value !== "" && latitude.value !== "" && longitude.value !== "" && population.value !== "") {
-                newName = cityName.value;
-                newLat = Number(latitude.value);
-                newLong = Number(longitude.value);
-                newPop = Number(population.value);
+            newName = cityName.value;
+            newLat = Number(latitude.value);
+            newLong = Number(longitude.value);
+            newPop = Number(population.value);
+            console.log(newPop);
+            console.log(Number.isInteger(newPop));
+            if (population.value < 0) {
+                resultArea1.textContent = "Population can't be less than 0."
+            } else if (Number.isInteger(newPop) == false) {
+                resultArea1.textContent = "Population has to be integer."
+            } else if (cityName.value !== "" && latitude.value !== "" && longitude.value !== "" && population.value !== "") {
+                
+                // newPop = Number(population.value);
                 dataCommunity = await community.getAllCities();
                 // console.log("CountKey = " + data[0].countKey);
                 const newCountKey = dataCommunity[0].countKey+1;
@@ -69,13 +77,18 @@ bigContainer.addEventListener('click', (async (event) => {
                 communityDetail.style.visibility = "hidden";
                 document.getElementsByClassName("createCity")[0].setAttribute("value", "Create City");
 
+                console.log("showArea = " + bigShowArea.getElementsByClassName("showArea").length);
                 // // create new div
                 let newDiv = functions.createShowArea();
                 newDiv.setAttribute("data-key", newCountKey);
                 bigShowArea.appendChild(newDiv);
-                currentKey = newCountKey;
+                // currentKey = newCountKey;
 
-
+                console.log("newCountKey" + newCountKey);
+                console.log("currentKey" + currentKey);
+                maxIndexList = bigShowArea.getElementsByClassName("showArea").length;
+                currentKey = maxIndexList;
+                console.log("showArea = " + bigShowArea.getElementsByClassName("showArea").length);
                 // console.log(data);
                 // // show name and balance
                 // const lastIndex = controller.allAccounts.length - 1;                
@@ -87,11 +100,16 @@ bigContainer.addEventListener('click', (async (event) => {
                 // document.getElementsByClassName("showLongitude")[newCountKey-1].textContent = community.allCity[newCountKey-1].longitude;
                 // document.getElementsByClassName("showPopulation")[newCountKey-1].textContent = community.allCity[newCountKey-1].population;
 
-                document.getElementsByClassName("showCityName")[newCountKey - 1].textContent = newName;
-                document.getElementsByClassName("showLatitude")[newCountKey - 1].textContent = newLat;
-                document.getElementsByClassName("showLongitude")[newCountKey - 1].textContent = newLong;
-                document.getElementsByClassName("showPopulation")[newCountKey - 1].textContent = newPop;
+                // document.getElementsByClassName("showCityName")[newCountKey - 1].textContent = newName;
+                // document.getElementsByClassName("showLatitude")[newCountKey - 1].textContent = newLat;
+                // document.getElementsByClassName("showLongitude")[newCountKey - 1].textContent = newLong;
+                // document.getElementsByClassName("showPopulation")[newCountKey - 1].textContent = newPop;
 
+
+                document.getElementsByClassName("showCityName")[maxIndexList -1 ].textContent = newName;
+                document.getElementsByClassName("showLatitude")[maxIndexList-1].textContent = newLat;
+                document.getElementsByClassName("showLongitude")[maxIndexList-1].textContent = newLong;
+                document.getElementsByClassName("showPopulation")[maxIndexList-1].textContent = newPop;
 
                 // // clear value
                 cityName.value = "";
@@ -142,7 +160,7 @@ bigContainer.addEventListener('click', (async (event) => {
     resultArea2.textContent = "";
 }));
 
-bigShowArea.addEventListener('click', ((event) => {
+bigShowArea.addEventListener('click', ( async(event) => {
     console.log(event.target.className);
     switch (event.target.className) {
 
@@ -207,23 +225,49 @@ bigShowArea.addEventListener('click', ((event) => {
             resultArea1.textContent = "";
             break;
 
-        case "removeAccount":
+        case "removeCity":
             // get index of current account
             // pointer = Array.prototype.slice.call(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
+           
+            console.log(event.target.parentElement.getAttribute("data-key"));
 
-            event.target.parentElement.remove();
-            controller.removeAccount(pointer);
+            currentKey = event.target.parentElement.getAttribute("data-key");
+            
+            // console.log(community.allCity[currentKey]);
+            // console.log(community.allCity[currentKey-1]);
+            console.log(community.allCity);
+                data = community.allCity.find( (each) => Number(each.key) === Number(currentKey));
+                                
 
-            // unhighlight in show area
-            for (let i = 0; i < bigShowArea.children.length; i++) {
-                bigShowArea.children[i].style.backgroundColor = "";
+            if (data !== undefined) {
+                console.log("Number(each.key) === Number(currentKey)");
+                console.log(data);
+
+                // const result = inventory.find(({ name }) => name === 'cherries');
+                // // controller.removeAccount(pointer);
+                // console.log(event.target);
+                // data = await community.createCity(Number(newCountKey), newName, newLat, newLong, newPop);
+                // community.allCity[currentKey-1]
+
+                event.target.parentElement.remove();
+                data = await community.deleteCity(data);
+            } else {
+                console.log("No no!!!");
+
             }
+            currentKey -= 1;
 
-            // hide div and buttons
-            bigActivity.style.visibility = "hidden";
-            functionsArea.style.visibility = "hidden";
-            showResult.textContent = "";
-            break;
+            console.log("currentKey" + currentKey);
+            // // unhighlight in show area
+            // for (let i = 0; i < bigShowArea.children.length; i++) {
+            //     bigShowArea.children[i].style.backgroundColor = "";
+            // }
+
+            // // hide div and buttons
+            // bigActivity.style.visibility = "hidden";
+            // functionsArea.style.visibility = "hidden";
+            // showResult.textContent = "";
+            // break;
     };
 }));
 
@@ -345,7 +389,9 @@ moveInOutBtn.addEventListener('click', (async (event) => {
     resultArea3.textContent = "";
 
     amt = Number(moveInOut.value);
-    if (amt !== "") {
+    if (Number.isInteger(amt) == false) {
+        resultArea3.textContent = "Population is not integer.";
+    } else if (amt !== "") {
         // amt = functions.round2Digit(Number(amt));
         console.log(amt);
         switch (choice.selectedIndex) {
@@ -363,6 +409,7 @@ moveInOutBtn.addEventListener('click', (async (event) => {
                         console.log(document.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
                         // console.log(event.target.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
                         document.getElementsByClassName("showPopulation")[currentKey - 1].textContent = community.allCity[currentKey - 1].population;
+                        moveInOut.value = "";
                     } else {
                         resultArea3.textContent = "Error!!!";
                     }
@@ -395,6 +442,7 @@ moveInOutBtn.addEventListener('click', (async (event) => {
                             console.log(document.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
                             // console.log(event.target.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
                             document.getElementsByClassName("showPopulation")[currentKey - 1].textContent = community.allCity[currentKey - 1].population;
+                            moveInOut.value = "";
                         } else {
                             resultArea3.textContent = "Error!!!";
                         }

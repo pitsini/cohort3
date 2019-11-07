@@ -158,6 +158,11 @@ class Community {
         // this.allCity = newCityArr.slice();
 
         this.data = await postData(this.url + 'delete', obj);
+        console.log("obj.name" + obj.name);
+        const newCityArr = this.allCity.filter(eachCity => eachCity.name != obj.name);
+        this.allCity = newCityArr.slice();
+
+        console.log(this.allCity);
         return this.data;
     }
 
