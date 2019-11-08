@@ -172,7 +172,10 @@ class Community {
     }
 
     async getAllCities() {
+        // this.data = await postData(this.url + 'all');
+        // this.allCity = this.data;
         this.data = await postData(this.url + 'all');
+        // this.data = this.allCity;
         return this.data;
     }
 
@@ -197,27 +200,27 @@ class Community {
         
     // }
 
-    async getHightestKey() {
-        this.allCity = await this.getAllCities();
-        // console.log(this.allCity);
+    // async getHightestKey() {
+    //     this.allCity = await this.getAllCities();
+    //     // console.log(this.allCity);
 
-        const allKey = this.allCity.map(each => each.key);
+    //     const allKey = this.allCity.map(each => each.key);
         
-        let mostHighestKey;
-        switch (true) {
-            case (allKey.length !== 0):
-                mostHighestKey = Math.max(...allKey);
-                break;
-            default:
-                mostHighestKey = 0;
-                break;
-        }
-        // console.log(mostHighestKey);
-        return mostHighestKey;
+    //     let mostHighestKey;
+    //     switch (true) {
+    //         case (allKey.length !== 0):
+    //             mostHighestKey = Math.max(...allKey);
+    //             break;
+    //         default:
+    //             mostHighestKey = 0;
+    //             break;
+    //     }
+    //     // console.log(mostHighestKey);
+    //     return mostHighestKey;
 
-        // const maxObj = this.allCity.reduce((prev, current) => (prev.latitude > current.latitude) ? prev : current);
-        // console.log(maxObj);
-    }
+    //     // const maxObj = this.allCity.reduce((prev, current) => (prev.latitude > current.latitude) ? prev : current);
+    //     // console.log(maxObj);
+    // }
 }
 
 async function postData(url = '', data = {}) {

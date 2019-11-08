@@ -1,21 +1,64 @@
 import { City, Community, functions } from './city_community.js'
-let amt,data, dataCommunity, currentKey=0, maxIndexList;
+let amt, data, dataCommunity, currentKey = 0, maxIndexList, newCountKey, index;
 const community = new Community();
 let currentCityName, currentLatitude, currentLongitude, currentPopulation;
 
 window.addEventListener('load', async (event) => {
-    data = await community.clearCommunity();
+    // data = await community.clearCommunity();
     dataCommunity = await community.getAllCities();
+    console.log(dataCommunity.length);
     if (dataCommunity.length === 0) {
-        // setup usedKey in the server   
-        // data = await community.createCity(0, undefined, undefined, undefined, 0);
+    //     // setup usedKey in the server   
+    //     // data = await community.createCity(0, undefined, undefined, undefined, 0);
         data = await community.setCountKey();
-        
+        newCountKey = 0;
+        console.log(data);        
     } else if (dataCommunity.length === 1) {
-        // console.log("1 " + data.length); 
+        console.log(dataCommunity[0].countKey);
+        newCountKey = dataCommunity[0].countKey;
+    } else {
+
+        console.log("have data");
+        console.log(dataCommunity);
+        console.log(dataCommunity[0].key);
+        console.log(dataCommunity[1].key);
+        newCountKey = dataCommunity[0].countKey;
+        data = dataCommunity.filter(each => each.key !== 0);
+        console.log(data);
+        data.map( each => {
+            console.log("showArea = " + bigShowArea.getElementsByClassName("showArea").length);
+
+            const newCity = new City(each.key, each.name, each.latitude, each.longitude, each.population);
+            community.allCity.push(newCity);
+            // console.log(community.allCity);
+            // console.log(newCity.howBig());
+            // newCountKey += 1;
+            // console.log(newCountKey);
+            // // create new div
+            let newDiv = functions.createShowArea();
+            console.log(each.key);
+            newDiv.setAttribute("data-key", each.key);
+            // console.log(newDiv);
+
+            newDiv.getElementsByClassName("showCityName")[0].textContent = each.name;
+            newDiv.getElementsByClassName("showLatitude")[0].textContent = each.latitude;
+            newDiv.getElementsByClassName("showLongitude")[0].textContent = each.longitude;
+            newDiv.getElementsByClassName("showPopulation")[0].textContent = each.population;
+
+            bigShowArea.appendChild(newDiv);
+        }
+        );
+        // maxIndexList = bigShowArea.getElementsByClassName("showArea").length;
+        // currentKey = maxIndexList;
+        // console.log("showArea = " + bigShowArea.getElementsByClassName("showArea").length);
+
+        // document.getElementsByClassName("showCityName")[maxIndexList - 1].textContent = newName;
+        // document.getElementsByClassName("showLatitude")[maxIndexList - 1].textContent = newLat;
+        // document.getElementsByClassName("showLongitude")[maxIndexList - 1].textContent = newLong;
+        // document.getElementsByClassName("showPopulation")[maxIndexList - 1].textContent = newPop;
+
+        
     }
-    // console.log(data);
-    // data = await community.createCity(0, "Calgary", 51.05, -114.05, 5000);
 });
 
 bigContainer.addEventListener('click', (async (event) => {
@@ -56,7 +99,8 @@ bigContainer.addEventListener('click', (async (event) => {
                 // newPop = Number(population.value);
                 dataCommunity = await community.getAllCities();
                 // console.log("CountKey = " + data[0].countKey);
-                const newCountKey = dataCommunity[0].countKey+1;
+                // const newCountKey = dataCommunity[0].countKey + 1;
+                newCountKey += 1;
                 data = await community.createCity(Number(newCountKey), newName, newLat, newLong, newPop);
 
                 // console.log(data);
@@ -150,8 +194,9 @@ bigContainer.addEventListener('click', (async (event) => {
                 // longitudeTxt.textContent = currentLongitude.textContent;
                 populationTxt.textContent = newPop;
 
-
                 dataCommunity = await community.getAllCities();
+
+                initMap(newLat, newLong);
             } else {
                 resultArea1.textContent = "Please fill up all information.";
             };
@@ -191,11 +236,15 @@ bigShowArea.addEventListener('click', ( async(event) => {
             populationTxt.textContent = currentPopulation.textContent;
 
             currentKey = event.target.parentElement.getAttribute("data-key");
-            // reset pointer
+            console.log(currentKey);
+                        // reset pointer
             // pointer = Array.prototype.slice.call(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
 
             //clear result content
             resultArea1.textContent = "";
+
+
+            initMap(currentLatitude.textContent, currentLongitude.textContent);
             break;
 
         case "showArea":
@@ -220,9 +269,14 @@ bigShowArea.addEventListener('click', ( async(event) => {
             populationTxt.textContent = currentPopulation.textContent;
 
             currentKey = event.target.getAttribute("data-key");
+
+            console.log(currentKey);
             // reset pointer
             // pointer = Array.prototype.slice.call(event.target.parentElement.children).indexOf(event.target);
             resultArea1.textContent = "";
+
+
+            initMap(currentLatitude.textContent, currentLongitude.textContent);
             break;
 
         case "removeCity":
@@ -251,13 +305,13 @@ bigShowArea.addEventListener('click', ( async(event) => {
 
                 event.target.parentElement.remove();
                 data = await community.deleteCity(data);
+
+                currentKey -= 1;
+                console.log("currentKey" + currentKey);
             } else {
                 console.log("No no!!!");
 
             }
-            currentKey -= 1;
-
-            console.log("currentKey" + currentKey);
             // // unhighlight in show area
             // for (let i = 0; i < bigShowArea.children.length; i++) {
             //     bigShowArea.children[i].style.backgroundColor = "";
@@ -342,35 +396,11 @@ totalPopulation.addEventListener('click', (async(event) => {
 
 
 howBig.addEventListener('click', (async (event) => {
-    // showResult.textContent = 'The lowest value is $' + controller.checkLowest().toFixed(2);
-    // data = new.howBig();
-    // console.log(community.allCity);
-
-
-    console.log(currentKey);
-    console.log(community.allCity);
-    console.log(community.allCity[0]);
-    console.log(community.allCity[1]);
-    console.log(community.allCity[currentKey-1]);
-    data = community.allCity[currentKey-1].howBig();
-
     // dataCommunity = await community.getAllCities();
-
-    // community.allCity = await community.getAllCities();
-    // console.log("run getAllCities");
-    // console.log(currentKey);
-    // console.log(community.allCity[0]);
-    // console.log(community.allCity[1]);
-    // console.log(community.allCity[currentKey]);
-    // data = community.allCity[1].howBig();
-
-    // console.log(dataCommunity[currentKey]);
-
-
-    // data = await community.allCity[currentKey - 1].movedIn(amt);
-
-    // console.log(dataCommunity[currentKey].howBig());
-    // console.log(community.allCity[Number(currentKey)].howBig());
+    console.log(currentKey);
+    index = community.allCity.findIndex( (each) => each.key === Number(currentKey));
+    
+    data = community.allCity[index].howBig();
     resultArea3Title.textContent = "This is a";
     resultArea3.textContent = data;
 }));
@@ -378,7 +408,10 @@ howBig.addEventListener('click', (async (event) => {
 whichSphereBtn.addEventListener('click', ((event) => {
     console.log(currentKey);
     console.log(community.allCity);
-    data = community.allCity[currentKey - 1].whichSphere();
+
+    index = community.allCity.findIndex((each) => each.key === Number(currentKey));
+
+    data = community.allCity[index].whichSphere();
 
     resultArea3Title.textContent = "This city is in the";
     resultArea3.textContent = data;
@@ -397,18 +430,21 @@ moveInOutBtn.addEventListener('click', (async (event) => {
         switch (choice.selectedIndex) {
             case 0:     // moved in
                 if (amt > 0) {
-                    console.log("currentKey: " + currentKey);
-                    console.log(community.allCity[currentKey - 1]);
-                    data = await community.allCity[currentKey - 1].movedIn(amt);
+
+                    console.log(currentKey);
+                    index = community.allCity.findIndex((each) => each.key === Number(currentKey));
+
+                    console.log(community.allCity[index]);
+                    data = await community.allCity[index].movedIn(amt);
                     console.log(data.status);
                     console.log(community.allCity);
                     if (data.status === 200) {
                         resultArea3.textContent = "Successful!!!";
-                        populationTxt.textContent = community.allCity[currentKey - 1].population;
+                        populationTxt.textContent = community.allCity[index].population;
                         console.log(currentKey);
-                        console.log(document.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
+                        console.log(document.getElementsByClassName("showPopulation")[index].textContent);
                         // console.log(event.target.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
-                        document.getElementsByClassName("showPopulation")[currentKey - 1].textContent = community.allCity[currentKey - 1].population;
+                        document.getElementsByClassName("showPopulation")[index].textContent = community.allCity[index].population;
                         moveInOut.value = "";
                     } else {
                         resultArea3.textContent = "Error!!!";
@@ -426,22 +462,23 @@ moveInOutBtn.addEventListener('click', (async (event) => {
                 break;
 
             case 1:     // move out
+
+                index = community.allCity.findIndex((each) => each.key === Number(currentKey));
                 if (amt > 0) {
-                    if (community.allCity[currentKey - 1].population < amt) {
+                    if (community.allCity[index].population < amt) {
                         resultArea3.textContent = "Moved out people can't be more than population.";
                     } else {
-                        console.log("currentKey: " + currentKey);
-                        console.log(community.allCity[currentKey - 1]);
-                        data = await community.allCity[currentKey - 1].movedOut(amt);
+                        // console.log(community.allCity[currentKey - 1]);
+                        data = await community.allCity[index].movedOut(amt);
                         console.log(data.status);
                         console.log(community.allCity);
                         if (data.status === 200) {
                             resultArea3.textContent = "Successful!!!";
-                            populationTxt.textContent = community.allCity[currentKey - 1].population;
+                            populationTxt.textContent = community.allCity[index].population;
                             console.log(currentKey);
-                            console.log(document.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
+                            console.log(document.getElementsByClassName("showPopulation")[index].textContent);
                             // console.log(event.target.getElementsByClassName("showPopulation")[currentKey - 1].textContent);
-                            document.getElementsByClassName("showPopulation")[currentKey - 1].textContent = community.allCity[currentKey - 1].population;
+                            document.getElementsByClassName("showPopulation")[index].textContent = community.allCity[index].population;
                             moveInOut.value = "";
                         } else {
                             resultArea3.textContent = "Error!!!";
@@ -463,3 +500,14 @@ moveInOutBtn.addEventListener('click', (async (event) => {
         resultArea3.textContent = "Please fill in amount.";
     }
 }));
+
+// Initialize and add the map
+function initMap(latNum, longNum) {
+    // The location of Uluru 
+    var uluru = { lat: Number(latNum), lng: Number(longNum) };
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), { zoom: 9, center: uluru });
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({ position: uluru, map: map });
+}

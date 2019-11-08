@@ -44,7 +44,7 @@ input[type=submit]:hover {
     border-radius: 10px;
     box-shadow: 5px 5px rgb(145, 144, 144);
     margin: 5px;
-    padding: 5px;
+    padding: 0px 5px;
     width: 80%;
 }
 
@@ -52,6 +52,12 @@ h3, h4 {
     /* border: 1px solid gray; */
     width: 350px;
     text-align: center;
+}
+
+textarea {
+    margin: 10px 20px;
+    /* text-align:left; */
+    /* align-content: flex-start; */
 }
 
 #resultArea3 {
@@ -129,7 +135,7 @@ h3, h4 {
 }
 
 #bigActivity {
-    /* visibility: hidden; */
+    visibility: hidden;
     /* display: flex; */
     margin-top: 20px;
     /* flex */
@@ -150,7 +156,7 @@ h3, h4 {
 #communityArea {
     width: 850px;
     min-height: 150px;
-    padding: 20px;
+    padding: 10px 20px;
 }
 
 #history {    
@@ -174,7 +180,7 @@ h3, h4 {
 }
 
 .titleTxt {
-    width: 180px;
+    width: 250px;
 }
 
 .titleText {
@@ -183,6 +189,7 @@ h3, h4 {
     /* border: 1px dashed black; */
     display: flex;
     align-items: center;
+    background-color: rgb(255, 197, 176);
     /* justify-content: center; */
 }
 .showArea {
@@ -191,6 +198,12 @@ h3, h4 {
     justify-content: center;
     height: 40px;
     width: 100%;
+}
+
+.showLat {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
 }
 
 button {
