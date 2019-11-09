@@ -126,12 +126,17 @@ bigContainer.addEventListener('click', (async (event) => {
                 let newDiv = functions.createShowArea();
                 newDiv.setAttribute("data-key", newCountKey);
                 bigShowArea.appendChild(newDiv);
-                // currentKey = newCountKey;
+                // +++++++++++++++++++
+                currentKey = newCountKey;
+                // +++++++++++++++++++
 
                 console.log("newCountKey" + newCountKey);
                 console.log("currentKey" + currentKey);
                 maxIndexList = bigShowArea.getElementsByClassName("showArea").length;
-                currentKey = maxIndexList;
+                // +++++++++++++++++++
+                // currentKey = maxIndexList;
+                // +++++++++++++++++++
+
                 console.log("showArea = " + bigShowArea.getElementsByClassName("showArea").length);
                 // console.log(data);
                 // // show name and balance
@@ -330,9 +335,12 @@ mostNorthern.addEventListener('click', (async (event) => {
     resultArea2.textContent = "Hello";
     // data = await community.updateCountKey(newCountKey);  
     data = await community.getMostNorthern();
-    resultArea2.textContent = "North";
+    // resultArea2.textContent = "North";
     console.log(data);
     console.log(data.length);
+    // currentKey = data[0].key;
+    console.log("key = " + data[0].key);
+    console.log("currentKey = " + currentKey);
     switch (true) {
         case (data.length == 1):
             console.log("Hey1");
@@ -363,6 +371,12 @@ mostSouthernBtn.addEventListener('click', (async (event) => {
     // resultArea2.textContent = "hell";
     console.log(data);
     console.log(data.length);
+
+
+    // currentKey = data[0].key;
+    console.log("key = " + data[0].key);
+    console.log("currentKey = " + currentKey);
+
     switch (true) {
         case (data.length === 1):
             resultArea2.textContent = `The southernmost city is ${data[0].name} (Latitude = ${data[0].latitude})`;
@@ -392,6 +406,11 @@ totalPopulation.addEventListener('click', (async(event) => {
     // showResult.textContent = 'The lowest value is $' + controller.checkLowest().toFixed(2);
     data = await community.getPopulation();
     resultArea2.textContent = `Our community has a population of ${data}`;
+
+
+    // currentKey = data[0].key;
+    // console.log("key = " + data[0].key);
+    console.log("currentKey = " + currentKey);
 }));
 
 
@@ -399,7 +418,7 @@ howBig.addEventListener('click', (async (event) => {
     // dataCommunity = await community.getAllCities();
     console.log(currentKey);
     index = community.allCity.findIndex( (each) => each.key === Number(currentKey));
-    
+    console.log(index);
     data = community.allCity[index].howBig();
     resultArea3Title.textContent = "This is a";
     resultArea3.textContent = data;
