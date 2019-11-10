@@ -12,8 +12,6 @@ class City {
 
     show() {
         return `City: ${this.name} | Latitude: ${this.latitude} | Longtitude: ${this.longitude} | Population: ${this.population}`;
-        // const obj = { key: this.key, name: this.name, latitude: this.latitude, longitude: this.longitude, population: this.population };
-        // return obj;
     }
 
     async movedIn(number) {
@@ -28,8 +26,8 @@ class City {
         return data;
     } 
 
-    async get_aCity() {
-        data = await postData(url + 'read', this.key);
+    async get_aCity(key) {
+        data = await postData(url + 'read', key);
         return data;
     }
 
@@ -80,23 +78,10 @@ class Community {
     }
 
     async getMostNorthern() {
-        // this.allCity = await this.getAllCities();
-        // const allLatitude = this.allCity.map(each => each.latitude).filter(each => each !== undefined);
-        // console.log(allLatitude);
-        // const mostNorthernLatitude = Math.max(...allLatitude);
-        // console.log(mostNorthernLatitude);
-        // console.log(this.allCity);
-        // const mostNorthernCities = this.allCity.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined );
-
         this.data = await this.getAllCities();
         const allLatitude = this.data.map(each => each.latitude).filter(each => each !== undefined);
-        console.log(allLatitude);
         const mostNorthernLatitude = Math.max(...allLatitude);
-        console.log(mostNorthernLatitude);
-        console.log(this.data);
         const mostNorthernCities = this.data.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined);
-
-        console.log(mostNorthernCities);
         return mostNorthernCities;
     }
 
@@ -104,65 +89,30 @@ class Community {
         this.data = await this.getAllCities();
         const allLatitude = this.data.map(each => each.latitude).filter(each => each !== undefined);
         const mostSouthernLatitude = Math.min(...allLatitude);
-        console.log(mostSouthernLatitude);
         const mostSouthernCities = this.data.filter(each => (each.latitude === mostSouthernLatitude) ? each : undefined );
-
-        console.log(mostSouthernCities);
         return mostSouthernCities;
-
-        // this.allCity = await this.getAllCities();
-        // const allLatitude = this.allCity.map(each => each.latitude);
-        // const mostSouthernLatitude = Math.min(...allLatitude);
-        // const mostSouthernCities = this.allCity.filter(each => each.latitude === mostSouthernLatitude);
-        // return mostSouthernCities;
     }
 
     async getPopulation() {
         this.data = await this.getAllCities();
-
         const allPop = this.data.map(each => each.population).filter(each => each !== undefined);
-        console.log(allPop);
         const total = allPop.reduce((acc, population) => acc + population);
-        console.log(total);
-        // let total = 0;
-        // for (const eachCity of this.allCity) {
-        //     console.log(eachCity.population);
-        //     console.log(total);
-        //     total += eachCity.population;
-        // }
-
-
-        console.log(total);
         return total;
     }
 
     async createCity(key, name, latitude, longitude, population) {
         const newCity = new City(key, name, latitude, longitude, population);
-        this.allCity.push(newCity);
-        console.log(newCity);
-        // console.log(newCity.show());
         this.data = await postData(this.url + 'add', newCity);
+        if (this.data.status === 200) {
+            this.allCity.push(newCity);
+        }
         return this.data;
     }
 
-    // async createCity(obj) {
-    //     const newCity = new City(obj.key, obj.name, obj.latitude, obj.longitude, obj.population);
-    //     // this.allCity.push(newCity);
-
-    //     this.data = await postData(this.url + 'add', newCity);
-    //     return this.data;
-    // }
-
     async deleteCity(obj) {
-        // const newCityArr = this.allCity.filter(eachCity => eachCity.name != selectedCity);
-        // this.allCity = newCityArr.slice();
-
         this.data = await postData(this.url + 'delete', obj);
-        console.log("obj.name" + obj.name);
         const newCityArr = this.allCity.filter(eachCity => eachCity.name != obj.name);
         this.allCity = newCityArr.slice();
-
-        console.log(this.allCity);
         return this.data;
     }
 
@@ -172,55 +122,30 @@ class Community {
     }
 
     async getAllCities() {
-        // this.data = await postData(this.url + 'all');
-        // this.allCity = this.data;
         this.data = await postData(this.url + 'all');
-        // this.data = this.allCity;
         return this.data;
     }
 
     async setCountKey() {
         this.data = await postData(this.url + 'add', { key: 0, countKey: 0 });
+        if (this.data.status === 200) {
+            this.allCity.push({ key: 0, countKey: 0 });
+        }
         return this.data;
     }
 
     async updateCountKey(newCountKey) {
         this.data = await postData(this.url + 'update', { key: 0, countKey: newCountKey });
+        if (this.data.status === 200) {
+            console.log(this.allCity.length)
+            this.allCity.forEach( each => {
+                if (each.key === 0) {
+                    each.countKey = newCountKey
+                }
+            });
+        }
         return this.data;
     }
-
-    // async get_aCity(keyObj) {
-    //     this.data = await postData(this.url + 'read', keyObj);        
-    //     return this.data;
-    // }
-
-    // async update_aCity(obj) {
-    //     this.data = await postData(this.url + 'update', obj);
-    //     return this.data;
-        
-    // }
-
-    // async getHightestKey() {
-    //     this.allCity = await this.getAllCities();
-    //     // console.log(this.allCity);
-
-    //     const allKey = this.allCity.map(each => each.key);
-        
-    //     let mostHighestKey;
-    //     switch (true) {
-    //         case (allKey.length !== 0):
-    //             mostHighestKey = Math.max(...allKey);
-    //             break;
-    //         default:
-    //             mostHighestKey = 0;
-    //             break;
-    //     }
-    //     // console.log(mostHighestKey);
-    //     return mostHighestKey;
-
-    //     // const maxObj = this.allCity.reduce((prev, current) => (prev.latitude > current.latitude) ? prev : current);
-    //     // console.log(maxObj);
-    // }
 }
 
 async function postData(url = '', data = {}) {
@@ -278,7 +203,6 @@ const functions = {
 
         newRemoveBtn.appendChild(removeBtnContent);
         parentDiv.appendChild(newRemoveBtn);
-
         return parentDiv
     }
 };

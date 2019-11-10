@@ -12,7 +12,6 @@
         <div id="heading">
             <div>
             <h3>Welcome to our community!</h3></div>
-            <!-- <h4>Click the button to create a new city.</h4> -->
             <div id="resultArea1"></div>
             <input type="submit" value="Create City" class="createCity">
         </div>
@@ -20,10 +19,7 @@
         <div id="outter_Detail">
             <hr>
             <div id="communityDetail">
-                
-                <!-- <input type="text" name="accountName" id="accountName" placeholder="Account name"> -->
                 <input type="text" name="cityName" id="cityName" placeholder="City name">
-                <!-- <input type="number" name="startingBalance" id="startingBalance" placeholder="$ Amount"> -->
                 <input type="number" name="latitude" id="latitude" placeholder="Latitude">
                 <input type="number" name="longitude" id="longitude" placeholder="Longitude">
                 <input type="number" name="population" id="population" placeholder="Population">
@@ -47,11 +43,8 @@
         <input type="submit" value="Most Northern" id="mostNorthern">
         <input type="submit" value="Most Southern" id="mostSouthernBtn">
         <input type="submit" value="Check Population" id="totalPopulation">
-        
     </div>
-    
     <div id="resultArea2"></div>
-    
     <div class="container" id="bigActivity">
         <div id="flex">
             <div>City: <span class="grey_text" id="cityTxt"></div>
@@ -60,53 +53,29 @@
             <div>Population: <span class="grey_text" id="populationTxt"></div>
         </div>
         <hr>
-        <!-- <div > -->
-            <!-- <div id="accountB">Balance: $100</div> -->
-            
-            <div id="flex_center">
-                    <div id="map"></div> 
-                <div class="activity">
-                    <div class="center" id="resultArea3Title"></div>
-                    <div class="center" id="resultArea3"></div>
-                    <div class="center">
-                        <input type="submit" value="How Big?" id="howBig">
-                        <input type="submit" value="Which Hemisphere?" id="whichSphereBtn">
-                    </div>
-                    <div class="border center">
-                        <select id="choice">
-                            <option value="movedIn">Moved In</option>
-                            <option value="movedOut">Moved Out</option>
-                        </select>
-                        <input type="number" name="moveInOut" placeholder="amount" id="moveInOut">
-                        <input type="submit" value="Submit" id="moveInOutBtn">
-                    </div>
+        <div id="flex_center">
+            <div id="map"></div> 
+            <div class="activity">
+                <div class="center" id="resultArea3Title"></div>
+                <div class="center" id="resultArea3"></div>
+                <div class="center">
+                    <input type="submit" value="How Big?" id="howBig">
+                    <input type="submit" value="Which Hemisphere?" id="whichSphereBtn">
+                </div>
+                <div class="border center">
+                    <select id="choice">
+                        <option value="movedIn">Moved In</option>
+                        <option value="movedOut">Moved Out</option>
+                    </select>
+                    <input type="number" name="moveInOut" placeholder="amount" id="moveInOut">
+                    <input type="submit" value="Submit" id="moveInOutBtn">
                 </div>
             </div>
-            <!-- <div class="activity">            
-                <select id="choice">
-                    <option value="deposit">Deposit</option>
-                    <option value="withdraw">Withdraw</option>
-                </select>
-                <input type="number" name="amount" placeholder="amount" id="activityAmount">
-                <input type="submit" value="Submit" id="activityBtn">
-            </div> -->
-        <!-- </div> -->
+        </div>
     </div>
 
     <script type="module" src="./scripts/index.js"></script>
-    <script>
-        // Initialize and add the map
-        function initMap() {
-            // The location of Uluru 
-            var uluru = { lat: 53.547037, lng: -113.493929 };
-            // The map, centered at Uluru
-            var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 9, center: uluru });
-            // The marker, positioned at Uluru
-            var marker = new google.maps.Marker({ position: uluru, map: map });
-        }
-    </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGXiO2HWYiVEt_R7KO72IK_6PVWp0GW7M&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGXiO2HWYiVEt_R7KO72IK_6PVWp0GW7M&callback=" + functions.initMap(0,0)>
         </script>
 </body>
