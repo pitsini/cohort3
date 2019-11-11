@@ -1,5 +1,24 @@
 // Write the function after this comment ---
 const functions = {
+    // --- Callback Exercise (Part 1) - November 8, 2019
+    processBC_AB: (data, callback) => {
+        let fullnameArr = [];
+        let count = 0;
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].province === "BC" || data[i].province === "AB") {
+                if (typeof callback === "function") {
+                    fullnameArr.push(callback(data[i]));
+                }
+                count++;
+            }
+        }
+        return { fullName: fullnameArr, count: count };
+    },
+
+    // fullname: (obj) => {
+    //     return obj.fname + " " + obj.lname;
+    // },
+
     // --- More Array Exercises - October 29, 2019
     filterBalance: (staff) => {
         return staff.filter(eachStaff => eachStaff.balance >= 1000);
