@@ -126,7 +126,7 @@ test('test that the fetch works?', async () => {
 
 // ========== Test - extra functions ==========
 
-test('test that the Functions works?', async () => {
+test('test that the Create Div works?', async () => {
     const newDiv = functions.createShowArea();
     expect(newDiv.childElementCount).toEqual(5);
 });

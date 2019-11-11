@@ -26,8 +26,7 @@ window.addEventListener('load', async (event) => {
             newDiv.getElementsByClassName("showPopulation")[0].textContent = each.population;
 
             bigShowArea.appendChild(newDiv);
-        }
-        );
+        });
     }
 });
 
@@ -149,6 +148,9 @@ bigShowArea.addEventListener('click', ( async(event) => {
 
             currentKey = event.target.parentElement.getAttribute("data-key");
             resultArea1.textContent = "";
+            resultArea2.textContent = "";
+            resultArea3Title.textContent = "";
+            resultArea3.textContent = "";
 
             initMap(currentLatitude.textContent, currentLongitude.textContent);
             break;
@@ -174,6 +176,9 @@ bigShowArea.addEventListener('click', ( async(event) => {
 
             currentKey = event.target.getAttribute("data-key");
             resultArea1.textContent = "";
+            resultArea2.textContent = "";
+            resultArea3Title.textContent = "";
+            resultArea3.textContent = "";
 
             initMap(currentLatitude.textContent, currentLongitude.textContent);
             break;
@@ -186,6 +191,9 @@ bigShowArea.addEventListener('click', ( async(event) => {
                 event.target.parentElement.remove();
                 data = await community.deleteCity(data);
                 currentKey -= 1;
+
+                bigActivity.style.visibility = "hidden";
+                functionsArea.style.visibility = "hidden";
             } else {
                 resultArea1.textContent = "Something went wrong!";
             }
@@ -193,7 +201,6 @@ bigShowArea.addEventListener('click', ( async(event) => {
 }));
 
 mostNorthern.addEventListener('click', (async (event) => {
-    resultArea2.textContent = "Hello";
     data = await community.getMostNorthern();
     switch (true) {
         case (data.length == 1):
@@ -247,8 +254,8 @@ whichSphereBtn.addEventListener('click', ((event) => {
 moveInOutBtn.addEventListener('click', (async (event) => {
     resultArea3Title.textContent = "";
     resultArea3.textContent = "";
-
     amt = Number(moveInOut.value);
+
     if (Number.isInteger(amt) == false) {
         resultArea3.textContent = "Population is not integer.";
     } else if (amt !== "") {
