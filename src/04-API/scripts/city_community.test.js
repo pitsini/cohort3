@@ -1,6 +1,21 @@
 global.fetch = require('node-fetch');
 import { City, Community, functions } from './city_community'
+let data;
 
+test('test the Object Reference (130E)', async () => {
+    let myCity, myFav;
+    myCity = new City(1, 'Calgary', 51.05, -114.05, 5000);
+    myFav = myCity;
+    
+    expect(myCity.population).toEqual(5000);
+    expect(myFav.population).toEqual(5000);
+
+    data = await myCity.movedIn(1000);
+    expect(myCity.population).toEqual(6000);
+    expect(myFav.population).toEqual(6000);
+});
+
+// ---- City Class ----
 test('test that the City class works?', async () => {
     const community = new Community();
     data = await community.clearCommunity()
@@ -52,8 +67,6 @@ test('test that the City class works?', async () => {
 });
 
 // ---- Community Class ----
-let data;
-
 test('test that the Community class works?', async () => {
     const community = new Community();
     data = await community.clearCommunity()
