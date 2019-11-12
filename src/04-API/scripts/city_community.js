@@ -137,10 +137,11 @@ class Community {
     async updateCountKey(newCountKey) {
         this.data = await postData(this.url + 'update', { key: 0, countKey: newCountKey });
         if (this.data.status === 200) {
-            console.log(this.allCity.length)
+            console.log(this.allCity.length);
+            console.log(this.allCity);
             this.allCity.forEach( each => {
                 if (each.key === 0) {
-                    each.countKey = newCountKey
+                    each.countKey = newCountKey;
                 }
             });
         }

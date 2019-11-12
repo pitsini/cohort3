@@ -13,6 +13,8 @@ window.addEventListener('load', async (event) => {
         newCountKey = dataCommunity[0].countKey;
     } else {
         newCountKey = dataCommunity[0].countKey;
+        community.allCity.push({ key: 0, countKey: dataCommunity[0].countKey });
+
         data = dataCommunity.filter(each => each.key !== 0);
         data.map( each => {
             const newCity = new City(each.key, each.name, each.latitude, each.longitude, each.population);
@@ -64,9 +66,8 @@ bigContainer.addEventListener('click', (async (event) => {
                 switch (data.status) {
                     case 200:
                         resultArea1.textContent = "Successful!";
-                        data = await community.updateCountKey(newCountKey);                        
-                        break;
-                
+                        data = await community.updateCountKey(newCountKey);
+                        break;                
                     default:
                         resultArea1.textContent = `Error! ${data.msg}`;
                         break;
@@ -111,6 +112,7 @@ bigContainer.addEventListener('click', (async (event) => {
                 dataCommunity = await community.getAllCities();
 
                 initMap(newLat, newLong);
+                index = community.allCity.findIndex((each) => each.key === Number(currentKey));
             } else {
                 resultArea1.textContent = "Please fill up all information.";
             };
@@ -153,6 +155,7 @@ bigShowArea.addEventListener('click', ( async(event) => {
             resultArea3.textContent = "";
 
             initMap(currentLatitude.textContent, currentLongitude.textContent);
+            index = community.allCity.findIndex((each) => each.key === Number(currentKey));
             break;
 
         case "showArea":
@@ -181,6 +184,7 @@ bigShowArea.addEventListener('click', ( async(event) => {
             resultArea3.textContent = "";
 
             initMap(currentLatitude.textContent, currentLongitude.textContent);
+            index = community.allCity.findIndex((each) => each.key === Number(currentKey));
             break;
 
         case "removeCity":
@@ -259,15 +263,15 @@ moveInOutBtn.addEventListener('click', (async (event) => {
     if (Number.isInteger(amt) == false) {
         resultArea3.textContent = "Population is not integer.";
     } else if (amt !== "") {
+        index = community.allCity.findIndex((each) => each.key === Number(currentKey));
         switch (choice.selectedIndex) {
             case 0:     // moved in
                 if (amt > 0) {
-                    index = community.allCity.findIndex((each) => each.key === Number(currentKey));
                     data = await community.allCity[index].movedIn(amt);
                     if (data.status === 200) {
                         resultArea3.textContent = "Successful!!!";
                         populationTxt.textContent = community.allCity[index].population;
-                        document.getElementsByClassName("showPopulation")[index].textContent = community.allCity[index].population;
+                        document.getElementsByClassName("showPopulation")[index-1].textContent = community.allCity[index].population;
                         moveInOut.value = "";
                     } else {
                         resultArea3.textContent = "Error!!!";
@@ -280,7 +284,6 @@ moveInOutBtn.addEventListener('click', (async (event) => {
                 break;
 
             case 1:     // move out
-                index = community.allCity.findIndex((each) => each.key === Number(currentKey));
                 if (amt > 0) {
                     if (community.allCity[index].population < amt) {
                         resultArea3.textContent = "Moved out people can't be more than population.";
@@ -289,7 +292,7 @@ moveInOutBtn.addEventListener('click', (async (event) => {
                         if (data.status === 200) {
                             resultArea3.textContent = "Successful!!!";
                             populationTxt.textContent = community.allCity[index].population;
-                            document.getElementsByClassName("showPopulation")[index].textContent = community.allCity[index].population;
+                            document.getElementsByClassName("showPopulation")[index-1].textContent = community.allCity[index].population;
                             moveInOut.value = "";
                         } else {
                             resultArea3.textContent = "Error!!!";
