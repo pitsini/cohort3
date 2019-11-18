@@ -27,5 +27,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  
+  "homepage": "https://pitsini.github.io/cohort3/react-02/"
+
 }
