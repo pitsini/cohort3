@@ -1,20 +1,10 @@
 import React from 'react';
+import santa from '../images/santa.svg';
 
-const MyComponent = (props) => {
+const SantaComponent = (props) => {
     return (
-        <div>
-            <h1>{props.sayWhat}</h1>
-            <button onClick={props.pushChange}>Push Me</button>
-        </div>
+        <img src={santa} className="components one" alt="santa" />
     )
 }
-
-const EvenComponent = (props) => {
-    return <h1>Even</h1>
-}
-
-const OddComponent = (props) => {
-    return <h1>Odd</h1>
-}
  
-export { MyComponent, EvenComponent, OddComponent };
+export default SantaComponent

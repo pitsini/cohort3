@@ -1,20 +1,10 @@
 import React from 'react';
+import wreath from '../images/wreath.svg';
 
-const MyComponent = (props) => {
+const WreathComponent = (props) => {
     return (
-        <div>
-            <h1>{props.sayWhat}</h1>
-            <button onClick={props.pushChange}>Push Me</button>
-        </div>
+        <img src={wreath} className="components three" alt="wreath" />
     )
 }
 
-const EvenComponent = (props) => {
-    return <h1>Even</h1>
-}
-
-const OddComponent = (props) => {
-    return <h1>Odd</h1>
-}
- 
-export { MyComponent, EvenComponent, OddComponent };
+export default WreathComponent

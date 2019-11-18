@@ -1,20 +1,10 @@
 import React from 'react';
+import reindeer from '../images/reindeer.svg';
 
-const MyComponent = (props) => {
+const ReindeerComponent = (props) => {
     return (
-        <div>
-            <h1>{props.sayWhat}</h1>
-            <button onClick={props.pushChange}>Push Me</button>
-        </div>
+        <img src={reindeer} className="components four" alt="reindeer" />
     )
 }
 
-const EvenComponent = (props) => {
-    return <h1>Even</h1>
-}
-
-const OddComponent = (props) => {
-    return <h1>Odd</h1>
-}
- 
-export { MyComponent, EvenComponent, OddComponent };
+export default ReindeerComponent

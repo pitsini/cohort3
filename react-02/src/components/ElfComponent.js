@@ -1,20 +1,10 @@
 import React from 'react';
+import elf from '../images/elf.svg';
 
-const MyComponent = (props) => {
+const ElfComponent = (props) => {
     return (
-        <div>
-            <h1>{props.sayWhat}</h1>
-            <button onClick={props.pushChange}>Push Me</button>
-        </div>
+        <img src={elf} className="components two" alt="elf" />
     )
 }
 
-const EvenComponent = (props) => {
-    return <h1>Even</h1>
-}
-
-const OddComponent = (props) => {
-    return <h1>Odd</h1>
-}
- 
-export { MyComponent, EvenComponent, OddComponent };
+export default ElfComponent
