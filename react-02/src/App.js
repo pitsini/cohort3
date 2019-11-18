@@ -8,7 +8,7 @@ import './App.css';
 import './components/components.css';
 
 class App extends Component {
-  constructor() {
+  constructor(props) {
     super()
   }
 
