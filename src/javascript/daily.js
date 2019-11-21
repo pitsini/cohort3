@@ -1,5 +1,18 @@
 // Write the function after this comment ---
 const functions = {
+    // --- Callback Exercise (Part 2) - November 21, 2019
+    summaryBC_AB: (data) => {
+        let totalCount = 0, 
+        totalAge = 0,
+        avgAge = 0;
+        functions.processBC_AB(data, function (obj) {
+            totalCount++;
+            totalAge += obj.age;
+        })
+        avgAge = Math.round(Number(totalAge / totalCount));
+        return { totalCount: totalCount, totalAge: totalAge, avgAge: avgAge };
+    },
+
     // --- Callback Exercise (Part 1) - November 8, 2019
     processBC_AB: (data, callback) => {
         let fullnameArr = [];

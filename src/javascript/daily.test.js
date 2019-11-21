@@ -46,6 +46,14 @@ const people = [
     { fname: "Darrell", lname: "Koch", province: "SK", age: 10 },
     { fname: "Tylor", lname: "Torres", province: "MN", age: 98 }
 ];
+// --- Callback Exercise (Part 2) - November 21, 2019
+test('Test if the summaryBC_AB function working?', () => {
+    let totalObj = functions.summaryBC_AB(people);
+    expect(totalObj.totalCount).toEqual(22);
+    expect(totalObj.totalAge).toEqual(838);
+    expect(totalObj.avgAge).toEqual(38);
+
+});
 
 // --- Callback Exercise (Part 1) - November 8, 2019
 test('Test if the Callback function working?', () => {
