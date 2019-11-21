@@ -47,7 +47,7 @@ const people = [
     { fname: "Tylor", lname: "Torres", province: "MN", age: 98 }
 ];
 // --- Callback Exercise (Part 2) - November 21, 2019
-test('Test if the summaryBC_AB function working?', () => {
+test('Test if the summaryBC_AB function works?', () => {
     let totalObj = functions.summaryBC_AB(people);
     expect(totalObj.totalCount).toEqual(22);
     expect(totalObj.totalAge).toEqual(838);
@@ -56,10 +56,9 @@ test('Test if the summaryBC_AB function working?', () => {
 });
 
 // --- Callback Exercise (Part 1) - November 8, 2019
-test('Test if the Callback function working?', () => {
-    let peopleArray = functions.processBC_AB(people, function (obj) {
-        return obj.fname + " " + obj.lname;
-    });
+test('Test if the Callback function works?', () => {
+    let peopleArray = functions.fullnameBC_AB(people);
+    
     expect(peopleArray.count).toEqual(22);
     expect(peopleArray.fullName[0]).toEqual('Alex Smith');
 

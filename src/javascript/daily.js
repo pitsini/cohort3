@@ -14,6 +14,14 @@ const functions = {
     },
 
     // --- Callback Exercise (Part 1) - November 8, 2019
+    fullnameBC_AB: (data) => {
+        let peopleArray = functions.processBC_AB(data, function (obj) {
+            return obj.fname + " " + obj.lname;
+        });
+        console.log(peopleArray);
+        return peopleArray;
+    },
+
     processBC_AB: (data, callback) => {
         let fullnameArr = [];
         let count = 0;
@@ -27,10 +35,6 @@ const functions = {
         }
         return { fullName: fullnameArr, count: count };
     },
-
-    // fullname: (obj) => {
-    //     return obj.fname + " " + obj.lname;
-    // },
 
     // --- More Array Exercises - October 29, 2019
     filterBalance: (staff) => {
