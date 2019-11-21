@@ -18,7 +18,6 @@ const functions = {
         let peopleArray = functions.processBC_AB(data, function (obj) {
             return obj.fname + " " + obj.lname;
         });
-        console.log(peopleArray);
         return peopleArray;
     },
 
