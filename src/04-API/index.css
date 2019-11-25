@@ -2,6 +2,12 @@ body {
     font-family: 'Bree Serif', serif;
 }
 
+button {
+    height: 30px;
+    margin: 5px;
+    width: 150px;
+}
+
 input[type=number], input[type=text], select {
   width: 100px;
   margin: 8px 0;
@@ -13,30 +19,45 @@ input[type=number], input[type=text], select {
 }
 
 input[type=submit] {
-/* button { */
   width: 150px;
   background-color: #4CAF50;
   color: white;
   padding: 7px 5px;
-  /* margin: 8px 0; */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin: 5px;
 }
 
+input[type=submit]:hover {
+    background-color: #f4511e;
+}
+
 select {
     width: 200px;
 }
 
-input[type=submit]:hover {
-  background-color: #f4511e;
+h3, h4 {
+    text-align: center;
+    width: 350px;
 }
 
-#bigContainer {   
+textarea {
+    margin: 10px 20px;
+}
+
+.activity {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 50%;
+}
+
+.center {
+    padding: 10px;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .container {
@@ -48,16 +69,106 @@ input[type=submit]:hover {
     width: 80%;
 }
 
-h3, h4 {
-    /* border: 1px solid gray; */
-    width: 350px;
-    text-align: center;
+.grey_text {
+    color: grey;
 }
 
-textarea {
-    margin: 10px 20px;
-    /* text-align:left; */
-    /* align-content: flex-start; */
+.showArea {
+    border-bottom: 1px solid rgb(214, 214, 214);
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 100%;
+}
+
+.showArea:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.showCityName, .showLatitude, .showLongitude, .showPopulation {
+    margin: 5px;
+    width: 200px;
+}
+
+.showLat {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.titleText {
+    align-items: center;
+    background-color: rgb(255, 197, 176);
+    border-bottom: 1px dashed  rgb(214, 214, 214);
+    display: flex;
+    width: 700px;
+}
+
+.titleTxt {
+    width: 250px;
+}
+
+#bigActivity {
+    margin-top: 20px;
+    visibility: hidden;
+}
+
+#bigContainer {   
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#communityArea {
+    min-height: 150px;
+    padding: 10px 20px;
+    width: 850px;
+}
+
+#communityDetail {
+    display: flex;
+    justify-content: space-around;
+    visibility: hidden;
+}
+
+#createAccount {
+    padding: 10px;
+    width: 115px;
+}
+
+#flex {
+    display: flex;     
+    justify-content: space-around;
+}
+
+#flex_center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#functionsArea {
+    border: hidden;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+}
+
+#heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+#history {    
+    min-height: 150px;
+}
+
+#map {
+    margin: 10px 30px;
+    height: 400px;  /* The height is 400 pixels */
+    width: 50%;  /*The width is the width of the web page*/
 }
 
 #resultArea3 {
@@ -66,12 +177,10 @@ textarea {
 }
 
 #resultArea3Title {
-    
     height: 20px;
 }
 
 #resultArea1 {
-    /* border: 1px solid gray; */
     width: 200px;
     color: red;
     font-size: 0.9em;
@@ -81,145 +190,6 @@ textarea {
 #resultArea2 {
     color: red;
     height: 20px;
-    /* border: 1px solid gray; */
     width: 80%;
     text-align: center;
 }
-
-.grey_text {
-    color: grey;
-}
-
-#flex {
-    display: flex;     
-    justify-content: space-around;
-    /* display: flex;
-    justify-content: center; */
-}
-
-#flex_center {
-    
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-around; */
-    justify-content: center;
-    /* border: 1px dashed red; */
-}
-
-.activity {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-    /* border: 1px dashed black; */
-    width: 50%;
-}
-
-/* .border {    
-    border: 1px dashed black;
-} */
-.center {
-
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-#functionsArea {
-    visibility: hidden;
-    border: hidden;
-    box-shadow: none;
-    /* padding: 0px; */
-    display: flex;
-    justify-content: center;
-}
-
-#bigActivity {
-    visibility: hidden;
-    /* display: flex; */
-    margin-top: 20px;
-    /* flex */
-}
-
-
-.showArea:hover {
-    
-  background-color: rgb(230, 230, 230);
-}
-
-#communityDetail {
-    display: flex;
-    justify-content: space-around;
-    visibility: hidden;
-}
-
-#communityArea {
-    width: 850px;
-    min-height: 150px;
-    padding: 10px 20px;
-}
-
-#history {    
-    min-height: 150px;
-}
-
-#createAccount {
-    width: 115px;
-    padding: 10px;
-}
-
-#heading {    
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.showCityName, .showLatitude, .showLongitude, .showPopulation {
-    margin: 5px;
-    width: 200px;
-}
-
-.titleTxt {
-    width: 250px;
-}
-
-.titleText {
-    width: 700px;
-    border-bottom: 1px dashed  rgb(214, 214, 214);
-    /* border: 1px dashed black; */
-    display: flex;
-    align-items: center;
-    background-color: rgb(255, 197, 176);
-    /* justify-content: center; */
-}
-.showArea {
-    border-bottom: 1px solid rgb(214, 214, 214);
-    display: flex;
-    justify-content: center;
-    height: 40px;
-    width: 100%;
-}
-
-.showLat {
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-}
-
-button {
-    width: 150px;
-    height: 30px;
-    margin: 5px;
-}
-
-#bigShowArea {
-    /* height: 200px; */
-    /* overflow: auto; */
-}
-
-#map {
-    margin: 10px 30px;
-    /* align-content: center; */
-        height: 400px;  /* The height is 400 pixels */
-        width: 50%;  /*The width is the width of the web page*/
-       }
