@@ -1,4 +1,27 @@
 import functions from './daily.js'
+let myArray = [
+    { num: 5, str: "apples", origin: "BC" },
+    { num: 7, str: "oranges", origin: "Florida" },
+    { num: 2, str: "lemons", origin: "Mexico" },
+    { num: 8, str: "bananas", origin: "Ecuador" },
+    { num: 6, str: "avocados", origin: "Mexico" },
+    { num: 4, str: "pineapple", origin: "Brazil" },
+    { num: 3, str: "blueberries", origin: "Chile" },
+    { num: 9, str: "pears", origin: "Oregon" },
+    { num: 1, str: "cantaloupe", origin: "California" }
+];
+
+// --- Three ways of functions - November 22, 2019
+test('Test if Three ways of functions works?', () => {
+    let result = functions.numberAscending(myArray);
+    console.log("numberAscending = ", result);
+    
+    result = functions.fruitAlphabetic(myArray);
+    console.log("fruitAlphabetic = ", result);
+
+    result = functions.originReverseAlphabetic(myArray);
+    console.log("originReverseAlphabetic = ", result);
+});
 
 const people = [
     { fname: "Alex", lname: "Smith", province: "BC", age: 33 },

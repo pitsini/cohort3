@@ -1,5 +1,38 @@
 // Write the function after this comment ---
 const functions = {
+    // --- Three ways of functions - November 22, 2019
+    numberAscending: (myArray)  => {
+        myArray.sort(function (a, b) {
+            return a.num - b.num;
+        });
+        console.log("myArray = ", myArray);
+        return myArray;
+    },
+
+    fruitAlphabetic: (myArray) => {
+        myArray.sort(function sortFruitAlphabetic(a, b) {
+            if (a.str > b.str) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+        return myArray;
+    },
+
+    originReverseAlphabetic: (myArray) => {
+        myArray.sort((a, b) => {
+            if (a.origin < b.origin) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+        return myArray;
+    },
+    
+
+
     // --- Callback Exercise (Part 2) - November 21, 2019
     summaryBC_AB: (data) => {
         let totalCount = 0, 
