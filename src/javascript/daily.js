@@ -31,8 +31,6 @@ const functions = {
         return myArray;
     },
     
-
-
     // --- Callback Exercise (Part 2) - November 21, 2019
     summaryBC_AB: (data) => {
         let totalCount = 0, 
