@@ -11,14 +11,72 @@ let myArray = [
     { num: 1, str: "cantaloupe", origin: "California" }
 ];
 
+// --- Destructuring-assignment - November 26, 2019
+test('Test if Destructuring assignment works?', () => {
+    
+    // 1) Anonymous function
+    myArray.sort(function (a, b) {
+        return a.num - b.num;
+    });
+    console.log(myArray);
+
+    let [obj1, ...rest] = myArray;       // Array destructuring
+    let { num, str, origin } = obj1;    // Object destructuring
+
+    console.log(obj1);
+    expect(num).toEqual(1);
+    expect(str).toEqual('cantaloupe');
+    expect(origin).toEqual('California');
+
+    // 2) Named function
+    myArray.sort(function sortFruitAlphabetic(a, b) {
+        if (a.str > b.str) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
+    console.log(myArray);
+
+    [obj1, ...rest] = myArray;       // Array destructuring
+    ({ num, str, origin } = obj1);    // Object destructuring (Assignment without declaration)
+
+    console.log(obj1);
+    expect(num).toEqual(5);
+    expect(str).toEqual('apples');
+    expect(origin).toEqual('BC');
+
+    // 3) Arrow function
+    myArray.sort((a, b) => {
+        if (a.origin < b.origin) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
+    console.log(myArray);
+
+    [obj1, ...rest] = myArray;       // Array destructuring
+    ({ num, str, origin } = obj1);    // Object destructuring (Assignment without declaration)
+
+    console.log(obj1);
+    expect(num).toEqual(9);
+    expect(str).toEqual('pears');
+    expect(origin).toEqual('Oregon');
+});
+
 // --- Three ways of functions - November 22, 2019
 test('Test if Three ways of functions works?', () => {
+
+    // 1) Anonymous function
     let result = functions.numberAscending(myArray);
     console.log("numberAscending = ", result);
-    
+
+    // 2) Named function
     result = functions.fruitAlphabetic(myArray);
     console.log("fruitAlphabetic = ", result);
 
+    // 3) Arrow function
     result = functions.originReverseAlphabetic(myArray);
     console.log("originReverseAlphabetic = ", result);
 });
