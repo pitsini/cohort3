@@ -15,12 +15,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div>
-            <MenuPanel />
-            {/* <SantaComponent />
-            <ElfComponent />
-            <WreathComponent />
-            <ReindeerComponent /> */}
+          <div className="head">
+            <div>
+              <MenuPanel />
+            </div>
           </div>
           <Game />
           <img src={logo} className="App-logo" alt="logo" />

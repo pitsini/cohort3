@@ -1,9 +1,8 @@
 .components {
-  height: 10%;
+  height: 6%;
   margin: 30px;
-  width: 10%;
+  width: 6%;
   /* filter: grayscale(50%); */
-
   
   animation: roll 10s infinite;
   animation-direction: alternate;
