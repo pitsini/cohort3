@@ -37,7 +37,7 @@ select {
     width: 200px;
 }
 
-.activity {
+.accActivityDiv {
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -60,8 +60,7 @@ select {
     width: 100%;
 }
 
-.showArea:hover {
-    
+.showArea:hover {    
   background-color: rgb(230, 230, 230);
 }
 
@@ -76,12 +75,12 @@ select {
     visibility: hidden;
 }
 
-#accSummary {
+#allAccountDiv {
     width: 700px;
     min-height: 150px;
 }
 
-#bigActivity {
+#accDetailDiv {
     visibility: hidden;
 }
 
@@ -91,7 +90,7 @@ select {
     flex-wrap: wrap;
 }
 
-#bigShowArea {
+#showAllAccountDiv {
     height: 200px;
     overflow: auto;
 }
@@ -111,7 +110,7 @@ select {
     min-height: 150px;
 }
 
-#lowHigh {
+#accControllerArea {
     visibility: hidden;
     border: hidden;
     box-shadow: none;

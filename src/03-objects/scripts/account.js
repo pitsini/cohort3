@@ -12,7 +12,7 @@ class Account {
         this.balance -= amount;
     }
 
-    checkBalance() {            
+    checkBalance() {
         return this.balance;
     }
 }
@@ -27,7 +27,7 @@ class AccountController {
         this.allAccounts.push(newAccount);
     }
 
-    removeAccount(pointer) {
+    removeAccBtn(pointer) {
         this.allAccounts.splice(pointer, 1);
     }
 
@@ -69,7 +69,7 @@ const functions = {
 
         // create "Remove" button
         let newRemoveBtn = document.createElement("button");
-        newRemoveBtn.className = "removeAccount";
+        newRemoveBtn.className = "removeAccBtn";
         let removeBtnContent = document.createTextNode("Remove");
 
         newRemoveBtn.appendChild(removeBtnContent);

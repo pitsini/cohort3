@@ -7,36 +7,36 @@
     <title>Comp 130 - Online Banking</title>
 </head>
 <body id="bigContainer">
-    <div class="container" id="accSummary">
+    <div class="container" id="allAccountDiv">
         <div id="heading">
                 Account Summary
-                <input type="submit" value="Create Account" class="account">                
+                <input type="submit" value="Create Account" class="createAccBtn">                
         </div>
         <div id="accountDetail">
             <input type="text" name="accountName" id="accountName" placeholder="Account name" >
             <input type="number" name="startingBalance" id="startingBalance" placeholder="$ Amount" >
-            <input type="submit" value="Add Account" class="addAccount">        
+            <input type="submit" value="Add Account" class="createAccSubmitBtn">        
         </div>
         <hr>        
-        <div id="bigShowArea"></div>        
+        <div id="showAllAccountDiv"></div>        
     </div>
-    <div class="container" id="lowHigh">
-        <input type="submit" value="Hightest Account" id="highest">
-        <input type="submit" value="Lowest Account" id="lowest">
-        <input type="submit" value="Total Balance" id="total">
+    <div class="container" id="accControllerArea">
+        <input type="submit" value="Hightest Account" id="highestBtn">
+        <input type="submit" value="Lowest Account" id="lowestBtn">
+        <input type="submit" value="Total Balance" id="totalBtn">
         <div id="showResult"></div>
     </div>
-    <div class="container" id="bigActivity">
-        <div id="accountN">Account name: checking</div>
-        <div id="accountB">Balance: $100</div>
+    <div class="container" id="accDetailDiv">
+        <div id="accNameDiv">Account name: checking</div>
+        <div id="accBalanceDiv">Balance: $100</div>
         <hr>
-        <div class="activity">
-            <select id="choice">
+        <div class="accActivityDiv">
+            <select id="accActivityChoice">
                 <option value="deposit">Deposit</option>
                 <option value="withdraw">Withdraw</option>
             </select>
-            <input type="number" name="amount" placeholder="amount" id="activityAmount">
-            <input type="submit" value="Submit" id="activityBtn">
+            <input type="number" name="amount" placeholder="amount" id="accActivityAmount">
+            <input type="submit" value="Submit" id="accActivityBtn">
         </div>
     </div>
 

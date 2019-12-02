@@ -5,20 +5,20 @@ let currentBalance;
 let amt;
 const controller = new AccountController();
 
-total.addEventListener('click', ((event) => {
+totalBtn.addEventListener('click', ((event) => {
     showResult.textContent = 'The total balance is $' + controller.totalBalance().toFixed(2);
 }));
 
-highest.addEventListener('click', ((event) => {
-    showResult.textContent = 'The hightest value is $' + controller.checkHighest().toFixed(2);
+highestBtn.addEventListener('click', ((event) => {
+    showResult.textContent = 'The highest value is $' + controller.checkHighest().toFixed(2);
 }));
 
-lowest.addEventListener('click', ((event) => {
+lowestBtn.addEventListener('click', ((event) => {
     showResult.textContent = 'The lowest value is $' + controller.checkLowest().toFixed(2);
 }));
 
-activityBtn.addEventListener('click', ((event) => {
-    amt = activityAmount.value;
+accActivityBtn.addEventListener('click', ((event) => {
+    amt = accActivityAmount.value;
     if (amt === "") {
         alert("Amount cannot be empty.");
     } else if (isNaN(amt)) {
@@ -27,15 +27,15 @@ activityBtn.addEventListener('click', ((event) => {
         amt = functions.round2Digit(Number(amt));
         console.log(amt);        
 
-        switch (choice.selectedIndex) {
+        switch (accActivityChoice.selectedIndex) {
             case 0:     // deposit
                 if (amt > 0) {
                     console.log("pointer: " + pointer);
                     controller.allAccounts[pointer].deposit(amt);
                     // alert(`Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`);
                     showResult.textContent = `Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`;
-                    accountB.textContent = "Balance: $" + controller.allAccounts[pointer].balance.toFixed(2);
-                    activityAmount.value = "";
+                    accBalanceDiv.textContent = "Balance: $" + controller.allAccounts[pointer].balance.toFixed(2);
+                    accActivityAmount.value = "";
                     currentName.textContent = controller.allAccounts[pointer].accountName;
                     currentBalance.textContent = controller.allAccounts[pointer].balance.toFixed(2);
                 } else {
@@ -53,8 +53,8 @@ activityBtn.addEventListener('click', ((event) => {
                     controller.allAccounts[pointer].withdraw(amt);
                     // alert(`Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`);
                     showResult.textContent = `Successful! Your current balance is $${controller.allAccounts[pointer].balance.toFixed(2)}`;
-                    accountB.textContent = "Balance: $" + controller.allAccounts[pointer].balance.toFixed(2);
-                    activityAmount.value = "";
+                    accBalanceDiv.textContent = "Balance: $" + controller.allAccounts[pointer].balance.toFixed(2);
+                    accActivityAmount.value = "";
                     currentName.textContent = controller.allAccounts[pointer].accountName;
                     currentBalance.textContent = controller.allAccounts[pointer].balance.toFixed(2);
                 }
@@ -63,29 +63,29 @@ activityBtn.addEventListener('click', ((event) => {
     }
 }));
 
-bigShowArea.addEventListener('click', ((event) => {
+showAllAccountDiv.addEventListener('click', ((event) => {
     console.log(event.target.className);
     switch (event.target.className) {
 
         case "showBalance":
         case "showAccName":
             // unhighlight in show area
-            for (let i = 0; i < bigShowArea.children.length; i++) {
-                bigShowArea.children[i].style.backgroundColor = "";
+            for (let i = 0; i < showAllAccountDiv.children.length; i++) {
+                showAllAccountDiv.children[i].style.backgroundColor = "";
             }
 
             // highlight background
             event.target.parentElement.style.backgroundColor = "rgb(230, 230, 230)";
 
             // showing 3 buttons and the selected account area
-            bigActivity.style.visibility = "visible";
-            lowHigh.style.visibility = "visible";
+            accDetailDiv.style.visibility = "visible";
+            accControllerArea.style.visibility = "visible";
 
             // update account detail
             currentName = event.target.parentElement.getElementsByClassName("showAccName")[0];
-            accountN.textContent = "Account name: " + currentName.textContent;            
+            accNameDiv.textContent = "Account name: " + currentName.textContent;            
             currentBalance = event.target.parentElement.getElementsByClassName("showBalance")[0];
-            accountB.textContent = "Balance: $" + currentBalance.textContent;
+            accBalanceDiv.textContent = "Balance: $" + currentBalance.textContent;
 
             // reset pointer
             pointer = Array.prototype.slice.call(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
@@ -96,41 +96,41 @@ bigShowArea.addEventListener('click', ((event) => {
 
         case "showArea":
             // unhighlight in show area
-            for (let i = 0; i < bigShowArea.children.length; i++) {
-                bigShowArea.children[i].style.backgroundColor = "";
+            for (let i = 0; i < showAllAccountDiv.children.length; i++) {
+                showAllAccountDiv.children[i].style.backgroundColor = "";
             }
 
             event.target.style.backgroundColor = "rgb(230, 230, 230)";
 
-            bigActivity.style.visibility = "visible";
-            lowHigh.style.visibility = "visible";
+            accDetailDiv.style.visibility = "visible";
+            accControllerArea.style.visibility = "visible";
             
             currentName = event.target.getElementsByClassName("showAccName")[0];
-            accountN.textContent = "Account name: " + currentName.textContent;
+            accNameDiv.textContent = "Account name: " + currentName.textContent;
 
             currentBalance = event.target.getElementsByClassName("showBalance")[0];
-            accountB.textContent = "Balance: $" + currentBalance.textContent;
+            accBalanceDiv.textContent = "Balance: $" + currentBalance.textContent;
 
             // reset pointer
             pointer = Array.prototype.slice.call(event.target.parentElement.children).indexOf(event.target);
             showResult.textContent = "";
             break;
 
-        case "removeAccount":
+        case "removeAccBtn":
             // get index of current account
             pointer = Array.prototype.slice.call(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
             
             event.target.parentElement.remove();
-            controller.removeAccount(pointer);
+            controller.removeAccBtn(pointer);
 
             // unhighlight in show area
-            for (let i = 0; i < bigShowArea.children.length; i++) {
-                bigShowArea.children[i].style.backgroundColor = "";
+            for (let i = 0; i < showAllAccountDiv.children.length; i++) {
+                showAllAccountDiv.children[i].style.backgroundColor = "";
             }
 
             // hide div and buttons
-            bigActivity.style.visibility = "hidden";
-            lowHigh.style.visibility = "hidden";
+            accDetailDiv.style.visibility = "hidden";
+            accControllerArea.style.visibility = "hidden";
             showResult.textContent = "";
             break;
     };
@@ -140,7 +140,7 @@ bigContainer.addEventListener('click', ((event) => {
     switch (event.target.className) {
 
         // click create account button
-        case "account":
+        case "createAccBtn":
             showResult.textContent = "";
             switch (event.target.getAttribute("value")) {
                 case "Create Account":
@@ -155,7 +155,7 @@ bigContainer.addEventListener('click', ((event) => {
             break;
 
         // click add account button
-        case "addAccount":
+        case "createAccSubmitBtn":
             if (accountName.value !== "" && startingBalance.value !== "") {
                 // rounding number
                 const roundAmount = functions.round2Digit(Number(startingBalance.value));
@@ -165,11 +165,11 @@ bigContainer.addEventListener('click', ((event) => {
 
                 // hide and show div
                 accountDetail.style.visibility = "hidden";
-                document.getElementsByClassName("account")[0].setAttribute("value", "Create Account");
+                document.getElementsByClassName("createAccBtn")[0].setAttribute("value", "Create Account");
 
                 // create new div
                 let newDiv = functions.createShowArea();
-                bigShowArea.appendChild(newDiv);
+                showAllAccountDiv.appendChild(newDiv);
 
                 // show name and balance
                 const lastIndex = controller.allAccounts.length - 1;
@@ -182,12 +182,12 @@ bigContainer.addEventListener('click', ((event) => {
                 showResult.textContent = "";
                 
                 // unhighlight in show area
-                for (let i = 0; i < bigShowArea.children.length; i++) {
-                    bigShowArea.children[i].style.backgroundColor = "";
+                for (let i = 0; i < showAllAccountDiv.children.length; i++) {
+                    showAllAccountDiv.children[i].style.backgroundColor = "";
                 }
                 
-                bigActivity.style.visibility = "hidden";
-                lowHigh.style.visibility = "visible";
+                accDetailDiv.style.visibility = "hidden";
+                accControllerArea.style.visibility = "visible";
             } else {
                 alert("Please fill in account name and starting balance.");
             };
