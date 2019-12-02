@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import MenuPanel from './components/MenuPanel';
 import Game from './components/TicTacToe';
-import './App.css';
-import './components/MenuPanel.css';
-import './components/TicTacToe.css';
+import Home from './components/Home';
+import {HomeIcon, TicTacToe, Account, City} from './components/MenuPanel';
+import './css/App.css';
+import './css/MenuPanel.css';
+import './css/TicTacToe.css';
 
 class App extends Component {
   constructor(props) {
     super()
+    this.state = {
+      whatToShow: <Home />,
+    }
   }
+
+  homeClick = () => {
+    this.setState({ whatToShow: <Home /> })
+    console.log("Eh!");
+  }
+
+ticTacToeClick = () =>  {
+  this.setState({ whatToShow: <Game />})
+  console.log("Yo!");
+}
+
+accountClick = () => {
+  console.log("Hey!");
+}
+
+cityClick = () => {
+  console.log("Sup!");
+}
 
   render() {
     return (
@@ -17,23 +38,16 @@ class App extends Component {
         <header className="App-header">
           <div className="head">
             <div>
-              <MenuPanel />
+              <HomeIcon homeClick={this.homeClick}/>
+              <TicTacToe ticTacToeClick={this.ticTacToeClick} />
+              <Account accountClick={this.accountClick}/>
+              <City cityClick={this.cityClick}/>
             </div>
           </div>
-          <Game />
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-        </a>
         </header>
+        <div>
+          {this.state.whatToShow}
+        </div>
       </div>
     );
   }
