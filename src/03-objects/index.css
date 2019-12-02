@@ -69,19 +69,31 @@ select {
     width: 200px;
 }
 
-#accountDetail {
+#accControllerArea {
+    visibility: hidden;
+    border: hidden;
+    box-shadow: none;
+}
+
+#accDetailDiv {
+    visibility: hidden;
+}
+
+#allAccDetailDiv {
     display: flex;
     justify-content: space-around;
     visibility: hidden;
 }
 
+#allAccHeadingDiv {    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
 #allAccountDiv {
     width: 700px;
     min-height: 150px;
-}
-
-#accDetailDiv {
-    visibility: hidden;
 }
 
 #bigContainer {   
@@ -93,25 +105,4 @@ select {
 #showAllAccountDiv {
     height: 200px;
     overflow: auto;
-}
-
-#createAccount {
-    width: 115px;
-    padding: 10px;
-}
-
-#heading {    
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-#history {    
-    min-height: 150px;
-}
-
-#accControllerArea {
-    visibility: hidden;
-    border: hidden;
-    box-shadow: none;
 }

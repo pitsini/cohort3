@@ -144,11 +144,11 @@ bigContainer.addEventListener('click', ((event) => {
             showResult.textContent = "";
             switch (event.target.getAttribute("value")) {
                 case "Create Account":
-                    accountDetail.style.visibility = "visible";
+                    allAccDetailDiv.style.visibility = "visible";
                     event.target.setAttribute("value", "Cancel");
                     break;
                 case "Cancel":
-                    accountDetail.style.visibility = "hidden";
+                    allAccDetailDiv.style.visibility = "hidden";
                     event.target.setAttribute("value", "Create Account");
                     break;
             }
@@ -164,7 +164,7 @@ bigContainer.addEventListener('click', ((event) => {
                 controller.addAccount(accountName.value, roundAmount);
 
                 // hide and show div
-                accountDetail.style.visibility = "hidden";
+                allAccDetailDiv.style.visibility = "hidden";
                 document.getElementsByClassName("createAccBtn")[0].setAttribute("value", "Create Account");
 
                 // create new div
