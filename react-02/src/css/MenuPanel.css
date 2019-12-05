@@ -1,7 +1,7 @@
 .components {
-  height: 15vmin ;
+  height: 10vmin ;
   margin: 30px;
-  width: 15vmin;
+  width: 10vmin;
   /* filter: grayscale(50%); */
   
   animation: roll 10s infinite;

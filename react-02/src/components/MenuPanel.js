@@ -16,7 +16,7 @@ export const City = (props) => {
     )
 }
 
-export const Account = (props) => {
+export const AccountIcon = (props) => {
     return (
         <img src={account} className="components three" alt="account" onClick={props.accountClick}/>
     )

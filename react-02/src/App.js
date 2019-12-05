@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Game from './components/TicTacToe';
 import Home from './components/Home';
-import {HomeIcon, TicTacToe, Account, City} from './components/MenuPanel';
+import { Account } from './components/Account';
+import { HomeIcon, TicTacToe, AccountIcon, City} from './components/MenuPanel';
 import './css/App.css';
 import './css/MenuPanel.css';
 import './css/TicTacToe.css';
@@ -19,18 +20,19 @@ class App extends Component {
     console.log("Eh!");
   }
 
-ticTacToeClick = () =>  {
-  this.setState({ whatToShow: <Game />})
-  console.log("Yo!");
-}
+  ticTacToeClick = () =>  {
+    this.setState({ whatToShow: <Game />})
+    console.log("Yo!");
+  }
 
-accountClick = () => {
-  console.log("Hey!");
-}
+  accountClick = () => {
+      this.setState({ whatToShow: <Account /> })
+    console.log("Hey!");
+  }
 
-cityClick = () => {
-  console.log("Sup!");
-}
+  cityClick = () => {
+    console.log("Sup!");
+  }
 
   render() {
     return (
@@ -40,7 +42,7 @@ cityClick = () => {
             <div>
               <HomeIcon homeClick={this.homeClick}/>
               <TicTacToe ticTacToeClick={this.ticTacToeClick} />
-              <Account accountClick={this.accountClick}/>
+              <AccountIcon accountClick={this.accountClick}/>
               <City cityClick={this.cityClick}/>
             </div>
           </div>
