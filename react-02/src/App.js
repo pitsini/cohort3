@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Game from './components/TicTacToe';
-import Home from './components/Home';
-import { Account } from './components/Account';
-import { HomeIcon, TicTacToe, AccountIcon, City} from './components/MenuPanel';
+import Game from './components/layout/TicTacToe';
+import Home from './components/layout/Home';
+import { AppAccount } from './components/account/AppAccount';
+import { HomeIcon, TicTacToe, AccountIcon, City} from './components/layout/MenuPanel';
 import './css/App.css';
 import './css/MenuPanel.css';
 import './css/TicTacToe.css';
@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super()
     this.state = {
-      whatToShow: <Home />,
+      whatToShow: <AppAccount />,
     }
   }
 
@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   accountClick = () => {
-      this.setState({ whatToShow: <Account /> })
+      this.setState({ whatToShow: <AppAccount /> })
     console.log("Hey!");
   }
 
