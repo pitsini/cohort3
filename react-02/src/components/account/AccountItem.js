@@ -11,14 +11,14 @@ export class AccountItem extends Component {
         }
     }
     render() {
-        const { accountName, balance } = this.props.account
+        const { accountName, balance, id } = this.props.account
         return (
             <div style={this.getStyle()}>
                 <p>
                     {accountName}
                     {' '}
                     {balance}
-                    <button style={btnStyle}>x</button>
+                    <button style={btnStyle} onClick={this.props.delAccount.bind(this, id)}>x</button>
                 </p>
             </div>
         )

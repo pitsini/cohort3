@@ -3,35 +3,48 @@ import AppHeader from "./AppHeader";
 import AccController from './AccController';
 // import { functions } from './AccountPojo'
 // import { Account as AccountPojo } from './AccountPojo'
-// import { AccController as AccControllerPojo } from './AccountPojo'
+import { AccountController } from './AccountPojo'
 import AddAccount from "./AddAccount";
 // import { thisExpression } from '@babel/types';
 
 export class AppAccount extends Component {
-    state = {
-        // accController: new AccountController()
-        accController: [
-            {
-                id: 1,
-                accountName: "Checking",
-                balance: 100
-            },
-            {
-                id: 2,
-                accountName: "Saving",
-                balance: 1000
-            }
-        ]
+    constructor() {
+        super();
+        this.accounts = new AccountController();
+        this.state = {
+            accController: this.accounts.allAccounts,
+            // accController: [
+            //     // {
+            //     //     id: 1,
+            //     //     accountName: "Checking",
+            //     //     balance: 100
+            //     // },
+            //     // {
+            //     //     id: 2,
+            //     //     accountName: "Saving",
+            //     //     balance: 1000
+            //     // }
+            // ],
+            lastUsedID: 0
+        }
     }
 
     // Add Account
     addAccount = (name, balance) => {
         const newAccount = {
-            id: name,
+            id: this.state.lastUsedID+1,
             accountName: name,
             balance: Number(balance)
         }
-        this.setState({ accController: [...this.state.accController, newAccount] });
+        this.setState({ 
+            accController: [...this.state.accController, newAccount],
+            // accController: [...this.state.accController, newAccount],
+            lastUsedID: this.state.lastUsedID + 1
+        });
+    }
+
+    delAccount = (id) => {
+        this.setState({ accController: [...this.state.accController.filter(account => account.id !== id)] });
     }
 
     render() {
@@ -39,7 +52,7 @@ export class AppAccount extends Component {
             <div>
                 <AppHeader />
                 <AddAccount addAccount={this.addAccount} />
-                <AccController accController={this.state.accController} />
+                <AccController accController={this.state.accController} delAccount={this.delAccount} />
             </div>
         )
     }

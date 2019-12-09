@@ -4,9 +4,12 @@ import AccountItem from "./AccountItem";
 
 export class AccController extends Component {
     render() {
-        // console.log(this.props.AccController);
-        return this.props.accController.map((eachAccount) => (
-            <AccountItem key={eachAccount.accountName}  account={eachAccount} />
+        // console.log(this.props.accController.allAccounts.length);
+        // return (
+        //     <div></div>
+        // )
+        return this.props.accController.map((account) => (
+            <AccountItem key={account.id} account={account} delAccount={this.props.delAccount} />
         ));
     }
 }

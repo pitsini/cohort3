@@ -1,5 +1,6 @@
 class Account {
-    constructor(accountName, startingBalance) {
+    constructor(id, accountName, startingBalance) {
+        this.id = id;
         this.accountName = accountName;
         this.balance = startingBalance;
     }
@@ -22,13 +23,14 @@ class AccountController {
         this.allAccounts = [];
     }
 
-    addAccount(accName, amount) {
-        const newAccount = new Account(accName, amount);
+    addAccount(id, accName, amount) {
+        const newAccount = new Account(id, accName, amount);
         this.allAccounts.push(newAccount);
     }
 
-    removeAccBtn(pointer) {
-        this.allAccounts.splice(pointer, 1);
+    removeAccount(id) {
+        let index = this.allAccounts.map(each => each.id).indexOf(id);
+        this.allAccounts.splice(index, 1);
     }
 
     totalBalance () {
