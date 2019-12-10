@@ -1,24 +1,26 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
+// import '../../css/account.css';
 
 export class AccountItem extends Component {
-    getStyle = () => {
+    getStyle = (color) => {        
         return {
-            background: '#f4f4f4',
+            background: color,
             color: 'black',
             padding: '5px',
             borderBottom: '1px #ccc dotted'
         }
     }
+
     render() {
         const { accountName, balance, id } = this.props.account
         return (
-            <div style={this.getStyle()}>
+            <div style={this.getStyle(this.props.isActive ? "#bebebe" : "#f4f4f4")} onClick={() => this.props.onClickAccount(id)}>
                 <p>
                     {accountName}
                     {' '}
                     {balance}
-                    <button style={btnStyle} onClick={this.props.delAccount.bind(this, id)}>x</button>
+                    <button style={btnStyle} onClick={() => this.props.delAccount(id)}>x</button>
                 </p>
             </div>
         )

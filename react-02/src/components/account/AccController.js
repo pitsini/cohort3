@@ -3,13 +3,34 @@ import AccountItem from "./AccountItem";
 // import PropTypes from 'prop-types';
 
 export class AccController extends Component {
+    constructor () {
+        super();
+        this.state = {
+            selectedId: 0
+        }        
+    }
+
+    componentDidMount() {
+        console.log("didMount from control");
+    }
+
+    onClickAccount = (selectedId) => {
+        this.setActiveTab(selectedId);
+        return this.props.onClickAccount(selectedId);
+    }
+
+    isActive = (id) => {
+        return this.state.selectedId === id;
+    }
+
+    setActiveTab = (selectedId) => {
+        this.setState({ selectedId });
+    }
+
     render() {
-        // console.log(this.props.accController.allAccounts.length);
-        // return (
-        //     <div></div>
-        // )
-        return this.props.accController.map((account) => (
-            <AccountItem key={account.id} account={account} delAccount={this.props.delAccount} />
+        // const { accountName, balance, id } = this.props.account
+        return this.props.accountsArray.map((account) => (
+            <AccountItem isActive={this.isActive(account.id)} key={account.id} account={account} delAccount={this.props.delAccount} onClickAccount={this.onClickAccount} />
         ));
     }
 }

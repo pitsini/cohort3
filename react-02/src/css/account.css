@@ -1,4 +1,17 @@
-body {
+.accountBackground {
+    background: #f4f4f4;
+    color: black;
+    padding: '5px';
+    border-bottom: '1px #ccc dotted';
+}
+
+.accountBackground--active {
+    background: #bebebe;
+    color: green;
+
+}
+
+/* body {
     font-family: 'Bree Serif', serif;
 }
 
@@ -85,7 +98,7 @@ select {
 #allAccDetailDiv {
     display: flex;
     justify-content: space-around;
-    /* visibility: hidden; */
+     visibility: hidden; 
     height: 40px;
 }
 
@@ -109,4 +122,4 @@ select {
 #showAllAccountDiv {
     height: 200px;
     overflow: auto;
-}
+} */
