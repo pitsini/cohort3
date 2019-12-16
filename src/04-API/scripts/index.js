@@ -1,19 +1,26 @@
 import { City, Community, functions } from './city_community.js'
+import fetch_functions from './fetch_functions.js'
+
 let amt, data, dataCommunity, currentKey = 0, maxIndexList, newCountKey, index;
 const community = new Community();
 let currentCityName, currentLatitude, currentLongitude, currentPopulation;
 
 window.addEventListener('load', async (event) => {
-    dataCommunity = await community.getAllCities();
+    dataCommunity = await fetch_functions.getAllCities();
     if (dataCommunity.length === 0 || dataCommunity[0].countKey === undefined) {
-        data = await community.clearCommunity()
-        data = await community.setCountKey();
+        data = await fetch_functions.clearCommunity();
+        data = await fetch_functions.reset_countKey();
         newCountKey = 0;
+        if (data === 200) {
+            data = community.setCountKey(newCountKey);
+        }
     } else if (dataCommunity.length === 1) {
         newCountKey = dataCommunity[0].countKey;
+        community.setCountKey(dataCommunity[0].countKey); // Added this line @Dec16
     } else {
         newCountKey = dataCommunity[0].countKey;
-        community.allCity.push({ key: 0, countKey: dataCommunity[0].countKey });
+        // community.allCity.push({ key: 0, countKey: dataCommunity[0].countKey });
+        community.setCountKey(dataCommunity[0].countKey);
 
         data = dataCommunity.filter(each => each.key !== 0);
         data.map( each => {
@@ -59,14 +66,22 @@ bigContainer.addEventListener('click', (async (event) => {
             } else if (Number.isInteger(newPop) == false) {
                 resultArea1.textContent = "Population has to be integer."
             } else if (cityName.value !== "" && latitude.value !== "" && longitude.value !== "" && population.value !== "") {
-                dataCommunity = await community.getAllCities();
+                //**** dataCommunity = await fetch_functions.getAllCities();
+                // data = await community.createCity(Number(newCountKey), newName, newLat, newLong, newPop);
                 newCountKey += 1;
-                data = await community.createCity(Number(newCountKey), newName, newLat, newLong, newPop);
+                const newCity = new City(Number(newCountKey), newName, newLat, newLong, newPop);
+                data = await fetch_functions.add_aCity(newCity);
                 resultArea1.textContent = (data.status === 200) ? "Successful!" : data.msg;
                 switch (data.status) {
                     case 200:
+                        community.createCity(newCity);
                         resultArea1.textContent = "Successful!";
-                        data = await community.updateCountKey(newCountKey);
+                        // data = await community.updateCountKey(newCountKey);
+                        data = await fetch_functions.update_countKey(newCountKey);
+                        if (data.status === 200) {
+                            // community.updateCountKey(newCountKey);
+                            community.setCountKey(newCountKey);
+                        }                        
                         break;                
                     default:
                         resultArea1.textContent = `Error! ${data.msg}`;
@@ -109,7 +124,7 @@ bigContainer.addEventListener('click', (async (event) => {
                 longitudeTxt.textContent = newLong;
                 populationTxt.textContent = newPop;
 
-                dataCommunity = await community.getAllCities();
+                //**** dataCommunity = await fetch_functions.getAllCities();
 
                 initMap(newLat, newLong);
                 index = community.allCity.findIndex((each) => each.key === Number(currentKey));
@@ -189,11 +204,18 @@ bigShowArea.addEventListener('click', ( async(event) => {
 
         case "removeCity":
             currentKey = event.target.parentElement.getAttribute("data-key");
-                data = community.allCity.find( (each) => Number(each.key) === Number(currentKey));
+            // data = community.allCity.find((each) => Number(each.key) === Number(currentKey));
+            dataCommunity = community.allCity.find( (each) => Number(each.key) === Number(currentKey));
                 
-            if (data !== undefined) {
+            if (dataCommunity !== undefined) {
                 event.target.parentElement.remove();
-                data = await community.deleteCity(data);
+                // data = await community.deleteCity(data);
+                data = await fetch_functions.delete_aCity(dataCommunity);
+                if (data.status === 200) {
+                    community.deleteCity(dataCommunity)
+                } else {
+                    console.log('Delete function error!')
+                }
                 currentKey -= 1;
 
                 bigActivity.style.visibility = "hidden";
@@ -205,14 +227,17 @@ bigShowArea.addEventListener('click', ( async(event) => {
 }));
 
 mostNorthern.addEventListener('click', (async (event) => {
-    data = await community.getMostNorthern();
+    // data = await community.getMostNorthern();
+    data = await fetch_functions.getAllCities();
+    const mostNortherncity = community.getMostNorthern(data);
+
     switch (true) {
-        case (data.length == 1):
-            resultArea2.textContent = 'The northernmost city is ' + data[0].name + ' (Latitude = ' + data[0].latitude + ')';            
+        case (mostNortherncity.length == 1):
+            resultArea2.textContent = 'The northernmost city is ' + mostNortherncity[0].name + ' (Latitude = ' + mostNortherncity[0].latitude + ')';            
             break;    
-        case (data.length > 1):
-            const city = data.map(each => each.name);
-            resultArea2.textContent = 'The northernmost cities are ' + city + ' (Latitude = ' + data[0].latitude + ')';
+        case (mostNortherncity.length > 1):
+            const city = mostNortherncity.map(each => each.name);
+            resultArea2.textContent = 'The northernmost cities are ' + city + ' (Latitude = ' + mostNortherncity[0].latitude + ')';
             break;    
         default:
             resultArea2.textContent = "There is no northernmost city in our database."
@@ -221,14 +246,17 @@ mostNorthern.addEventListener('click', (async (event) => {
 }));
 
 mostSouthernBtn.addEventListener('click', (async (event) => {
-    data = await community.getMostSouthern();
+    // data = await community.getMostSouthern();
+    data = await fetch_functions.getAllCities();
+    const mostSoutherncity = community.getMostSouthern(data);
+
     switch (true) {
-        case (data.length === 1):
-            resultArea2.textContent = `The southernmost city is ${data[0].name} (Latitude = ${data[0].latitude})`;
+        case (mostSoutherncity.length === 1):
+            resultArea2.textContent = `The southernmost city is ${mostSoutherncity[0].name} (Latitude = ${mostSoutherncity[0].latitude})`;
             break;
-        case (data.length > 1):
-            const city = data.map(each => each.name);
-            resultArea2.textContent = 'The southernmost cities are ' + city + " (Latitude = " + data[0].latitude + ")";
+        case (mostSoutherncity.length > 1):
+            const city = mostSoutherncity.map(each => each.name);
+            resultArea2.textContent = 'The southernmost cities are ' + city + " (Latitude = " + mostSoutherncity[0].latitude + ")";
             break;
         default:
             resultArea2.textContent = "There is no southernmost city in our database."
@@ -237,11 +265,14 @@ mostSouthernBtn.addEventListener('click', (async (event) => {
 }));
 
 totalPopulation.addEventListener('click', (async(event) => {
-    data = await community.getPopulation();
-    resultArea2.textContent = `Our community has a population of ${data}`;
+    // data = await community.getPopulation();
+    data = await fetch_functions.getAllCities();
+    const allPopulation = community.getPopulation(data);
+
+    resultArea2.textContent = `Our community has a population of ${allPopulation}`;
 }));
 
-howBig.addEventListener('click', (async (event) => {
+howBig.addEventListener('click', ((event) => {
     index = community.allCity.findIndex( (each) => each.key === Number(currentKey));
     data = community.allCity[index].howBig();
     resultArea3Title.textContent = "This is a";
@@ -264,44 +295,70 @@ moveInOutBtn.addEventListener('click', (async (event) => {
         resultArea3.textContent = "Population is not integer.";
     } else if (amt !== "") {
         index = community.allCity.findIndex((each) => each.key === Number(currentKey));
+        const myCity = community.allCity[index];
         switch (choice.selectedIndex) {
             case 0:     // moved in
                 if (amt > 0) {
-                    data = await community.allCity[index].movedIn(amt);
+                    // data = await community.allCity[index].movedIn(amt);
+                    // data = await community.allCity[index].movedIn(amt);
+                    data = await fetch_functions.update_aCity({ 
+                        key: myCity.key, 
+                        name: myCity.name, 
+                        latitude: myCity.latitude, 
+                        longitude: myCity.longitude, 
+                        population: myCity.population + amt
+                    });
+                    
+                    // community.allCity[index].movedIn(amt);
                     if (data.status === 200) {
+                        myCity.movedIn(amt);
                         resultArea3.textContent = "Successful!!!";
-                        populationTxt.textContent = community.allCity[index].population;
-                        document.getElementsByClassName("showPopulation")[index-1].textContent = community.allCity[index].population;
+                        populationTxt.textContent = myCity.population;
+                        // document.getElementsByClassName("showPopulation")[index - 1].textContent = myCity.population;
+                        // changed @dec16
+                        console.log('index', index);
+                        document.getElementsByClassName("showPopulation")[index - 1].textContent = myCity.population;
                         moveInOut.value = "";
                     } else {
                         resultArea3.textContent = "Error!!!";
                     }
-                } else if (amt < 0) {
-                        resultArea3.textContent = "Amount can't be lese than 0";
+                } else if (amt <= 0) {
+                    resultArea3.textContent = "The amount can't be or less than zero";
                 } else {
-                    resultArea3.textContent = "Amount can't be blank.";
+                    resultArea3.textContent = "The amount can't be blank.";
                 }
                 break;
 
             case 1:     // move out
                 if (amt > 0) {
-                    if (community.allCity[index].population < amt) {
+                    if (myCity.population === 0) {
+                        resultArea3.textContent = "There is no population in this city.";
+                    } else if (myCity.population < amt) {
                         resultArea3.textContent = "Moved out people can't be more than population.";
                     } else {
-                        data = await community.allCity[index].movedOut(amt);
+                        // data = await community.allCity[index].movedOut(amt);
+                        data = await fetch_functions.update_aCity({
+                            key: myCity.key,
+                            name: myCity.name,
+                            latitude: myCity.latitude,
+                            longitude: myCity.longitude,
+                            population: myCity.population - amt
+                        });
+
                         if (data.status === 200) {
+                            myCity.movedOut(amt);
                             resultArea3.textContent = "Successful!!!";
-                            populationTxt.textContent = community.allCity[index].population;
-                            document.getElementsByClassName("showPopulation")[index-1].textContent = community.allCity[index].population;
+                            populationTxt.textContent = myCity.population;
+                            document.getElementsByClassName("showPopulation")[index - 1].textContent = myCity.population;
                             moveInOut.value = "";
                         } else {
                             resultArea3.textContent = "Error!!!";
                         }
                     }
-                } else if (amt < 0) {
-                    resultArea3.textContent = "Amount can't be lese than 0";
+                } else if (amt <= 0) {
+                    resultArea3.textContent = "The amount can't be or lese than zero";
                 } else {
-                    resultArea3.textContent = "Amount can't be blank.";
+                    resultArea3.textContent = "The amount can't be blank.";
                 }
                 break;
         }

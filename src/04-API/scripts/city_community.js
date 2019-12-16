@@ -1,5 +1,3 @@
-const url = 'http://localhost:5000/';
-let data;
 class City {
     
     constructor(key, name, latitude, longitude, population) {
@@ -14,27 +12,13 @@ class City {
         return `City: ${this.name} | Latitude: ${this.latitude} | Longtitude: ${this.longitude} | Population: ${this.population}`;
     }
 
-    async movedIn(number) {
+    movedIn(number) {
         this.population += number;
-        data = await this.update_aCity(this);
-        return data;
     }
 
-    async movedOut(number) {
+    movedOut(number) {
         this.population -= number;
-        data = await this.update_aCity(this);
-        return data;
     } 
-
-    async get_aCity(key) {
-        data = await postData(url + 'read', key);
-        return data;
-    }
-
-    async update_aCity(obj) {
-        data = await postData(url + 'update', obj);
-        return data;
-    }
 
     howBig() {
         let result;
@@ -77,99 +61,50 @@ class Community {
         this.data;
     }
 
-    async getMostNorthern() {
-        this.data = await this.getAllCities();
-        const allLatitude = this.data.map(each => each.latitude).filter(each => each !== undefined);
+    getMostNorthern(data) {
+        const allLatitude = data.map(each => each.latitude).filter(each => each !== undefined);
         const mostNorthernLatitude = Math.max(...allLatitude);
-        const mostNorthernCities = this.data.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined);
+        const mostNorthernCities = data.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined);
         return mostNorthernCities;
     }
 
-    async getMostSouthern() {
-        this.data = await this.getAllCities();
-        const allLatitude = this.data.map(each => each.latitude).filter(each => each !== undefined);
+    getMostSouthern(data) {
+        const allLatitude = data.map(each => each.latitude).filter(each => each !== undefined);
         const mostSouthernLatitude = Math.min(...allLatitude);
-        const mostSouthernCities = this.data.filter(each => (each.latitude === mostSouthernLatitude) ? each : undefined );
+        const mostSouthernCities = data.filter(each => (each.latitude === mostSouthernLatitude) ? each : undefined );
         return mostSouthernCities;
     }
 
-    async getPopulation() {
-        this.data = await this.getAllCities();
-        const allPop = this.data.map(each => each.population).filter(each => each !== undefined);
+    getPopulation(data) {
+        const allPop = data.map(each => each.population).filter(each => each !== undefined);
         const total = allPop.reduce((acc, population) => acc + population);
         return total;
     }
 
-    async createCity(key, name, latitude, longitude, population) {
-        const newCity = new City(key, name, latitude, longitude, population);
-        this.data = await postData(this.url + 'add', newCity);
-        if (this.data.status === 200) {
-            this.allCity.push(newCity);
-        }
-        return this.data;
+    createCity(newCity) {
+        this.allCity.push(newCity);
     }
 
-    async deleteCity(obj) {
-        this.data = await postData(this.url + 'delete', obj);
+    deleteCity(obj) {
         const newCityArr = this.allCity.filter(eachCity => eachCity.name != obj.name);
         this.allCity = newCityArr.slice();
-        return this.data;
     }
 
-    async clearCommunity() {
-        this.data = await postData(this.url + 'clear');
-        return this.data;
-    }
-
-    async getAllCities() {
-        this.data = await postData(this.url + 'all');
-        return this.data;
-    }
-
-    async setCountKey() {
-        this.data = await postData(this.url + 'add', { key: 0, countKey: 0 });
-        if (this.data.status === 200) {
-            this.allCity.push({ key: 0, countKey: 0 });
-        }
-        return this.data;
-    }
-
-    async updateCountKey(newCountKey) {
-        this.data = await postData(this.url + 'update', { key: 0, countKey: newCountKey });
-        if (this.data.status === 200) {
-            console.log(this.allCity.length);
-            console.log(this.allCity);
-            this.allCity.forEach( each => {
+    setCountKey(newCountKey) {
+        console.log(this.allCity.length);
+        if (this.allCity.length === 0 || newCountKey === 0) {
+            this.allCity.push({ key: 0, countKey: newCountKey });
+        } else if (this.allCity.length > 0) {
+            this.allCity.forEach(each => {
                 if (each.key === 0) {
                     each.countKey = newCountKey;
                 }
             });
+        } else {
+            console.log('Set Count Key Error!');
+            
         }
-        return this.data;
     }
-}
-
-async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-        method: 'POST',     // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors',       // no-cors, *cors, same-origin
-        cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: 'follow',         // manual, *follow, error
-        referrer: 'no-referrer',    // no-referrer, *client
-        body: JSON.stringify(data)  // body data type must match "Content-Type" header
-    });
-
-    const json = await response.json();    // parses JSON response into native JavaScript objects
-    json.status = response.status;
-    json.statusText = response.statusText;
-    // console.log(json, typeof(json));
-    return json;
 }
 
 const functions = {
