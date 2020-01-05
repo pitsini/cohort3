@@ -1,0 +1,213 @@
+body {
+    font-family: 'Bree Serif', serif;
+}
+
+button {
+    height: 30px;
+    margin: 5px;
+    /* width: 10%; */
+    width: 100px;
+}
+
+input[type=number], input[type=text], select {
+  /* width: 15%; */
+  width: 100px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+input[type=submit] {
+  /* width: 30%; */
+  width: 150px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 7px 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+input[type=submit]:hover {
+    background-color: #f4511e;
+}
+
+/* select {
+    width: 50%; */
+    /* width: 200px; */
+/* } */
+
+h3, h4 {
+    text-align: center;
+    width: 350px;
+}
+
+textarea {
+    margin: 10px 20px;
+}
+
+hr {
+    width: 100%;
+}
+
+.activity {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.center {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 5px 5px rgb(145, 144, 144);
+    margin: 5px;
+    padding: 0px 5px;
+    /* width: 80%; */
+}
+
+.yellow_text {
+    color: rgb(238, 225, 45);
+}
+
+.showArea {
+    border-bottom: 1px solid rgb(214, 214, 214);
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 100%;
+}
+
+.showArea:hover {
+  background-color: rgb(201, 102, 66);  
+}
+
+.showCityName, .showLatitude, .showLongitude, .showPopulation {
+    margin: 5px;
+    width: 20%;
+}
+
+.showLat {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.titleText {
+    align-items: center;
+    background-color: rgb(255, 197, 176);
+    border-bottom: 1px dashed  rgb(214, 214, 214);
+    color: #333;
+    display: flex;
+    /* width: 700px; */
+}
+
+.titleTxt {
+    width: 22%;
+}
+
+#bigActivity {
+    /* margin-top: 20px; */
+    margin: 10px 20px;
+    padding: 10px 20px;
+    visibility: hidden;
+}
+
+#city {
+    width: 30%;
+    height: 100%;
+}
+
+#bigContainer {   
+    display: flex;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+}
+
+#communityArea {
+    min-height: 150px;
+    padding: 10px 20px;
+    margin: 10px 20px;
+    /* width: 850px; */
+    width: 70%
+}
+
+#communityDetail {
+    display: flex;
+    justify-content: space-around;
+    visibility: hidden;
+}
+/* 
+#createAccount {
+    padding: 10px;
+    width: 115px;
+} */
+
+#flex {
+    display: flex;     
+    justify-content: space-around;
+}
+
+#flex_center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#functionsArea {
+    border: hidden;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+}
+
+#heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+#history {    
+    min-height: 150px;
+}
+
+#map {
+    margin: 10px 30px;
+    height: 400px;  /* The height is 400 pixels */
+    width: 50%;  /*The width is the width of the web page*/
+}
+
+#resultArea3 {
+    color: red;
+    height: 20px;
+}
+
+#resultArea3Title {
+    height: 20px;
+}
+
+#resultArea1 {
+    width: 30%;
+    color: red;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+#resultArea2 {
+    color: red;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+}

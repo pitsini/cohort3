@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Game from './components/layout/TicTacToe';
 import Home from './components/layout/Home';
 import { AppAccount } from './components/account/AppAccount';
+import { AppCity } from './components/city/AppCity';
 import { HomeIcon, TicTacToe, AccountIcon, City} from './components/layout/MenuPanel';
 import './css/App.css';
 import './css/MenuPanel.css';
@@ -11,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super()
     this.state = {
-      whatToShow: <AppAccount />,
+      whatToShow: <AppCity />,
     }
   }
 
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   cityClick = () => {
-    console.log("Sup!");
+    this.setState({ whatToShow: <AppCity /> })
   }
 
   render() {
