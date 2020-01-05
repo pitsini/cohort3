@@ -227,28 +227,28 @@ bigShowArea.addEventListener('click', ( async(event) => {
 }));
 
 mostNorthern.addEventListener('click', (async (event) => {
-    // data = await community.getMostNorthern();
     data = await fetch_functions.getAllCities();
-    const mostNortherncity = community.getMostNorthern(data);
+    const mostNortherncity = community.getMostNorthern();
 
     switch (true) {
         case (mostNortherncity.length == 1):
             resultArea2.textContent = 'The northernmost city is ' + mostNortherncity[0].name + ' (Latitude = ' + mostNortherncity[0].latitude + ')';            
             break;    
         case (mostNortherncity.length > 1):
+            console.log('2');
             const city = mostNortherncity.map(each => each.name);
             resultArea2.textContent = 'The northernmost cities are ' + city + ' (Latitude = ' + mostNortherncity[0].latitude + ')';
             break;    
         default:
+            console.log('3');
             resultArea2.textContent = "There is no northernmost city in our database."
             break;
     }    
 }));
 
 mostSouthernBtn.addEventListener('click', (async (event) => {
-    // data = await community.getMostSouthern();
     data = await fetch_functions.getAllCities();
-    const mostSoutherncity = community.getMostSouthern(data);
+    const mostSoutherncity = community.getMostSouthern();
 
     switch (true) {
         case (mostSoutherncity.length === 1):
@@ -267,7 +267,7 @@ mostSouthernBtn.addEventListener('click', (async (event) => {
 totalPopulation.addEventListener('click', (async(event) => {
     // data = await community.getPopulation();
     data = await fetch_functions.getAllCities();
-    const allPopulation = community.getPopulation(data);
+    const allPopulation = community.getPopulation();
 
     resultArea2.textContent = `Our community has a population of ${allPopulation}`;
 }));

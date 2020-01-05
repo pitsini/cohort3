@@ -1,8 +1,9 @@
 global.fetch = require('node-fetch');
 import { City, Community, functions } from './city_community'
+import fetch_functions from './fetch_functions.js'
 let data;
 
-test('test the Object Reference (130E)', async () => {
+test('test the Object Reference (130E)', () => {
     let myCity, myFav;
     myCity = new City(1, 'Calgary', 51.05, -114.05, 5000);
     myFav = myCity;
@@ -10,45 +11,27 @@ test('test the Object Reference (130E)', async () => {
     expect(myCity.population).toEqual(5000);
     expect(myFav.population).toEqual(5000);
 
-    data = await myCity.movedIn(1000);
+    myCity.movedIn(1000);
+
     expect(myCity.population).toEqual(6000);
     expect(myFav.population).toEqual(6000);
 });
 
 // ---- City Class ----
-test('test that the City class works?', async () => {
+test('test that the City class works?', () => {
     const community = new Community();
-    data = await community.clearCommunity()
-    expect(data.status).toEqual(200);
 
     const newCity = new City(1, 'Calgary', 51.05, -114.05, 5000);
-    data = await community.createCity(newCity.key, newCity.name, newCity.latitude, newCity.longitude, newCity.population);
-    expect(data.status).toEqual(200);
+    community.createCity(newCity);
+    expect(community.allCity[0].show()).toEqual("City: Calgary | Latitude: 51.05 | Longtitude: -114.05 | Population: 5000");
 
-    expect(newCity.show()).toEqual("City: Calgary | Latitude: 51.05 | Longtitude: -114.05 | Population: 5000");
-
-    data = await newCity.movedIn(100);
+    // data = await newCity.movedIn(100);
+    newCity.movedIn(100);
     expect(newCity.population).toEqual(5100);
     
-    data = await newCity.movedOut(4000);
+    // data = await newCity.movedOut(4000);
+    newCity.movedOut(4000);
     expect(newCity.population).toEqual(1100);
-
-    // --- update ----
-    data = await newCity.get_aCity({ key: 1 });
-    expect(data.status).toEqual(200);
-    expect(data.length).toBe(1);
-    expect(data[0].name).toBe("Calgary");
-
-    data[0].name = "Bangkok";
-
-    data = await newCity.update_aCity(data[0]);
-    expect(data.status).toEqual(200);
-
-
-    data = await newCity.get_aCity({ key: 1 });
-    expect(data.status).toEqual(200);
-    expect(data.length).toBe(1);
-    expect(data[0].name).toBe("Bangkok");
     
     expect(newCity.howBig()).toEqual("Town");
     const newCity1 = new City(2, 'New York', -51.05, -114.05, 900000);
@@ -67,73 +50,65 @@ test('test that the City class works?', async () => {
 });
 
 // ---- Community Class ----
-test('test that the Community class works?', async () => {
+test('test that the Community class works?', () => {
+    // test('test that the Community class works?', async () => {
     const community = new Community();
-    data = await community.clearCommunity()
-    expect(data.status).toEqual(200);
+    const newCity1 = new City(1, 'Calgary', 51.05, -114.05, 5000);
+    const newCity2 = new City(2, "Edmonton", 53.55, -113.49, 20000);
+    const newCity3 = new City(3, "Red Deer", 52.28, -113.81, 1000);
     
-    data = await community.createCity(1, "Calgary", 51.05, -114.05, 5000);
-    expect(data.status).toEqual(200);
-    data = await community.createCity(2, "Edmonton", 53.55, -113.49, 20000);
-    expect(data.status).toEqual(200);
-    data = await community.createCity(3, "Red Deer", 52.28, -113.81, 1000);
-    expect(data.status).toEqual(200);
+    community.createCity(newCity1);
+    community.createCity(newCity2);
+    community.createCity(newCity3);
+    expect(community.allCity.length).toEqual(3) 
 
-    data = await community.getAllCities();
-    expect(data.status).toEqual(200);
-    expect(data.length).toBe(3);
-
-    const NorthernArr = await community.getMostNorthern();
-    expect(NorthernArr.length).toEqual(1);
-    expect(NorthernArr[0].name).toEqual("Edmonton");
-
-    const SouthernArr = await community.getMostSouthern();
-    expect(SouthernArr.length).toEqual(1);
-    expect(SouthernArr[0].name).toEqual("Calgary");
-
-    expect(await community.getPopulation()).toEqual(26000);
+    expect(community.getMostNorthern()[0].name).toEqual("Edmonton");
+    expect(community.getMostSouthern()[0].name).toEqual("Calgary");
+    expect(community.getPopulation()).toEqual(26000);
 });
 
 test('test that the fetch works?', async () => {
+    const newCity1 = new City(1, 'Calgary', 51.05, -114.05, 5000);
+    const newCity2 = new City(2, "Edmonton", 53.55, -113.49, 20000);
     const community = new Community();
-    let data = await community.clearCommunity()
+    let data = await fetch_functions.clearCommunity()
     expect(data.status).toEqual(200);
 
-    data = await community.getAllCities();
+    data = await fetch_functions.getAllCities();
     expect(data.status).toEqual(200);
     expect(data.length).toBe(0);
 
     // --- add data ---
-    data = await community.createCity(1, "Calgary", 51.05, -114.05, 5000);
+    data = await fetch_functions.add_aCity(newCity1);
     expect(data.status).toEqual(200);
 
-    data = await community.getAllCities();
+    data = await fetch_functions.getAllCities();
     expect(data.status).toEqual(200);
     expect(data.length).toBe(1);
     expect(data[0].name).toBe("Calgary");
 
     // add a second with the same key which should be an error
-    data = await community.createCity(1, "Calgary", 51.05, -114.05, 5000);
+    data = await fetch_functions.add_aCity(newCity1);
     expect(data.status).toEqual(400);
 
     // add a second which should be ok
-    data = await community.createCity(2, "Edmonton", 53.55, -113.49, 20000);
+    data = await fetch_functions.add_aCity(newCity2);
     expect(data.status).toEqual(200);
 
     // --- check data ---
-    data = await community.getAllCities();
+    data = await fetch_functions.getAllCities();
     expect(data.status).toEqual(200);
     expect(data.length).toBe(2);
     expect(data[1].name).toBe("Edmonton");
 
     // --- delete ---
-    data = await community.deleteCity({ key: 1 });
+    data = await fetch_functions.delete_aCity({ key: 1 });
     expect(data.status).toEqual(200);
 
-    data = await community.setCountKey();
+    data = await fetch_functions.reset_countKey();
     expect(data.status).toEqual(200);
 
-    data = await community.updateCountKey(5); 
+    data = await fetch_functions.update_countKey(5);
     expect(data.status).toEqual(200);
 });
 

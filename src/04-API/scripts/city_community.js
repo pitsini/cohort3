@@ -61,22 +61,22 @@ class Community {
         this.data;
     }
 
-    getMostNorthern(data) {
-        const allLatitude = data.map(each => each.latitude).filter(each => each !== undefined);
+    getMostNorthern() {
+        const allLatitude = this.allCity.map(each => each.latitude).filter(each => each !== undefined);
         const mostNorthernLatitude = Math.max(...allLatitude);
-        const mostNorthernCities = data.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined);
+        const mostNorthernCities = this.allCity.filter(each => (each.latitude === mostNorthernLatitude) ? each : undefined);
         return mostNorthernCities;
     }
 
-    getMostSouthern(data) {
-        const allLatitude = data.map(each => each.latitude).filter(each => each !== undefined);
+    getMostSouthern() {
+        const allLatitude = this.allCity.map(each => each.latitude).filter(each => each !== undefined);
         const mostSouthernLatitude = Math.min(...allLatitude);
-        const mostSouthernCities = data.filter(each => (each.latitude === mostSouthernLatitude) ? each : undefined );
+        const mostSouthernCities = this.allCity.filter(each => (each.latitude === mostSouthernLatitude) ? each : undefined);
         return mostSouthernCities;
     }
 
-    getPopulation(data) {
-        const allPop = data.map(each => each.population).filter(each => each !== undefined);
+    getPopulation() {
+        const allPop = this.allCity.map(each => each.population).filter(each => each !== undefined);
         const total = allPop.reduce((acc, population) => acc + population);
         return total;
     }
