@@ -4,18 +4,18 @@ test('test ListNode class', () => {
     let myListNode;
     myListNode = new ListNode('Smith', 10);
 
-    // checking properties
+    // Checking properties
     expect(myListNode.subject).toEqual('Smith');
     expect(myListNode.amount).toEqual(10);
 
-    // checing 'show' method
+    // Checing 'show' method
     expect(myListNode.show()).toEqual(`Subject: Smith | Amount: 10`);
     myListNode = new ListNode('Smith', 0);
     expect(myListNode.show()).toEqual(`Subject: Smith | Amount: 0`);
 });
 
 test('test LinkedList class', () => {
-    // create blank LinkedList
+    // Create blank LinkedList
     const myLinkedList = new LinkedList();
 
     // Expect head and current node to be null
@@ -53,7 +53,7 @@ test('test LinkedList class', () => {
     expect(myLinkedList.current.amount).toEqual(2);
     expect(myLinkedList.current.forwardNode).toEqual(null);
 
-    // set the current node to be 'aNode' (which is the first node)
+    // Set the current node to be 'aNode' (which is the first node)
     myLinkedList.current = aNode;
 
     //-------------------------------------------------
