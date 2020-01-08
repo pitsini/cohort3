@@ -13,8 +13,105 @@ test('test ListNode class', () => {
     myListNode = new ListNode('Smith', 0);
     expect(myListNode.show()).toEqual(`Subject: Smith | Amount: 0`);
 });
+test('testing delete()', () => {
+    // Create blank LinkedList
+    const myLinkedList = new LinkedList();
 
-test('test LinkedList class', () => {
+    // --------- Testing 1 nodes in LinkedList ----------------
+    // Insert() - Expect current node should be the last node
+    myLinkedList.insert('A', 1);
+    expect(myLinkedList.current.subject).toEqual('A');
+
+    // delete() - Expect LunkedList should be empty
+    myLinkedList.delete();
+    expect(myLinkedList.current).toEqual(null);
+    expect(myLinkedList.head).toEqual(null);
+
+    // --------- Testing 2 nodes in LinkedList ----------------
+    // Insert 2 nodes in linkedList
+    // So myLinkedList is ... [ 'A' ==> 'B' ]
+    myLinkedList.insert('A', 1);
+    myLinkedList.insert('B', 2);
+    expect(myLinkedList.current.subject).toEqual('B');
+
+    // Move currentNode to be 'A'
+    myLinkedList.first();
+    expect(myLinkedList.current.subject).toEqual('A');
+
+    // delete() - Expect current node should be 'B'
+    myLinkedList.delete();
+    expect(myLinkedList.current.subject).toEqual('B');
+    expect(myLinkedList.head.subject).toEqual('B');
+
+    // delete() - Expect LunkedList should be empty
+    myLinkedList.delete();
+    expect(myLinkedList.current).toEqual(null);
+    expect(myLinkedList.head).toEqual(null);
+
+    // --------- Testing 3 nodes in LinkedList ----------------
+    // myLinkedList is ... [ 'A' ==> 'B' ==> 'C' ]
+    myLinkedList.insert('A', 1);
+    myLinkedList.insert('B', 2);
+    myLinkedList.insert('C', 3);
+    expect(myLinkedList.current.subject).toEqual('C');
+
+    // Move currentNode to 'B'
+    myLinkedList.previous();
+    expect(myLinkedList.current.subject).toEqual('B');
+
+    // delete() - Expect both current & head should be null
+    myLinkedList.delete();
+    expect(myLinkedList.current.subject).toEqual('A');
+    expect(myLinkedList.head.subject).toEqual('A');
+});
+
+test('testing first(), last() and next()', () => {
+    // Create blank LinkedList
+    const myLinkedList = new LinkedList();
+
+    // Insert 3 nodes in linkedList
+    // So myLinkedList is ... [ 'A' ==> 'B' ==> 'C' ]
+    myLinkedList.insert('A', 1);
+    myLinkedList.insert('B', 2);
+    myLinkedList.insert('C', 3);
+
+    // Expect current node should be the last node
+    expect(myLinkedList.current.subject).toEqual('C');
+
+    // --------- Testing next() ----------------
+    // next() - Expect return error message
+    expect(myLinkedList.next()).toEqual(`Error: This is the last node`);
+
+    // first() - Set current node on the first
+    myLinkedList.first();
+    expect(myLinkedList.current.subject).toEqual('A');
+
+    // next() - Expect next node should be 'B'
+    myLinkedList.next();
+    expect(myLinkedList.current.subject).toEqual('B');
+
+    // next() - Expect next node should be 'C'
+    myLinkedList.next();
+    expect(myLinkedList.current.subject).toEqual('C');
+
+    // --------- Testing first() and last() ------------
+    // set current node to be 'A' (using 'first' method)
+    myLinkedList.first();
+    expect(myLinkedList.current.subject).toEqual('A');
+    myLinkedList.last();
+    expect(myLinkedList.current.subject).toEqual('C');
+
+    // --------- Testing previous() ----------------
+    myLinkedList.previous();
+    expect(myLinkedList.current.subject).toEqual('B');
+
+    // first() - Expect error from previous()
+    myLinkedList.first();
+    expect(myLinkedList.previous()).toEqual(`Error: There is no previous node for this current node`);
+
+});
+
+test('Insert method testing', () => {
     // Create blank LinkedList
     const myLinkedList = new LinkedList();
 
@@ -68,4 +165,16 @@ test('test LinkedList class', () => {
 
     // Expect forwardNode of 'A' node should point to 'B' Node
     expect(myLinkedList.current.forwardNode.subject).toEqual('B');
+});
+
+test('Total method testing', () => {
+    // Insert 3 nodes in linkedList
+    // So myLinkedList is ... [ 'A' ==> 'B' ==> 'C' ]
+    const myLinkedList = new LinkedList();
+    myLinkedList.insert('A', 1);
+    myLinkedList.insert('B', 2);
+    myLinkedList.insert('C', 3);
+
+    myLinkedList.previous();
+    expect(myLinkedList.total()).toEqual(6);
 });
