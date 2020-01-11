@@ -3,6 +3,8 @@ import ticTacToe from '../../images/tic-tac-toe.svg';
 import home from '../../images/home.svg';
 import account from '../../images/account1.svg';
 import city from '../../images/city1.svg';
+import linkedList from '../../images/linkedList.svg';
+import fifo from '../../images/fifo.svg';
 
 export const HomeIcon = (props) => {
     return (
@@ -25,5 +27,17 @@ export const AccountIcon = (props) => {
 export const TicTacToe = (props) => {
     return (
         <img src={ticTacToe} className="components two" alt="ticTacToe" onClick={props.ticTacToeClick}/>
+    )
+}
+
+export const LinkedList = (props) => {
+    return (
+        <img src={linkedList} className="components two" alt="linkedListClick" onClick={props.linkedListClick} />
+    )
+}
+
+export const Fifo = (props) => {
+    return (
+        <img src={fifo} className="components two" alt="fifoClick" onClick={props.fifoClick} />
     )
 }

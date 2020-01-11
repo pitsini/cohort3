@@ -2,7 +2,7 @@ import { ListNode, LinkedList } from './linkedListPojo'
 
 test('test ListNode class', () => {
     let myListNode;
-    myListNode = new ListNode('Smith', 10);
+    myListNode = new ListNode(1,'Smith', 10);
 
     // Checking properties
     expect(myListNode.subject).toEqual('Smith');
@@ -10,7 +10,7 @@ test('test ListNode class', () => {
 
     // Checing 'show' method
     expect(myListNode.show()).toEqual(`Subject: Smith | Amount: 10`);
-    myListNode = new ListNode('Smith', 0);
+    myListNode = new ListNode(0, 'Smith', 0);
     expect(myListNode.show()).toEqual(`Subject: Smith | Amount: 0`);
 });
 test('testing delete()', () => {
@@ -19,7 +19,7 @@ test('testing delete()', () => {
 
     // --------- Testing 1 nodes in LinkedList ----------------
     // Insert() - Expect current node should be the last node
-    myLinkedList.insert('A', 1);
+    myLinkedList.insert(1, 'A', 1);
     expect(myLinkedList.current.subject).toEqual('A');
 
     // delete() - Expect LunkedList should be empty
@@ -30,8 +30,8 @@ test('testing delete()', () => {
     // --------- Testing 2 nodes in LinkedList ----------------
     // Insert 2 nodes in linkedList
     // So myLinkedList is ... [ 'A' ==> 'B' ]
-    myLinkedList.insert('A', 1);
-    myLinkedList.insert('B', 2);
+    myLinkedList.insert(1, 'A', 1);
+    myLinkedList.insert(2, 'B', 2);
     expect(myLinkedList.current.subject).toEqual('B');
 
     // Move currentNode to be 'A'
@@ -50,9 +50,9 @@ test('testing delete()', () => {
 
     // --------- Testing 3 nodes in LinkedList ----------------
     // myLinkedList is ... [ 'A' ==> 'B' ==> 'C' ]
-    myLinkedList.insert('A', 1);
-    myLinkedList.insert('B', 2);
-    myLinkedList.insert('C', 3);
+    myLinkedList.insert(1, 'A', 1);
+    myLinkedList.insert(2, 'B', 2);
+    myLinkedList.insert(3, 'C', 3);
     expect(myLinkedList.current.subject).toEqual('C');
 
     // Move currentNode to 'B'
@@ -71,16 +71,17 @@ test('testing first(), last() and next()', () => {
 
     // Insert 3 nodes in linkedList
     // So myLinkedList is ... [ 'A' ==> 'B' ==> 'C' ]
-    myLinkedList.insert('A', 1);
-    myLinkedList.insert('B', 2);
-    myLinkedList.insert('C', 3);
+    myLinkedList.insert(1, 'A', 1);
+    myLinkedList.insert(2, 'B', 2);
+    myLinkedList.insert(3, 'C', 3);
 
     // Expect current node should be the last node
     expect(myLinkedList.current.subject).toEqual('C');
 
     // --------- Testing next() ----------------
     // next() - Expect return error message
-    expect(myLinkedList.next()).toEqual(`Error: This is the last node`);
+    myLinkedList.next()
+    expect(myLinkedList.msg).toContain(`Error: This is the last node`);
 
     // first() - Set current node on the first
     myLinkedList.first();
@@ -107,7 +108,8 @@ test('testing first(), last() and next()', () => {
 
     // first() - Expect error from previous()
     myLinkedList.first();
-    expect(myLinkedList.previous()).toEqual(`Error: There is no previous node for this current node`);
+    myLinkedList.previous()
+    expect(myLinkedList.msg).toContain(`Error: There is no previous node`);
 
 });
 
@@ -120,14 +122,16 @@ test('Insert method testing', () => {
     expect(myLinkedList.head).toBeNull();
     
     // Expect error from inserting empty subject and amount
-    expect(myLinkedList.insert('', 1)).toEqual(`Error: Subject or amount is empty`);
-    expect(myLinkedList.insert('A', '')).toEqual(`Error: Subject or amount is empty`);
+    myLinkedList.insert(1, '', 1)
+    expect(myLinkedList.msg).toContain(`Error: Subject or amount is empty`);
+    myLinkedList.insert(1, 'A', '')
+    expect(myLinkedList.msg).toContain(`Error: Subject or amount is empty`);
     
     //-------------------------------------------------
     // Insert 'A' node (1st node) to LinkedList (Manually)
     // So myLinkedList is ... [ 'A' ]
     //-------------------------------------------------
-    const aNode = new ListNode('A', 1);
+    const aNode = new ListNode(1, 'A', 1);
     myLinkedList.head = aNode;
     myLinkedList.current = aNode;
 
@@ -140,7 +144,8 @@ test('Insert method testing', () => {
     // Insert 'B' node to LinkedList (Using 'insert' method)
     // So myLinkedList should be ... [ 'A' ==> 'B' ]
     //-------------------------------------------------
-    expect(myLinkedList.insert('B', 2)).toContain('Successful');
+    myLinkedList.insert(2, 'B', 2)
+    expect(myLinkedList.msg).toContain('Successful');
 
     // Expect forwardNode of 'A' node should point to 'B' Node
     expect(aNode.forwardNode.subject).toEqual('B');
@@ -157,7 +162,8 @@ test('Insert method testing', () => {
     // Insert 'C' node to LinkedList
     // So myLinkedList should be ... [ 'A' ==> 'C' ==> 'B' ]
     //-------------------------------------------------
-    expect(myLinkedList.insert('C', 3)).toContain('Successful');
+    myLinkedList.insert(3, 'C', 3)
+    expect(myLinkedList.msg).toContain('Successful');
 
     // Expect current node should be 'C' node
     expect(myLinkedList.current.subject).toEqual('C');
@@ -171,9 +177,9 @@ test('Total method testing', () => {
     // Insert 3 nodes in linkedList
     // So myLinkedList is ... [ 'A' ==> 'B' ==> 'C' ]
     const myLinkedList = new LinkedList();
-    myLinkedList.insert('A', 1);
-    myLinkedList.insert('B', 2);
-    myLinkedList.insert('C', 3);
+    myLinkedList.insert(1, 'A', 1);
+    myLinkedList.insert(2, 'B', 2);
+    myLinkedList.insert(3, 'C', 3);
 
     myLinkedList.previous();
     expect(myLinkedList.total()).toEqual(6);

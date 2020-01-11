@@ -1,5 +1,6 @@
 export class ListNode {
-    constructor(subject, amount) {
+    constructor(id, subject, amount) {
+        this.id = id;
         this.subject = subject;
         this.amount = amount;
         this.forwardNode = null;
@@ -14,48 +15,62 @@ export class LinkedList {
     constructor() {
         this.current = null;
         this.head = null;
+        this.msg = '';
     }
 
     first() {
         this.current = this.head;
+        this.msg = `Successful first [${this.current.subject}: ${this.current.amount}]`
     }
 
     last() {
         do {
             this.next();
         } while (this.current.forwardNode !== null)
+        this.msg = `Successful last [${this.current.subject}: ${this.current.amount}]`
     }
 
     next() {
-        if (this.current.forwardNode === null) return `Error: This is the last node`;
-        this.current = this.current.forwardNode;
-        return `Successful: move to the next!`
+        this.msg = '';
+        if (this.current.forwardNode === null) { this.msg = `Error: This is the last node`; }
+        else {
+            this.current = this.current.forwardNode;
+            // this.msg = `Successful: move to the next!`
+            this.msg = `Successful next [${this.current.subject}: ${this.current.amount}]`
+        }        
     }
 
     previous() {
+        this.msg = '';
         // The current node is the first
-        if (this.current === this.head) return `Error: There is no previous node for this current node`;
-        
-        // put the current node to variable
-        const theCurrent = this.current;
+        if (this.current === this.head) { this.msg = `Error: There is no previous node`; }
+        else {
+            // put the current node to variable
+            const theCurrent = this.current;
 
+            // Set current node to be the first
+            this.first();
 
-        // Set current node to be the first
-        this.first();
-
-        // loop through linkedList to find which node that has forwardNode equal 'theCurrent'
-        while (this.current.forwardNode !== theCurrent) {
-            this.next();
+            // loop through linkedList to find which node that has forwardNode equal 'theCurrent'
+            while (this.current.forwardNode !== theCurrent) {
+                this.next();
+            }
+            // this.msg = `Successful: move to the previous!`
+            this.msg = `Successful previous [${this.current.subject}: ${this.current.amount}]`
         }
     }
 
-    insert(subject, amount) {
+    insert(id, subject, amount) {
+        this.msg = '';
         // 1) Show error if subject or amount is empty
         // '!amount' is included when 'amount = 0'. That is why I need to check 'typeof' amount too.
-        if (!subject || (!amount && typeof amount != 'number')) return `Error: Subject or amount is empty`;
+        if (!subject || (!amount && typeof amount != 'number')) {
+            this.msg = `Error: Subject or amount is empty`;
+            return;
+        }
 
         // create new listNode
-        const newNode = new ListNode(subject, amount);
+        const newNode = new ListNode(id, subject, amount);
 
         // 2) LinkedList has 0 node
         if (this.current === null) this.head = newNode;
@@ -71,14 +86,18 @@ export class LinkedList {
 
         // Set current to be the new node
         this.current = newNode;
-        return `Successful insert!`
+        this.msg = `Successful insert [${this.current.subject}: ${this.current.amount}]`
     }
 
     delete() {
+        const delSubject = this.current.subject;
+        const delAmount = this.current.amount;
+        this.msg = ``;
         switch (true) {
             // If there is 0 node in LinkedList
             case (this.current === null && this.head === null):
-                return `Error: There is no node left in linkedList`;
+                this.msg = `Error: There is no node left in linkedList`;
+                break;
 
             // If currentNode is the headNode
             case (this.current === this.head):
@@ -87,23 +106,26 @@ export class LinkedList {
                     this.head = null;
                     this.current = null;
                 }
-
                 // if there are more than 1 node in Linkedlist
                 else {
                     this.head = this.current.forwardNode;
                     this.next();
                 }
+                this.msg = `Successful delete [${delSubject}: ${delAmount}]`;
                 break;
+
             // If currentNode is the lastNode
             case (this.current.forwardNode === null):
                 this.previous();
                 this.current.forwardNode = null;
+                this.msg = `Successful delete [${delSubject}: ${delAmount}]`;
                 break;
 
             default:
                 const fNode = this.current.forwardNode;
                 this.previous();
                 this.current.forwardNode = fNode;
+                this.msg = `Successful delete [${delSubject}: ${delAmount}]`;
                 break;
         }
     }
@@ -113,11 +135,11 @@ export class LinkedList {
 
         const currentNodeCopy = this.current;        
         this.first();
-        let sum = this.current.amount;
-        do {
+        let sum = Number(this.current.amount);
+        while (this.current.forwardNode != null) {
             this.next();
-            sum += this.current.amount;
-        } while (this.current.forwardNode != null)
+            sum += Number(this.current.amount);
+        } 
 
         this.current = currentNodeCopy;
         return sum;
