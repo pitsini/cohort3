@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import ClassCounter from './1/ClassCounter'
-import HookCounter from './1/HookCounter'
-import ClassCounterTwo from './1/ClassCounterTwo'
-import HookCounterTwo from './1/HookCounterTwo'
-import HookCounterThree from './1/HookCounterThree'
-import HookCounterFour from './1/HookCounterFour'
-import HookUseEffectOne from './1/HookUseEffectOne'
-import ClassUseEffectOne from './1/ClassUseEffectOne'
+import ClassCounter from './ClassCounter'
+import HookCounter from './HookCounter'
+import ClassCounterTwo from './ClassCounterTwo'
+import HookCounterTwo from './HookCounterTwo'
+import HookCounterThree from './HookCounterThree'
+import HookCounterFour from './HookCounterFour'
+import HookUseEffectOne from './HookUseEffectOne'
+import ClassUseEffectOne from './ClassUseEffectOne'
 
 class App extends Component {
     render() {
