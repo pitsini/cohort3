@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { LinkedList } from './linkedListPojo'
 import '../../css/linkedList.css';
-
+import { themes, ButtonThemeContext, ToggleThemeContext } from './theme-context';
+import ThemeTogglerButton from './theme-toggler-button';
 
 const myLinkedList = new LinkedList();
+
 export function AppLinkedList() {
     const [node, setNode] = useState({ id: 1, subject: '', amount: '' }); 
     const [nodes, setNodes] = useState([]);
@@ -11,7 +13,17 @@ export function AppLinkedList() {
     const [total, setTotal] = useState(0);
     let index = -1;
 
+    // Context exercise
+    const [theme, setTheme] = useState(themes.green);
 
+    const toggleTheme = () => {
+        setTheme(preTheme => (
+            preTheme === themes.green
+                ? themes.yellow
+                : themes.green
+        ))
+    }
+    
     const deleteNode = () => {
         // still has node in linkedList
         if (myLinkedList.current) {
@@ -78,45 +90,55 @@ export function AppLinkedList() {
     }
 
     return (
-        <div className="flex_center">
-            <div id="menu">
-                <div className="white_border">
-                    <h2>Linked List</h2>
-                    <span>
-                        <input
-                            type="text"
-                            placeholder="Subject..."
-                            value={node.subject}
-                            onChange={e => setNode({ ...node, subject: e.target.value })}
-                        />
-                        <input
-                            type="number"
-                            placeholder="Amount..."
-                            value={node.amount}
-                            onChange={e => setNode({ ...node, amount: e.target.value })}
-                        />
-                        <button onClick={insertNode}>Insert</button>
-                    </span>
-                </div>
-                <div id="showArea" className="white_border">
-                    {nodes.map(node => (
-                        <div key={node.id}>
-                            {node.subject}: {node.amount}
-                           </div>
-                    ))}
-                </div>
-                <div id="showArea" className="white_border">
-                    <h4>{msg}</h4>
-                    <span className="flex_center">
-                        <button onClick={firstNode}>First</button>
-                        <button onClick={previousNode}>Previous</button>
-                        <button onClick={deleteNode}>Delete</button>
-                        <button onClick={nextNode}>Next</button>
-                        <button onClick={lastNode}>Last</button>
-                    </span>
-                    <h4>Total Amount = {total}</h4>     
-                </div>
-            </div>
+        <div>
+            <ButtonThemeContext.Provider value={theme}>
+                <ToggleThemeContext.Provider value={toggleTheme}>
+                    <ThemeTogglerButton  />
+                    <div className="flex_center">
+                        <div id="menu">
+                            <div className="white_border" style={{ background: theme.background }}>
+                                <h2>Linked List</h2>
+                                <span>
+                                    <input
+                                        type="text"
+                                        placeholder="Subject..."
+                                        value={node.subject}
+                                        onChange={e => setNode({ ...node, subject: e.target.value })}
+                                    />
+                                    <input
+                                        type="number"
+                                        placeholder="Amount..."
+                                        value={node.amount}
+                                        onChange={e => setNode({ ...node, amount: e.target.value })}
+                                    />
+                                    <button onClick={insertNode} 
+                                        style={{ background: theme.backgroundBtn }}>
+                                    Insert
+                                    </button>
+                                </span>
+                            </div>
+                            <div id="showArea" className="white_border">
+                                {nodes.map(node => (
+                                    <div key={node.id}>
+                                        {node.subject}: {node.amount}
+                                    </div>
+                                ))}
+                            </div>
+                            <div id="showArea" className="white_border" style={{ background: theme.background }}>
+                                <h4>{msg}</h4>
+                                <span className="flex_center">
+                                    <button onClick={firstNode} style={{ background: theme.backgroundBtn }}>First</button>
+                                    <button onClick={previousNode} style={{ background: theme.backgroundBtn }}>Previous</button>
+                                    <button onClick={deleteNode} style={{ background: theme.backgroundBtn }}>Delete</button>
+                                    <button onClick={nextNode} style={{ background: theme.backgroundBtn }}>Next</button>
+                                    <button onClick={lastNode} style={{ background: theme.backgroundBtn }}>Last</button>
+                                </span>
+                                <h4>Total Amount = {total}</h4>     
+                            </div>
+                        </div>
+                    </div>
+                </ToggleThemeContext.Provider>
+            </ButtonThemeContext.Provider>
         </div>
     )
 }

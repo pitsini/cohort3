@@ -19,11 +19,21 @@ export class LinkedList {
     }
 
     first() {
+        if (this.current === null) {
+            this.msg = `Error: No node on linkedlist`;
+            return;
+        }
+
         this.current = this.head;
         this.msg = `Successful first [${this.current.subject}: ${this.current.amount}]`
     }
 
     last() {
+        if (this.current === null) {
+            this.msg = `Error: No node on linkedlist`;
+            return;
+        }
+
         do {
             this.next();
         } while (this.current.forwardNode !== null)
@@ -32,10 +42,10 @@ export class LinkedList {
 
     next() {
         this.msg = '';
-        if (this.current.forwardNode === null) { this.msg = `Error: This is the last node`; }
+        if (this.current === null) { this.msg = `Error: No node on linkedlist`; }
+        else if (this.current.forwardNode === null) { this.msg = `Error: This is the last node`; }
         else {
             this.current = this.current.forwardNode;
-            // this.msg = `Successful: move to the next!`
             this.msg = `Successful next [${this.current.subject}: ${this.current.amount}]`
         }        
     }
@@ -43,7 +53,9 @@ export class LinkedList {
     previous() {
         this.msg = '';
         // The current node is the first
-        if (this.current === this.head) { this.msg = `Error: There is no previous node`; }
+
+        if (this.current === null) { this.msg = `Error: No node on linkedlist`; }
+        else if (this.current === this.head) { this.msg = `Error: There is no previous node`; }
         else {
             // put the current node to variable
             const theCurrent = this.current;
@@ -90,6 +102,11 @@ export class LinkedList {
     }
 
     delete() {
+        if (this.current === null) { 
+            this.msg = `Error: No node on linkedlist`; 
+            return; 
+        }
+        
         const delSubject = this.current.subject;
         const delAmount = this.current.amount;
         this.msg = ``;
