@@ -369,7 +369,8 @@ export class AppCity extends Component {
             this.message = `Connection to Server Failed! \nTry again later.`;
             console.log('message: ', error);
         }
-        document.getElementById("resultArea1").textContent = this.message;
+        if (document.getElementById("resultArea1"))
+            document.getElementById("resultArea1").textContent = this.message;
     }
     mostSouthern = async () => {
         console.log("south!");

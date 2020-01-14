@@ -4,7 +4,7 @@ import home from '../../images/home.svg';
 import account from '../../images/account1.svg';
 import city from '../../images/city1.svg';
 import linkedList from '../../images/linkedList.svg';
-import fifo from '../../images/fifo.svg';
+import fifoLifo from '../../images/fifo.svg';
 
 export const HomeIcon = (props) => {
     return (
@@ -36,8 +36,8 @@ export const LinkedList = (props) => {
     )
 }
 
-export const Fifo = (props) => {
+export const FifoLifo = (props) => {
     return (
-        <img src={fifo} className="components two" alt="fifoClick" onClick={props.fifoClick} />
+        <img src={fifoLifo} className="components two" alt="fifoLifoClick" onClick={props.fifoLifoClick} />
     )
 }

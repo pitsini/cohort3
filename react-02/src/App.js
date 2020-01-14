@@ -4,7 +4,8 @@ import Home from './components/layout/Home';
 import { AppAccount } from './components/account/AppAccount';
 import { AppCity } from './components/city/AppCity';
 import { AppLinkedList } from './components/linkedList/AppLinkedList';
-import { HomeIcon, TicTacToe, AccountIcon, City, LinkedList, Fifo} from './components/layout/MenuPanel';
+import { AppFifoLifo } from './components/fifoLifo/AppFifoLifo';
+import { HomeIcon, TicTacToe, AccountIcon, City, LinkedList, FifoLifo} from './components/layout/MenuPanel';
 import './css/App.css';
 import './css/MenuPanel.css';
 import './css/TicTacToe.css';
@@ -13,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super()
     this.state = {
-      whatToShow: <AppLinkedList />,
+      whatToShow: <AppFifoLifo />,
     }
   }
 
@@ -40,9 +41,9 @@ class App extends Component {
     this.setState({ whatToShow: <AppLinkedList /> })
   }
 
-  // fifoClick = () => {
-  //   this.setState({ whatToShow: <AppFifo /> })
-  // }
+  fifoLifoClick = () => {
+    this.setState({ whatToShow: <AppFifoLifo /> })
+  }
 
   render() {
     return (
@@ -55,7 +56,7 @@ class App extends Component {
               <AccountIcon accountClick={this.accountClick}/>
               <City cityClick={this.cityClick} />
               <LinkedList linkedListClick={this.linkedListClick} />
-              <Fifo />
+              <FifoLifo fifoLifoClick={this.fifoLifoClick} />
               {/* <Fifo linkedListClick={this.FifoClick} /> */}
             </div>
           </div>

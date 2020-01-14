@@ -1,9 +1,4 @@
-import { Queue, Stack, BlockController } from './FIFO_LIFO_Pojo'
-
-test('test BlockController class', () => {
-    const myBlockController = new BlockController();
-    expect(myBlockController.randomPick()).toContain('././images/FIFO_LIFO/');
-}); 
+import { Queue, Stack } from './fifoLifoPojo'
 
 test('test Queue class', () => {
     const myQueue = new Queue();
