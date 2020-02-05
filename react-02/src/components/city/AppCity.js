@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-// import AppHeader from "./AppHeader";
-// import { AccController } from './AccController';
 import { City, Community, functions } from './CityPojo'
 import fetch_functions from './fetch_functions.js'
 import AddCity from "./AddCity";
-// import { thisExpression } from '@babel/types';
 import '../../css/city.css';
 import MovenInMoveOutForm from './MoveInMoveOutForm';
 
@@ -32,8 +29,6 @@ export class AppCity extends Component {
     }
 
     visibleForm = () => {
-        console.log("Create Click!");
-        console.log("C: ", this.state.showCreateCityForm);
         if (this.state.showCreateCityForm) {
             document.getElementById("communityDetail").style.visibility = 'hidden';
             this.setState({
@@ -51,11 +46,9 @@ export class AppCity extends Component {
     }
 
     clickShowArea = async (event) => {
-        console.log(event.target.textContent);
 
         // Clicking Remove button
         if (event.target.textContent === "Remove") {
-            console.log("Remove!");
 
             this.currentKey = event.target.parentElement.getAttribute("data-key");
             this.dataCommunity = this.community.allCity.find((each) => Number(each.key) === Number(this.currentKey));
@@ -67,8 +60,6 @@ export class AppCity extends Component {
                 if (this.data.status === 200) {
                     this.community.deleteCity(this.dataCommunity);
                     this.message = 'Successfully Deleted!'
-                } else {
-                    console.log('Delete function error!')
                 }
                 this.currentKey -= 1;
 
@@ -91,6 +82,7 @@ export class AppCity extends Component {
                 case "showLatitude":
                 case "showLongitude":
                 case "showPopulation":
+
                     // unhighlight in show area
                     for (let i = 0; i < document.getElementById("bigShowArea").children.length; i++) {
                         document.getElementById("bigShowArea").children[i].style.backgroundColor = "";
@@ -98,7 +90,6 @@ export class AppCity extends Component {
                     }
 
                     // highlight background
-                    // event.target.parentElement.style.backgroundColor = "rgb(230, 230, 230)";
                     event.target.parentElement.style.backgroundColor = "rgb(214, 214, 214)";
                     event.target.parentElement.style.color = "#333";
 
@@ -108,12 +99,6 @@ export class AppCity extends Component {
                     // update account detail
                     this.currentCityName = event.target.parentElement.getElementsByClassName("showCityName")[0];
                     document.getElementById("cityTxt").textContent = this.currentCityName.textContent;
-                    // this.currentLatitude = event.target.parentElement.getElementsByClassName("showLatitude")[0];
-                    // document.getElementById("latitudeTxt").textContent = this.currentLatitude.textContent;
-                    // this.currentLongitude = event.target.parentElement.getElementsByClassName("showLongitude")[0];
-                    // document.getElementById("longitudeTxt").textContent = this.currentLongitude.textContent;
-                    // this.currentPopulation = event.target.parentElement.getElementsByClassName("showPopulation")[0];
-                    // document.getElementById("populationTxt").textContent = this.currentPopulation.textContent;
 
                     this.currentKey = event.target.parentElement.getAttribute("data-key");
                     document.getElementById("resultArea1").textContent = "";
@@ -121,7 +106,6 @@ export class AppCity extends Component {
                     document.getElementById("resultArea3Title").textContent = "";
                     document.getElementById("resultArea3").textContent = "";
 
-                    // initMap(currentLatitude.textContent, currentLongitude.textContent);
                     this.index = this.community.allCity.findIndex((each) => each.key === Number(this.currentKey));
                     break;
 
@@ -132,7 +116,6 @@ export class AppCity extends Component {
                         document.getElementById("bigShowArea").children[i].style.color = "white";
                     }
 
-                    // event.target.style.backgroundColor = "rgb(230, 230, 230)";
                     event.target.style.backgroundColor = "rgb(214, 214, 214)";
                     event.target.style.color = "#333";
                     document.getElementById("bigActivity").style.visibility = "visible";
@@ -140,12 +123,6 @@ export class AppCity extends Component {
 
                     this.currentCityName = event.target.getElementsByClassName("showCityName")[0];
                     document.getElementById("cityTxt").textContent = this.currentCityName.textContent;
-                    // this.currentLatitude = event.target.getElementsByClassName("showLatitude")[0];
-                    // document.getElementById("latitudeTxt").textContent = this.currentLatitude.textContent;
-                    // this.currentLongitude = event.target.getElementsByClassName("showLongitude")[0];
-                    // document.getElementById("longitudeTxt").textContent = this.currentLongitude.textContent;
-                    // this.currentPopulation = event.target.getElementsByClassName("showPopulation")[0];
-                    // document.getElementById("populationTxt").textContent = this.currentPopulation.textContent;
 
                     this.currentKey = event.target.getAttribute("data-key");
                     document.getElementById("resultArea1").textContent = "";
@@ -153,7 +130,6 @@ export class AppCity extends Component {
                     document.getElementById("resultArea3Title").textContent = "";
                     document.getElementById("resultArea3").textContent = "";
 
-                    // initMap(currentLatitude.textContent, currentLongitude.textContent);
                     this.index = this.community.allCity.findIndex((each) => each.key === Number(this.currentKey));
                     break;
                 default:
@@ -173,7 +149,6 @@ export class AppCity extends Component {
             this.message = `Connection to Server Failed! \nTry again later.`;
 
         } else if (this.message.includes("Successfully")) {
-            //----------------
             //remove all child nodes
             let node = document.getElementById("bigShowArea");
             while (node.hasChildNodes()) {
@@ -195,34 +170,22 @@ export class AppCity extends Component {
                 const newCity = new City(Number(this.newCountKey), city, Number(lat), Number(long), Number(population))
 
                 try {
-                    this.data = await fetch_functions.add_aCity(newCity);
-                    // this.message = `Successfully Connect to Server!`;
-                    // this.message = `Connection to Server Successful`;
-
-                    // console.log(this.data);             
+                    this.data = await fetch_functions.add_aCity(newCity);         
                 } catch (error) {
                     this.message = `Connection to Server Failed! \nTry again later.`;
-                    console.log('message: ', error);
 
                     document.getElementById("bigShowArea").style.visibility = "hidden";
                 }
-
-                // document.getElementById('resultArea1').textContent = (this.data.status === 200) ? "Successful!" : this.data.msg;
-                console.log('this.data.status', this.data.status)
+                
                 switch (this.data.status) {
                     case 200:
                         this.community.createCity(newCity);
                         document.getElementById("bigShowArea").style.visibility = "visible";
-                        // data = await community.updateCountKey(newCountKey);
-                        // this.data = await fetch_functions.update_countKey(this.newCountKey);
 
                         // reset data
                         this.data = '';
                         try {
-                            this.data = await fetch_functions.update_countKey(this.newCountKey);
-                            // this.message = `Successfully Connect to Server!`;
-
-                            // console.log(this.data);             
+                            this.data = await fetch_functions.update_countKey(this.newCountKey);          
                         } catch (error) {
                             this.message = `Connection to Server Failed! \nTry again later.`;
                             console.log('message: ', error);
@@ -230,7 +193,6 @@ export class AppCity extends Component {
 
 
                         if (this.data.status === 200) {
-                            // community.updateCountKey(newCountKey);
                             this.community.setCountKey(this.newCountKey);
                             this.message = "Successfully Added."
 
@@ -273,37 +235,16 @@ export class AppCity extends Component {
                             newDiv.style.color = "#333";
                             document.getElementById("bigActivity").style.visibility = "visible";
                             document.getElementById("functionsArea").style.visibility = "visible";
-
                             document.getElementById("cityTxt").textContent = city;
-                            // document.getElementById("latitudeTxt").textContent = lat;
-                            // document.getElementById("longitudeTxt").textContent = long;
-                            // document.getElementById("populationTxt").textContent = population;
-
-                            //**** dataCommunity = await fetch_functions.getAllCities();
-
-                            // functions.initMap(lat, long);
                             this.index = this.community.allCity.findIndex((each) => each.key === Number(this.currentKey));
-                            //---------- move from bottom -----------
-
                         }
-
-                        // this.setState({
-                        //     showCreateCityForm: !this.state.showCreateCityForm,
-                        // });
                         break;
-                    // case 400:
-                    //     this.message = this.data.msg;
-                    //     break;
                     default:
-                        // this.message = this.data.msg;
-                        // document.getElementById('resultArea1').textContent = message;
-                        // document.getElementById('resultArea1').textContent = `Error! ${this.data.msg}`;
                         break;
                 }
             } else {
                 this.message = "Please fill up all information.";
             };
-            //---------------
         }
 
         console.log("I'm here.");
@@ -326,9 +267,7 @@ export class AppCity extends Component {
         } else {
             // clear array
             this.community.allCity = [];
-
             this.newCountKey = this.dataCommunity[0].countKey;
-            // community.allCity.push({ key: 0, countKey: dataCommunity[0].countKey });
             this.community.setCountKey(this.dataCommunity[0].countKey);
 
             this.data = this.dataCommunity.filter(each => each.key !== 0);
@@ -337,7 +276,6 @@ export class AppCity extends Component {
                 this.community.allCity.push(newCity);
                 let newDiv = functions.createShowArea();
 
-                // onClick
                 newDiv.onclick = this.clickShowArea;
                 newDiv.getElementsByClassName("removeCity").onclick = this.deleteCity;
 
@@ -348,7 +286,9 @@ export class AppCity extends Component {
                 newDiv.getElementsByClassName("showLongitude")[0].textContent = each.longitude;
                 newDiv.getElementsByClassName("showPopulation")[0].textContent = each.population;
 
-                document.getElementById('bigShowArea').appendChild(newDiv);
+                if (document.getElementById('bigShowArea')) {
+                    document.getElementById('bigShowArea').appendChild(newDiv);
+                }
 
                 // visible functionsArea div
                 document.getElementById("functionsArea").style.visibility = "visible";
@@ -360,11 +300,9 @@ export class AppCity extends Component {
     checkServer = async () => {
         console.log("Work!");
         try {
-            // this.data = await fetch_functions.update_countKey(this.newCountKey);
             this.dataCommunity = await fetch_functions.getAllCities();
             this.message = `Successfully Connect to Server!`;
-
-            // console.log(this.data);             
+            
         } catch (error) {
             this.message = `Connection to Server Failed! \nTry again later.`;
             console.log('message: ', error);
@@ -376,8 +314,6 @@ export class AppCity extends Component {
         console.log("south!");
         this.data = await fetch_functions.getAllCities();
         const mostSoutherncity = this.community.getMostSouthern();
-
-        console.log("mostSoutherncity: ", mostSoutherncity);
 
         switch (true) {
             case (mostSoutherncity.length === 1):
@@ -393,13 +329,10 @@ export class AppCity extends Component {
         }  
     }
 
-
     mostNorthern = async () => {
 
         this.data = await fetch_functions.getAllCities();
         const mostNortherncity = this.community.getMostNorthern();
-
-        console.log("mostNortherncity: ", mostNortherncity);
 
         switch (true) {
             case (mostNortherncity.length === 1):
@@ -418,7 +351,6 @@ export class AppCity extends Component {
     checkPopulation = async () => {
         this.data = await fetch_functions.getAllCities();
         const allPopulation = this.community.getPopulation(this.data);
-
         document.getElementById("resultArea2").textContent = `Our community has a population of ${allPopulation}`;
     }
 
@@ -445,48 +377,16 @@ export class AppCity extends Component {
     moveInMoveOut = async (activityType, amount) => {
         document.getElementById("resultArea1").textContent = '';
         document.getElementById("resultArea3").textContent = 'Connecting...';
-        console.log('activityType: ', activityType);
-        console.log('amount: ', amount);
-
         amount = Number(amount);
-        //-----------------
-            // //remove all child nodes
-            // let node = document.getElementById("bigShowArea");
-            // while (node.hasChildNodes()) {
-            //     node.removeChild(node.lastChild);
-            // }
-
-            // await this.checkServer();
-            // await this.loadServer();   
-        //----------------
 
         if (Number.isInteger(amount) === false) {
             document.getElementById("resultArea3").textContent = "Population is not integer.";
         } else if (amount !== "") {
             this.index = this.community.allCity.findIndex((each) => each.key === Number(this.currentKey));
             const myCity = this.community.allCity[this.index];
-
-
-            
-    
-
-
             switch (activityType) {
                 case 'moveIn':
-                    console.log("move in!")
-                    // this.accounts.allAccounts[this.state.currentIndex].deposit(Number(balance));
-                    // console.log(this.accounts.allAccounts);
-                    // this.setState({
-                    //     accountsArray: this.accounts.allAccounts
-                    // });
-                    //------------------------
-
-                
                         if (amount > 0) {
-                            // data = await community.allCity[index].movedIn(amt);
-                            // data = await community.allCity[index].movedIn(amt);
-                            //--------------------------------
-
                             // reset data
                             this.data = '';
                             try {
@@ -497,32 +397,16 @@ export class AppCity extends Component {
                                     longitude: myCity.longitude,
                                     population: myCity.population + amount
                                 });
-
-                                // community.allCity[index].movedIn(amt);
                                 if (this.data.status === 200) {
                                     myCity.movedIn(amount);
                                     document.getElementById("resultArea3").textContent = "Move In Successful!";
-                                    // document.getElementById("populationTxt").textContent = myCity.population;
-                                    // document.getElementsByClassName("showPopulation")[index - 1].textContent = myCity.population;
-                                    // changed @dec16
                                     console.log('index', this.index);
                                     document.getElementsByClassName("showPopulation")[this.index - 1].textContent = myCity.population;
-                                    // moveInOut.value = ""; //***------***
                                 } else {
-                                    // document.getElementById("resultArea3").textContent = "Error!!!";
-
                                     document.getElementById("resultArea1").textContent = `Connection to Server Failed! \nTry again later.`;
-                                    // console.log('message: ', error);
-
-                                    document.getElementById("bigActivity").style.visibility = "hidden";
+                                      document.getElementById("bigActivity").style.visibility = "hidden";
                                     document.getElementById("bigShowArea").style.visibility = "hidden";
-
-                                    // // hidden functionArea if there is no city
-                                    // if (document.getElementById("bigShowArea")
-
-                                }
-
-                                // console.log(this.data);             
+                                }           
                             } catch (error) {
                                 document.getElementById("resultArea1").textContent = `Connection to Server Failed! \nTry again later.`;
                                 console.log('message: ', error);
@@ -530,11 +414,8 @@ export class AppCity extends Component {
                                 document.getElementById("bigActivity").style.visibility = "hidden";
                                 document.getElementById("bigShowArea").style.visibility = "hidden";
                             }
-                            //------------------------------------
-                            
-                            //--------------------------
                         } else if (amount <= 0) {
-                            document.getElementById("resultArea3").textContent = "The amount can't be or less than zero";
+                            document.getElementById("resultArea3").textContent = "Amount can't be or less than zero";
                         } else {
                             document.getElementById("resultArea3").textContent = "The amount can't be blank.";
                         }
@@ -551,7 +432,6 @@ export class AppCity extends Component {
                             } else if (myCity.population < amount) {
                                 document.getElementById("resultArea3").textContent = "Moved out people can't be more than population.";
                             } else {
-                                // data = await community.allCity[index].movedOut(amt);
                                 this.data = await fetch_functions.update_aCity({
                                     key: myCity.key,
                                     name: myCity.name,
@@ -563,9 +443,7 @@ export class AppCity extends Component {
                                 if (this.data.status === 200) {
                                     myCity.movedOut(amount);
                                     document.getElementById("resultArea3").textContent = "Move Out Successful!!!";
-                                    // populationTxt.textContent = myCity.population;
                                     document.getElementsByClassName("showPopulation")[this.index - 1].textContent = myCity.population;
-                                    // moveInOut.value = "";
                                 } else {
                                     document.getElementById("resultArea3").textContent = "Error!!!";
                                 }
@@ -574,14 +452,11 @@ export class AppCity extends Component {
                             document.getElementById("resultArea3").textContent = `Connection to Server Failed! \nTry again later.`;
                             console.log('message: ', error);
                         }
-                        //-----------------------
-                        //-------------------------
                     } else if (amount <= 0) {
-                        document.getElementById("resultArea3").textContent = "The amount can't be or lese than zero";
+                        document.getElementById("resultArea3").textContent = "Amount can't be or less than zero";
                     } else {
                         document.getElementById("resultArea3").textContent = "The amount can't be blank.";
                     }
-                    // });
                     break;
                 default:
                     break;
@@ -596,7 +471,6 @@ export class AppCity extends Component {
                     <div id="heading">
                         <div><h3>Welcome to our community!</h3></div>
                         <div id="resultArea1"></div>
-                        {/* <input type="submit" value="Create City" className="createCity" onClick={this.createCity} /> */}
                         <input type="submit" value={this.state.createCityValue} className="createCity" onClick={this.visibleForm} />
                     </div>
 
@@ -612,40 +486,20 @@ export class AppCity extends Component {
                         </div>
                     </div>
                     <div id="bigShowArea"></div>
-
-                    {/* //-----------------------// */}
                     <div className="container" id="functionsArea">
                         <input type="submit" value="Most Northern" id="mostNorthern" onClick={this.mostNorthern} />
                         <input type="submit" value="Most Southern" id="mostSouthern" onClick={this.mostSouthern} />
                         <input type="submit" value="Check Population" id="totalPopulation" onClick={this.checkPopulation} />
                     </div>
                     <div id="resultArea2"></div>
-                    {/* //-------------------------// */}
                 </div>
-                {/* <div className="showLat"> */}
-                    {/* <textarea rows="16" cols="15" defaultValue='Calgary&#13;&#10;51.048615&#13;&#10;-114.070847&#13;&#10;&#13;&#10;Edmonton&#13;&#10;53.544388&#13;&#10;-113.490929&#13;&#10;&#13;&#10;Bangkok&#13;&#10;13.756331&#13;&#10;100.501762&#13;&#10;' /> */}
-                    {/* <a href="https://www.latlong.net" target="_blank">Find more Lat & Long</a> */}
-                {/* </div> */}
-                {/* //-----------------------------// */}
-                {/* <div className="container" id="functionsArea">
-                    <input type="submit" value="Most Northern" id="mostNorthern" />
-                    <input type="submit" value="Most Southern" id="mostSouthernBtn" />
-                    <input type="submit" value="Check Population" id="totalPopulation" />
-                </div>
-                <div id="resultArea2"></div> */}
-                {/* //-----------------------------// */}
                 <div id="city">
                     <div className="container" id="bigActivity">
                         <div>
-                            {/* <div id="flex"> */}
                             <div>City Name: <span className="yellow_text" id="cityTxt" /></div>
-                            {/* <div>Latitude: <span className="grey_text" id="latitudeTxt" /></div>
-                            <div>Longitude: <span className="grey_text" id="longitudeTxt" /></div>
-                            <div>Population: <span className="grey_text" id="populationTxt" /></div> */}
                         </div>
                         <hr/>
                         <div id="flex_center">
-                            {/* <div id="map"></div> */}
                             <div className="activity">
                                 <div className="center" id="resultArea3Title"></div>
                                 <div className="center" id="resultArea3"></div>
@@ -655,14 +509,7 @@ export class AppCity extends Component {
                                 </div>
                                 <hr/>
                                 <div className="border center">
-
                                     <MovenInMoveOutForm activities={this.moveInMoveOut} />
-                                    {/* <select id="choice">
-                                        <option value="movedIn">Moved In</option>
-                                        <option value="movedOut">Moved Out</option>
-                                    </select>
-                                    <input type="number" name="moveInOut" placeholder="amount" id="moveInOut" />
-                                    <input type="submit" value="Submit" id="moveInOutBtn" /> */}
                                 </div>
                             </div>
                         </div>

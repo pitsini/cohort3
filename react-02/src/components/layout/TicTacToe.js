@@ -102,7 +102,6 @@ class Game extends Component {
         }
 
         return (
-            // <div>
                 <div className="game">
                     <div className="game-board">
                         <Board 
@@ -115,7 +114,6 @@ class Game extends Component {
                         <ol>{moves}</ol>
                     </div>
                 </div>
-            // </div>
         );
     }
 }

@@ -13,47 +13,58 @@ export class AppAccount extends Component {
     constructor() {
         super();
         this.accounts = new AccountController();
+        this.duplicate = false;
         this.state = {
             accountsArray: this.accounts.allAccounts,
-            //--1-----
-            // accController: this.accounts.allAccounts,
-            //----------------------
-            // accController: [
-            //     // {
-            //     //     id: 1,
-            //     //     accountName: "Checking",
-            //     //     balance: 100
-            //     // },
-            //     // {
-            //     //     id: 2,
-            //     //     accountName: "Saving",
-            //     //     balance: 1000
-            //     // }
-            // ],
             lastUsedID: 0,
-            currentIndex: -1
+            currentIndex: -1,
+            message1: "",
+            message2: ""
         }
     }
 
     // Add Account
     addAccount = (name, balance) => {
+        if (name === "" || balance === "") {
+            this.setState({ 
+                message1: "Account name or balance can't be blank",
+                message2: "" });
+            return;
+        } else if (balance <= 0) {
+            this.setState({
+                message1: "Balance can't be less than or equal 0",
+                message2: ""
+            });
+        return;
+        }
+        
+        // checking duplicate account
+        this.duplicate = false;
+        this.accounts.allAccounts.forEach(each => {
+            if (each.accountName === name) {
+                this.duplicate = true;
+            }
+        })
+        console.log("duplicate", this.duplicate);
+
+        if (this.duplicate === true) {
+            this.setState({
+                message1: "Account name is already exists",
+                message2: ""
+            });
+            return;
+        }
+
         this.accounts.addAccount(this.state.lastUsedID + 1, name, Number(balance));
         console.log(this.accounts.allAccounts);
+        this.onClickAccount(this.state.lastUsedID + 1);
         this.setState({
             accountsArray: this.accounts.allAccounts,
             lastUsedID: this.state.lastUsedID + 1,
-            currentIndex: -1
+            // currentIndex: -1,
+            message1: "",
+            message2: ""
         });
-        //--1------
-        // const newAccount = {
-        //     id: this.state.lastUsedID+1,
-        //     accountName: name,
-        //     balance: Number(balance)
-        // }
-        // this.setState({ 
-        //     accController: [...this.state.accController, newAccount],
-        //     lastUsedID: this.state.lastUsedID + 1
-        // });
     }
 
     delAccount = (id) => {
@@ -61,8 +72,6 @@ export class AppAccount extends Component {
         this.setState({ accountsArray: this.accounts.allAccounts });
 
         console.log(this.accounts.allAccounts);
-        //--1--
-        // this.setState({ accountsArray: [...this.state.accountsArray.filter(account => account.id !== id)] });
     }
 
     onClickAccount = (id) => {
@@ -78,28 +87,56 @@ export class AppAccount extends Component {
     depositWithdraw = (activityType, balance) => {
         console.log('activityType: ', activityType);
         console.log('balance: ', balance);
+        console.log('allAccounts: ', this.accounts.allAccounts);
+        console.log('currentIndex: ', this.state.currentIndex);
+
+        // Check if any account has been selected
+        if (this.state.currentIndex === -1) {
+            this.setState({
+                message1: "",
+                message2: "No account has been selected. Choose account on your left." 
+            });
+            return;
+        }
+
+        // Check if balance input is empty or <= 0
+        if (balance === "") {
+            this.setState({
+                message1: "",
+                message2: "Balance box can't be empty"
+            });
+            return;
+        } else if (balance <= 0) {
+            this.setState({
+                message1: "",
+                message2: "Balance can't be less than or equal 0"
+            });
+            return;
+        }
 
             switch (activityType) {
                 case 'deposit':
                     this.accounts.allAccounts[this.state.currentIndex].deposit(Number(balance));
                     console.log(this.accounts.allAccounts);
                     this.setState({
-                        accountsArray: this.accounts.allAccounts
+                        accountsArray: this.accounts.allAccounts,
+                        message1: "",
+                        message2: "Successful deposit"
                     });
                     break;
                 case 'withdraw':
                     this.accounts.allAccounts[this.state.currentIndex].withdraw(Number(balance));
                     console.log(this.accounts.allAccounts);
                     this.setState({
-                        accountsArray: this.accounts.allAccounts
+                        accountsArray: this.accounts.allAccounts,
+                        message1: "",
+                        message2: "Successful withdraw"
                     });
                     break;
                 default:
                     break;
             }
-    }
-
-    
+    }    
 
     render() {
         return (
@@ -109,8 +146,13 @@ export class AppAccount extends Component {
             </div>
             <div style={{ display: 'flex' }}>
                 <div style={{ width: '40%' }}>
+                    <div className="redTxt">{this.state.message1}</div>
                     <AddAccount addAccount={this.addAccount} />
-                    <AccController 
+                    <div id="accountHeader" className="flex">
+                        <div className="col30width">Account Name</div>
+                        <div className="col30width">Balance</div>
+                    </div>
+                    <AccController
                         className="accountBackground" 
                         accountsArray={this.state.accountsArray} 
                         delAccount={this.delAccount} 
@@ -118,15 +160,18 @@ export class AppAccount extends Component {
                     />
                 </div>
                 <div style={{ width: '60%' }}>
-                    {/* < AccControllerSummary accountsArray={this.state.accountsArray} /> */}
-                    <div id="accSummaryDiv" style={this.summaryStyle()}>
-                        <ul style={{ marginLeft: '10%', textAlign: 'left' }}>
-                            <li>Highest Balance: ${this.accounts.checkHighest() === -Infinity ? '0' : this.accounts.checkHighest()}</li>
-                            <li>Lowest Balance: ${this.accounts.checkLowest() === Infinity ? '0' : this.accounts.checkLowest()}</li>
-                            <li>Total Balance: ${this.accounts.totalBalance()} </li>
-                        </ul>
+                        <div id="accSummaryDiv" style={this.summaryStyle()}>
+                            <div>Highest Balance: ${this.accounts.checkHighest() === -Infinity ? '0.00' : this.accounts.checkHighest().toFixed(2)}</div>
+                            <div>Lowest Balance: ${this.accounts.checkLowest() === Infinity ? '0.00' : this.accounts.checkLowest().toFixed(2)}</div>
+                            <div>Total Balance: ${this.accounts.totalBalance().toFixed(2)} </div>
+                        {/* <ul style={{ marginLeft: '10%', textAlign: 'left' }}>
+                                <li>Highest Balance: ${this.accounts.checkHighest() === -Infinity ? '0' : this.accounts.checkHighest().toFixed(2)}</li>
+                                <li>Lowest Balance: ${this.accounts.checkLowest() === Infinity ? '0' : this.accounts.checkLowest().toFixed(2)}</li>
+                                <li>Total Balance: ${this.accounts.totalBalance().toFixed(2)} </li>
+                        </ul> */}
                     </div>
-                        <DepositWithdrawForm activities={this.depositWithdraw} />
+                    <div className="redTxt">{this.state.message2}</div>
+                        <DepositWithdrawForm activities={this.depositWithdraw} currentAccName={this.state.currentIndex !== -1 ? "for "+this.accounts.allAccounts[this.state.currentIndex].accountName+" Account":""} />
                 </div>
             </div>
             </div>

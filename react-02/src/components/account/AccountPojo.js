@@ -6,11 +6,11 @@ class Account {
     }
 
     deposit(amount) {
-        this.balance += amount;
+        this.balance += functions.round2Digit(amount);
     }
 
     withdraw(amount) {
-        this.balance -= amount;
+        this.balance -= functions.round2Digit(amount);
     }
 
     checkBalance() {
@@ -24,7 +24,7 @@ class AccountController {
     }
 
     addAccount(id, accName, amount) {
-        const newAccount = new Account(id, accName, amount);
+        const newAccount = new Account(id, accName, functions.round2Digit(amount));
         this.allAccounts.push(newAccount);
     }
 
@@ -38,19 +38,19 @@ class AccountController {
         for (const eachAccount of this.allAccounts) {
             summary += eachAccount.balance;
         }
-        return summary;
+        return functions.round2Digit(summary);
     }
 
     checkHighest() {        
         const balanceArr = this.allAccounts.map(each => each.balance);
         const highestValue = Math.max(...balanceArr);
-        return highestValue;
+        return functions.round2Digit(highestValue);
     }
 
     checkLowest() {
         const balanceArr = this.allAccounts.map(each => each.balance);
         const lowestValue = Math.min(...balanceArr);
-        return lowestValue;
+        return functions.round2Digit(lowestValue);
     }
 }
 

@@ -1,5 +1,6 @@
 import { functions, Account, AccountController } from './AccountPojo'
 
+// Function for creating new accounts
 function createAccounts(controller) {
     controller.addAccount(1, 'checking', 50);
     controller.addAccount(2, 'saving', 500);
@@ -34,7 +35,7 @@ test('Add Account', () => {
 
 test('Remove Account', () => {
     const controller = new AccountController();
-    createAccounts(controller);     // creating 4 accounts to use
+    createAccounts(controller); 
 
     expect(controller.allAccounts[2].accountName).toEqual('house saving');
     controller.removeAccount(2);
@@ -44,26 +45,25 @@ test('Remove Account', () => {
 
 test('Total Balance', () => {
     const controller = new AccountController();
-    createAccounts(controller);     // creating 4 accounts to use
+    createAccounts(controller); 
 
     expect(controller.totalBalance()).toEqual(950);
 });
 
 test('Check Highest Value', () => {
     const controller = new AccountController();
-    createAccounts(controller);     // creating 4 accounts to use
+    createAccounts(controller); 
 
     expect(controller.checkHighest()).toEqual(500);
 });
 
 test('Check Lowest Value', () => {    
     const controller = new AccountController();
-    createAccounts(controller);     // creating 4 accounts to use
+    createAccounts(controller);  
 
     expect(controller.checkLowest()).toEqual(50);
 });
 
-// ========== 130C - extra functions ==========
 
 test('Create new div', () => {
     const newDiv = functions.createShowArea();

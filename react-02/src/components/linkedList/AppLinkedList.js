@@ -38,8 +38,16 @@ export function AppLinkedList() {
     }
 
     const insertNode = () => {
-        myLinkedList.insert(node.id, node.subject, node.amount);
+        // console.log('nodes', nodes);
+        // console.log('id', myLinkedList.current.id);
+        // console.log('index', index);
 
+        if (myLinkedList.current) {
+            index = nodes.map(e => e.id).indexOf(myLinkedList.current.id);
+        }
+        myLinkedList.insert(node.id, node.subject, node.amount);
+        setMsg(myLinkedList.msg);
+        console.log('myLinkedList.msg', myLinkedList.msg);
         // if textbox is not empty
         if (!myLinkedList.msg.includes('Error')) {
             if (!myLinkedList.current || !myLinkedList.current.forwardNode ) {
@@ -50,8 +58,10 @@ export function AppLinkedList() {
                 }]);
             }
             else {
-            index = nodes.map(e => e.id).indexOf(myLinkedList.current.id);
-                nodes.splice(index + 1, 0, {
+                // index = nodes.map(e => e.id).indexOf(myLinkedList.current.id);
+
+
+                nodes.splice(index+1, 0, {
                     id: node.id,
                     subject: node.subject,
                     amount: node.amount

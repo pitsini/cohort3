@@ -14,23 +14,20 @@ class App extends Component {
   constructor(props) {
     super()
     this.state = {
-      whatToShow: <AppFifoLifo />,
+      whatToShow: <AppLinkedList />,
     }
   }
 
   homeClick = () => {
     this.setState({ whatToShow: <Home /> })
-    console.log("Eh!");
   }
 
   ticTacToeClick = () =>  {
     this.setState({ whatToShow: <Game />})
-    console.log("Yo!");
   }
 
   accountClick = () => {
       this.setState({ whatToShow: <AppAccount /> })
-    console.log("Hey!");
   }
 
   cityClick = () => {
@@ -57,17 +54,12 @@ class App extends Component {
               <City cityClick={this.cityClick} />
               <LinkedList linkedListClick={this.linkedListClick} />
               <FifoLifo fifoLifoClick={this.fifoLifoClick} />
-              {/* <Fifo linkedListClick={this.FifoClick} /> */}
             </div>
           </div>
         </header>
         <div>
           {this.state.whatToShow}
         </div>
-        {/* <h6>Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-          Icons made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-          Icons made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-        </h6> */}
       </div>
     );
   }

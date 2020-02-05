@@ -21,15 +21,14 @@ export class DepositWithdrawForm extends Component {
         console.log('balance: ', this.state.balance);
 
         this.props.activities(this.state.activityType, this.state.balance);
-        this.setState({ balance: '' });
-        // this.setState({ activityType: 'deposit', balance: '' });
-        
+        this.setState({ balance: '' });        
     }
 
     render() {
         return (
             <div id='accActivityDiv'>
                 <h3 className='headerStyle'>Deposit / Withdraw</h3>
+                <h4 className='headerStyle'>{this.props.currentAccName}</h4>
                 <div style={{ display: 'flex' }}>
                     <select name='activityType' value={this.state.value} onChange={this.handleChange} style={{ width: '40%' }}>
                         <option value='deposit'>Deposit</option>

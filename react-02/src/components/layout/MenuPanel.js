@@ -1,8 +1,8 @@
 import React from 'react';
 import ticTacToe from '../../images/tic-tac-toe.svg';
 import home from '../../images/home.svg';
-import account from '../../images/account1.svg';
-import city from '../../images/city1.svg';
+import account from '../../images/account.svg';
+import city from '../../images/city.svg';
 import linkedList from '../../images/linkedList.svg';
 import fifoLifo from '../../images/fifo.svg';
 

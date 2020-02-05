@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
 import App from './App';
-// import App from './LearningHooks/useState_useEffect/AppUseState.js';
-// import App from './LearningHooks/useContext/AppUseContext.js';
-// import App from './LearningHooks/useContext/1/App.js';
 
 import * as serviceWorker from './serviceWorker';
 

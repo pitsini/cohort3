@@ -17,9 +17,10 @@ export class AccountItem extends Component {
             <div style={this.getStyle(this.props.isActive ? "#bebebe" : "#f4f4f4")} onClick={() => this.props.onClickAccount(id)}>
                 <div style={flex}>
                     <div style={showContent}>{accountName}</div>
-                    {/* <div>{' '} */}
-                    <div style={showContent}>{balance}</div>
-                    <button style={btnStyle} onClick={() => this.props.delAccount(id)}>x</button>
+                    <div style={showContent}>{balance.toFixed(2)}</div>
+                    <div id="btnDiv">
+                        <button style={btnStyle} onClick={() => this.props.delAccount(id)}>x</button>
+                    </div>
                 </div>
             </div>
         )
@@ -37,7 +38,7 @@ const flex = {
 }
 
 const showContent = {
-    width: '10%',
+    width: '30%',
     margin: '10px',
 }
 
@@ -49,7 +50,9 @@ const btnStyle = {
     padding: '0px 9px',
     borderRadius: '50%',
     cursor: 'pointer',
-    float: 'right'
+    float: 'right',
+    height: '30px',
+    width: '30px'
 }
 
 export default AccountItem
