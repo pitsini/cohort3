@@ -18,7 +18,7 @@ export class DepositWithdrawForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('type: ', this.state.activityType);
-        console.log('balance: ', this.state.balance);
+        console.log('amount: ', this.state.balance);
 
         this.props.activities(this.state.activityType, this.state.balance);
         this.setState({ balance: '' });        
@@ -38,7 +38,7 @@ export class DepositWithdrawForm extends Component {
                         type="number"
                         name="balance"
                         style={{ flex: '4', padding: '5px', width: '40%' }}
-                        placeholder="Balance"
+                        placeholder="Amount"
                         value={this.state.balance}
                         onChange={this.handleChange}
                     />

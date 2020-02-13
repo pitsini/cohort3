@@ -47,7 +47,11 @@ class City {
     whichSphere() {
         if (this.latitude > 0) {
             return "Northern Hemisphere";
-        } else {
+        } 
+        else if (this.latitude === 0) {
+            return "Equator";
+        }
+        else {
             return "Southern Hemisphere";
         }
     }

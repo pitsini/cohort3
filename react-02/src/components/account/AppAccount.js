@@ -103,13 +103,13 @@ export class AppAccount extends Component {
         if (balance === "") {
             this.setState({
                 message1: "",
-                message2: "Balance box can't be empty"
+                message2: "Amount box can't be empty"
             });
             return;
         } else if (balance <= 0) {
             this.setState({
                 message1: "",
-                message2: "Balance can't be less than or equal 0"
+                message2: "Amount can't be less than or equal 0"
             });
             return;
         }

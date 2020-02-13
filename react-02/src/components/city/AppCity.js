@@ -162,7 +162,21 @@ export class AppCity extends Component {
 
             if (Number(population) < 0) {
                 document.getElementById('resultArea1').textContent = "Population can't be less than 0.";
-            } else if (Number.isInteger(Number(population)) === false) {
+            } 
+            //-------------Roman-lat----------------
+            else if (Number(lat) > 90) {
+                document.getElementById('resultArea1').textContent = "Latitude can't be more than 90."
+            } else if (Number(lat) < -90) {
+                document.getElementById('resultArea1').textContent = "Latitude can't be less than -90."
+            }
+            else if (Number(long) > 180) {
+                document.getElementById('resultArea1').textContent = "Longitude can't be more than 180."
+            } else if (Number(long)  < -180) {
+                document.getElementById('resultArea1').textContent = "Longitude can't be less than -180."
+            }
+
+            //---------------------------------            
+            else if (Number.isInteger(Number(population)) === false) {
                 document.getElementById('resultArea1').textContent = "Population has to be integer."
             } else if (city !== "" && lat !== "" && long !== "" && population !== "") {
                 this.newCountKey++;
@@ -248,7 +262,7 @@ export class AppCity extends Component {
         }
 
         console.log("I'm here.");
-        document.getElementById('resultArea1').textContent = this.message;
+        // document.getElementById('resultArea1').textContent = this.message;
         document.getElementById("resultArea2").textContent = ""; 
 
     }
